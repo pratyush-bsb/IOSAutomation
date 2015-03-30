@@ -15,12 +15,12 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 
 public class AppiumLibrary extends AppiumCapabilities {
 
-	public static boolean isElementPresent(By element) {
-		if (driver.findElement(element).isDisplayed())
+	public static boolean isElementPresent(By locator) throws InterruptedException {
+		if (driver.findElement(locator).isDisplayed())
 			return true;
-		else
-			return false;
+		return false;
 	}
+
 
 	// To click on any element
 	public static void clickOnElement(By locator) {
@@ -33,8 +33,11 @@ public class AppiumLibrary extends AppiumCapabilities {
 
 	// To get the text for any element
 	public static String getText(By locator) {
-		System.out.println("gettexttttt......"+driver.findElement(locator).getAttribute("value"));
-		return (driver.findElement(locator).getAttribute("value"));
+		System.out.println("ssssaaaa"+driver.findElement(locator).getLocation());
+		System.out.println("datttttt");
+		System.out.println("aaaaaa"+driver.findElement(locator).getText());
+		return (driver.findElement(locator).getText());
+
 	}
 
 	// To check if particular element is enabled
@@ -51,17 +54,17 @@ public class AppiumLibrary extends AppiumCapabilities {
 	}
 
 	public static void doubleTapWithTwoFingers(final WebElement element) {
-		
+
 		((JavascriptExecutor) driver).executeScript("mobile: tap",
 				new HashMap<String, Double>() {
-					{
-						put("tapCount", (double) 2);
-						put("touchCount", (double) 2);
-						put("duration", 0.5);
-						put("x", (double) element.getLocation().getX());
-						put("y", (double) element.getLocation().getY());
-					}
-				});
+			{
+				put("tapCount", (double) 2);
+				put("touchCount", (double) 2);
+				put("duration", 0.5);
+				put("x", (double) element.getLocation().getX());
+				put("y", (double) element.getLocation().getY());
+			}
+		});
 	}
 
 }

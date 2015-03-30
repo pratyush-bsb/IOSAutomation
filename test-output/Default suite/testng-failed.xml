@@ -3,13 +3,12 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.bsb.hike.ios.tests.CreateHikeUser">
+      <class name="com.bsb.hike.ios.tests.NewMessagingTest">
         <methods>
+          <include name="test003CreateChat"/>
           <include name="setUp"/>
-          <include name="test001"/>
-          <include name="tearDown"/>
         </methods>
-      </class> <!-- com.bsb.hike.ios.tests.CreateHikeUser -->
+      </class> <!-- com.bsb.hike.ios.tests.NewMessagingTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

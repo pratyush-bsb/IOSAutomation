@@ -25,7 +25,7 @@ public class CreateHikeUser extends AppiumLibrary{
 	public void setUp() throws Exception{
 		appium.setUp();
 	}
-
+	
 	@Test
 	public void test001() throws Exception{
 		Thread.sleep(1000*10);
@@ -45,21 +45,26 @@ public class CreateHikeUser extends AppiumLibrary{
 		LoginAboutYouScreen.setName(HikeLibrary.DEFAULT_NAME);
 		LoginAboutYouScreen.clickOnNextBtn();
 		Thread.sleep(2000);
-		ChooseYourProfilePicturePopUp_NameEnteringScreen.clickOnNoBtn();	
+		ChooseYourProfilePicturePopUp_NameEnteringScreen.clickOnNoBtn();
+		Thread.sleep(5000);
 		PushNotificationsScreen.clickOnContinue_Btn();
 		Thread.sleep(5000);
 	}
+	
+	@Test
 	public void test002() throws InterruptedException{
 		String name="HikeIosUserName";
 		HomeScreenMenu.clickOnOverflow();
 		HomeScreenMenu.clickOnProfile_Lbl();
-		MyProfileScreen.getText_MyProfileTitle().contains("ABS");
+		Thread.sleep(3000);
+		Assert.assertTrue(MyProfileScreen.checkPresent_MyProfileTitle_LBL(),"Profile screen label not get displayed");
+		//System.out.println(MyProfileScreen.getText_MyProfileTitle().contains("My Profile"));
 		MyProfileScreen.clickOnEdit_BTN();
-		Assert.assertEquals(EditProfileScreen.getText_EditProfileScreenTitle_LBL(), "EditProfile");
-		Assert.assertEquals(EditProfileScreen.getText_Back_BTN(), EditProfileScreen.Back_BTN);
+		Assert.assertTrue(EditProfileScreen.checkPresent_EditProfileScreenTitle_LBL(),"Edit profile screen label not get displayed");
+		Assert.assertFalse(EditProfileScreen.getState_Done_BTN(),"Done button is enabled by default");
 		EditProfileScreen.setName(name);
 		EditProfileScreen.clickOnDone_BTN();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		Assert.assertFalse(EditProfileScreen.getState_Done_BTN(),"Done button not get disabled");
 	}
 

@@ -46,7 +46,7 @@ public class SettingsScreen extends AppiumLibrary{
 		clickOnElement(Notifications_LBL);
 		}
 	
-		public boolean isNotificationButtonPresent()
+		public boolean isNotificationButtonPresent() throws InterruptedException
 		{
 		return(isElementPresent(Notifications_BTN));
 		}
@@ -56,7 +56,7 @@ public class SettingsScreen extends AppiumLibrary{
 		 clickOnElement(BlockedList_LBL);
 		}
 	
-		public boolean isBlockListButtonPresent()
+		public boolean isBlockListButtonPresent() throws InterruptedException
 		{
 		 return(isElementPresent(BlockedList_BTN));
 		}
@@ -66,7 +66,7 @@ public class SettingsScreen extends AppiumLibrary{
 		 clickOnElement(Account_LBL);
 		}
 
-		public boolean isAccountButtonPresent()
+		public boolean isAccountButtonPresent() throws InterruptedException
 		{
 		return(isElementPresent(Accountt_BTN));
 		}
@@ -76,7 +76,7 @@ public class SettingsScreen extends AppiumLibrary{
 		 clickOnElement(FreeSMS_LBL);
 		}
 
-		public boolean isFreeSMSButtonPresent()
+		public boolean isFreeSMSButtonPresent() throws InterruptedException
 		{
 		return(isElementPresent(FreeSMS_BTN));
 		}
@@ -86,7 +86,7 @@ public class SettingsScreen extends AppiumLibrary{
 			clickOnElement(SystemHealth_LBL);
 		}
 
-		public boolean isSystemHealthButtonPresent()
+		public boolean isSystemHealthButtonPresent() throws InterruptedException
 		{
 		 return(isElementPresent(SystemHealth_BTN));
 		}
@@ -96,7 +96,7 @@ public class SettingsScreen extends AppiumLibrary{
 		 clickOnElement(AutoSaveMedia_LBL);
 		}
 	
-		public boolean isAutoSaveMediaButtonPresent()
+		public boolean isAutoSaveMediaButtonPresent() throws InterruptedException
 		{
 		 return(isElementPresent(AutoSaveMedia_BTN));
 		}
@@ -106,7 +106,7 @@ public class SettingsScreen extends AppiumLibrary{
 		 clickOnElement(EnterKeyIsSend_LBL);
 		}
 	
-		public boolean isEnterKeyIsSendButtonPresent()
+		public boolean isEnterKeyIsSendButtonPresent() throws InterruptedException
 		{
 		 return(isElementPresent(EnterKeyIsSend_BTN));
 		}
@@ -116,7 +116,7 @@ public class SettingsScreen extends AppiumLibrary{
 		 clickOnElement(FAQ_LBL);
 		}
 	
-		public boolean isFAQButtonPresent()
+		public boolean isFAQButtonPresent() throws InterruptedException
 		{
 		 return(isElementPresent(FAQ_BTN));
 		}
@@ -126,7 +126,7 @@ public class SettingsScreen extends AppiumLibrary{
 		clickOnElement(Contact_LBL);
 		}
 
-		public boolean isContactButtonPresent()
+		public boolean isContactButtonPresent() throws InterruptedException
 		{
 		return(isElementPresent(Contact_BTN));
 		}

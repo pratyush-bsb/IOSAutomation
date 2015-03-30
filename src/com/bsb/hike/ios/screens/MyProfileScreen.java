@@ -12,35 +12,40 @@ public class MyProfileScreen extends AppiumLibrary{
 	public static By Camera_BTN=By.name("largeCamera");
 	public static By ProfileName_LBL=By.name("tgg"); // ** To be added in a variable
 	public static By PostStatus_BTN=By.name("Post a Status");
+
+	public static String getText_MyProfileTitle()
+	{
+		System.out.println("saaasaa"+getText(MyProfileTitle_LBL));
+		return(getText(MyProfileTitle_LBL));
+	}	
+	public static void clickOnEdit_BTN()
+	{
+		clickOnElement(Edit_BTN);
+	}
+	public static boolean checkPresent_MyProfileTitle_LBL() throws InterruptedException{
+		return isElementPresent(MyProfileTitle_LBL);
+	}
+
+
+	
 	
 	public void clickOnBack_BTN()
-		{
+	{
 		clickOnElement(Back_BTN);
-		}
-	
-	public static String getText_MyProfileTitle()
-		{
-		return(getText(MyProfileTitle_LBL));
-		}
-	
-	public static void clickOnEdit_BTN()
-		{
-		clickOnElement(Edit_BTN);
-		}
-	
+	}
 	public void clickOnCamera_BTN()
-		{
+	{
 		clickOnElement(Camera_BTN);
-		}
-	
+	}
+
 	public String getText_ProfileName()
-		{	
-		 return(getText(ProfileName_LBL));
-		}
-	
+	{	
+		return(getText(ProfileName_LBL));
+	}
+
 	public void clickOnPostStatus_BTN()
-		{
+	{
 		clickOnElement(PostStatus_BTN);
-		}
-	
+	}
+
 }

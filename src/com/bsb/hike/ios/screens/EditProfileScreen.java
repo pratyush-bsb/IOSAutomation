@@ -11,7 +11,7 @@ public class EditProfileScreen extends AppiumLibrary {
 
 	public static By Back_BTN=By.name("My Profile");
 	public static By EditProfileScreenTitle_LBL=By.name("Edit Profile");
-	public static By Done_BTN=By.name("Done");
+	public static By Done_BTN=By.name("Done");	
 	public static By Name_LBL=By.xpath("//UIAApplication[1]/UIAWindow[1]/UIATableView[1]/UIATableCell[1]/UIATextField[1]");
 	public static By Mobile_LBL=By.name("Mobile");
 	public static By Email_LBL=By.name("E-mail");
@@ -27,7 +27,6 @@ public class EditProfileScreen extends AppiumLibrary {
 		m.clear();
 		enterText(Name_LBL, value);
 	}
-
 	public static void clickOnDone_BTN()
 	{
 		clickOnElement(Done_BTN);
@@ -35,16 +34,23 @@ public class EditProfileScreen extends AppiumLibrary {
 	public static boolean getState_Done_BTN(){
 		return isEnabled(Done_BTN);
 	}
+	public static boolean checkPresent_EditProfileScreenTitle_LBL() throws InterruptedException{
+		return isElementPresent(EditProfileScreenTitle_LBL);
+	}
 
 	
+	
+	
+	public static String EditProfileScreenTitle_LBL()
+	{
+	return(getText(EditProfileScreenTitle_LBL));
+	}
 	public void clickOnBack_BTN()
 	{
 		clickOnElement(Back_BTN);
 	}
-
 	public static String getText_EditProfileScreenTitle_LBL()
 	{
-		System.out.println("gettext function....."+getText(EditProfileScreenTitle_LBL));
 		return(getText(EditProfileScreenTitle_LBL));				
 	}
 	public static String getText_Back_BTN()
