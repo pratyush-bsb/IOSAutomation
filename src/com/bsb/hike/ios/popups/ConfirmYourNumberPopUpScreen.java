@@ -3,6 +3,7 @@ package com.bsb.hike.ios.popups;
 import org.openqa.selenium.By;
 
 import com.bsb.appium.Library.AppiumLibrary;
+import com.bsb.hike.ios.screens.PinEnteringScreen;
 
 public class ConfirmYourNumberPopUpScreen extends AppiumLibrary {
 
@@ -11,8 +12,9 @@ public class ConfirmYourNumberPopUpScreen extends AppiumLibrary {
 	public static By Cancel_Btn=By.name("Cancel");
 	public static By Confirm_Btn=By.name("Confirm");
 
-	public static void clickOnConfirmBtn(){
+	public static PinEnteringScreen clickOnConfirmBtn(){
 		clickOnElement(Confirm_Btn);
+		return new PinEnteringScreen();
 	}
 }
 

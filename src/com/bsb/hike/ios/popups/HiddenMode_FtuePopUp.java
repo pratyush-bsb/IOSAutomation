@@ -12,12 +12,12 @@ public class HiddenMode_FtuePopUp extends AppiumLibrary {
 	
 	public String getText_HiddenModePopupTitle()
 		{
-		return(getText(IntroducingHiddenModeTitle_LBL));
+		return(getTextByName(IntroducingHiddenModeTitle_LBL));
 		}
 	
 	public String getTextHiddenModePopupSubtitle()
 		{
-		 return(getText(HiddenModeSubTitle_LBL));
+		 return(getTextByName(HiddenModeSubTitle_LBL));
 		}
 
 	public void clickOnQuickSetup_BTN()

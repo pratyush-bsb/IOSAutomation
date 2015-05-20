@@ -13,7 +13,7 @@ public class ChangePhotoPopup extends AppiumLibrary {
 	
 	public String getText_ChangePhotoLbl()
 		{
-		return(getText(ChangePhoto_Lbl));
+		return(getTextByName(ChangePhoto_Lbl));
 		}
 	
 	public void clickOnTakePhotoBtn()

@@ -12,12 +12,12 @@ public class AddressBookSyncScreen extends AppiumLibrary{
 	
 	public String getTextAddressbookSyncLbl()
 		{
-		return(getText(AddressBookSync_Lbl));
+		return(getTextByName(AddressBookSync_Lbl));
 		}
 	
 	public String getTextSyncYourAddressbookLbl()
 		{
-		return(getText(SyncYourAddressbook_Lbl));
+		return(getTextByName(SyncYourAddressbook_Lbl));
 		}
 	
 	public void clickOnContinue()

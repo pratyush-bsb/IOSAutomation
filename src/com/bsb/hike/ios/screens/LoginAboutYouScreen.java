@@ -1,23 +1,47 @@
 package com.bsb.hike.ios.screens;
 
+import io.appium.java_client.MobileBy;
+
 import org.openqa.selenium.By;
 
-import com.bsb.appium.Library.AppiumLibrary;
+import com.bsb.hike.ios.library.HikeLibrary;
 
-public class LoginAboutYouScreen extends AppiumLibrary{
+public class LoginAboutYouScreen extends HikeLibrary {
+	
+	public LoginAboutYouScreen() {
+		waitForLoginAboutYouScreenToLoad();
+	}
 
-	public static By AboutYouTitle_Lbl=By.name("About You");
-	public static By NextBtn=By.name("Next");
-	public static By AddPhoto_Btn=By.name("add photo");
-	public static By Name_EditText=By.xpath("//UIAApplication[1]/UIAWindow[1]/UIATextField[1]");
-	public static By FeelingLazy_Lbl=By.name("Feeling lazy? We'll do it for you");
-	public static By ConnectWithFacebook_Btn=By.name("Connect with Facebook");
-	public static By ClearText_Btn=By.name("Clear text");
+	private void waitForLoginAboutYouScreenToLoad() {
+		
+		int counter = 5;
+		boolean pageLoaded = false;
+
+		while(!pageLoaded && counter < 5) {
+			try {
+				driver.findElement(AboutYouTitle_Lbl);
+				pageLoaded = true;
+			} catch (Exception e) {
+				counter++;
+				try {
+					Thread.sleep(1000);
+				} catch(Exception eSleep) {}
+			}
+		}
+	}
+
+	protected By AboutYouTitle_Lbl = MobileBy.name("About You");
+	protected By NextBtn = MobileBy.name("Next");
+	protected By AddPhoto_Btn = MobileBy.name("add photo");
+	protected By Name_EditText = MobileBy.IosUIAutomation(".textFields()[0]");
+	protected By FeelingLazy_Lbl = MobileBy.name("Feeling lazy? We'll do it for you");
+	protected By ConnectWithFacebook_Btn = MobileBy.name("Connect with Facebook");
+	protected By ClearText_Btn = MobileBy.name("Clear text");
 
 
-	public String getText_AboutYouTitle()
+	public String getTextByName_AboutYouTitle()
 	{
-		return(getText(AboutYouTitle_Lbl));
+		return(getTextByName(AboutYouTitle_Lbl));
 	}
 
 	public boolean iSNextButtonEnabled()
@@ -25,7 +49,7 @@ public class LoginAboutYouScreen extends AppiumLibrary{
 		return(isEnabled(NextBtn));
 	}
 
-	public static void clickOnNextBtn()
+	public void clickOnNextBtn()
 	{
 		clickOnElement(NextBtn);
 	}
@@ -40,15 +64,15 @@ public class LoginAboutYouScreen extends AppiumLibrary{
 		clickOnElement(AddPhoto_Btn);
 	}
 
-	public String getText_NameEnteringEditText()
+	public String getTextByName_NameEnteringEditText()
 	{
-		return(getText(Name_EditText));
+		return(getTextByName(Name_EditText));
 	}
-	public static void clickOnNameEnteringScreen()
+	public void clickOnNameEnteringScreen()
 	{
 		clickOnElement(Name_EditText);
 	}
-	public static void setName(String value)
+	public void setName(String value)
 	{
 		enterText(Name_EditText, value); //name value to be put in a variable
 	}
@@ -58,9 +82,9 @@ public class LoginAboutYouScreen extends AppiumLibrary{
 
 
 
-	public String getText_FeelingLazyLbl()
+	public String getTextByName_FeelingLazyLbl()
 	{
-		return(getText(FeelingLazy_Lbl));
+		return(getTextByName(FeelingLazy_Lbl));
 	}
 
 	public void clickOnConnectWithFacebookBtn()

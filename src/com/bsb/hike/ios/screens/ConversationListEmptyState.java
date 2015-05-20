@@ -19,22 +19,22 @@ public class ConversationListEmptyState extends AppiumLibrary{
 	
 	public String getText_MakeMyDayLbl()
 	{
-	return(getText(MakeMyDay_Lbl));
+	return(getTextByName(MakeMyDay_Lbl));
 	}
 	
 	public String getText_StickersHaveFeeling_Lbl()
 	{
-	return(getText(StickersHaveFeelings_Lbl));
+	return(getTextByName(StickersHaveFeelings_Lbl));
 	}
 	
 	public String getText_Tap_Lbl()
 	{
-	return(getText(Tap_Lbl));
+	return(getTextByName(Tap_Lbl));
 	}
 	
 	public String getText_ToSendASticker_Lbl()
 	{
-	return(getText(ToSendASticker_Lbl));
+	return(getTextByName(ToSendASticker_Lbl));
 	}
 	
 	public void clickOnHi_Btn()

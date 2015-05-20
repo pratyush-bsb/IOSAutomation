@@ -1,17 +1,20 @@
 package com.bsb.hike.ios.screens;
 
+import io.appium.java_client.MobileBy;
+
 import org.openqa.selenium.By;
 
 import com.bsb.appium.Library.AppiumLibrary;
 
 public class MyProfileScreen extends AppiumLibrary{
 
-	public static By Back_BTN=By.name("Back");
-	public static By MyProfileTitle_LBL=By.name("My Profile");
-	public static By Edit_BTN=By.name("Edit");
-	public static By Camera_BTN=By.name("largeCamera");
-	public static By ProfileName_LBL=By.name("tgg"); // ** To be added in a variable
-	public static By PostStatus_BTN=By.name("Post a Status");
+	public static By Back_BTN = MobileBy.name("Back");
+	public static By MyProfileTitle_LBL = By.name("My Profile");
+	public static String MyProfileTitle_LBL_Txt = "My Profile";
+	public static By Edit_BTN = MobileBy.name("Edit");
+	public static By Camera_BTN = MobileBy.name("largeCamera");
+	public static By ProfileName_LBL = MobileBy.name("tgg"); // ** To be added in a variable
+	public static By PostStatus_BTN = MobileBy.name("Post a Status");
 	
 	public void clickOnBack_BTN()
 		{
@@ -20,7 +23,7 @@ public class MyProfileScreen extends AppiumLibrary{
 	
 	public static String getText_MyProfileTitle()
 		{
-		return(getText(MyProfileTitle_LBL));
+		return(getTextByName(MyProfileTitle_LBL));
 		}
 	
 	public static void clickOnEdit_BTN()
@@ -35,7 +38,7 @@ public class MyProfileScreen extends AppiumLibrary{
 	
 	public String getText_ProfileName()
 		{	
-		 return(getText(ProfileName_LBL));
+		 return(getTextByName(ProfileName_LBL));
 		}
 	
 	public void clickOnPostStatus_BTN()

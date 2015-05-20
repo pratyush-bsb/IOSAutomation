@@ -1,135 +1,181 @@
 package com.bsb.hike.ios.screens;
 
+import io.appium.java_client.MobileBy;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Reporter;
 
-import com.bsb.appium.Library.AppiumLibrary;
+import com.bsb.hike.ios.library.HikeLibrary;
 
-public class SettingsScreen extends AppiumLibrary{
-
-	public static By Back_BTN = By.name("Back");
-	public static By SettingsTitle_LBL=By.name("Settings");
-	public static By Notifications_LBL=By.name("Notifications");
-	public static By Notifications_BTN=By.name("settings notifications cell ic");
-	public static By BlockedList_LBL=By.name("Blocked List");
-	public static By BlockedList_BTN=By.name("settings block cell icon");
-	public static By Account_LBL=By.name("Account");
-	public static By Accountt_BTN=By.name("settings account cell icon");
-	public static By FreeSMS_LBL=By.name("Free SMS");
-	public static By FreeSMS_BTN=By.name("settings sms cell icon");
-//  public static By FreeSMSCount_LBL=By.name("Free SMS: 0");   This ID needs to be static
-	public static By SystemHealth_LBL=By.name("System Health");
-	public static By SystemHealth_BTN=By.name("settings system health cell ic");
-	public static By AutoSaveMedia_LBL=By.name("Auto Save Media");
-	public static By AutoSaveMedia_BTN=By.name("settings autodownload cell ico");
-//	public static By AutoSaveMediaSwitch_BTN=By.name("Auto Save Media");  Need to get its ID change as it is same as LBL/ Value of this element is 1 when enabled 0 otherwise
-	public static By EnterKeyIsSend_LBL=By.name("Enter Key Is Send");
-	public static By EnterKeyIsSend_BTN=By.name("ettings enter return cell ico");
-//	public static By EnterKeyIsSendSwitch_BTN=By.name("Enter Key Is Send"); Need to get its ID change as it is same as LBL/ Value of this element is 1 when enabled 0 otherwise
-	public static By FAQ_LBL=By.name("FAQs");
-	public static By FAQ_BTN=By.name("settings faq cell icon");
-	public static By Contact_LBL=By.name("Contact");
-	public static By Contact_BTN=By.name("settings contact us cell icon");
+public class SettingsScreen extends HikeLibrary{
 	
+	public SettingsScreen() {
+		waitForSettingsPageToLoad();
+	}
+
+	private void waitForSettingsPageToLoad() {
+		int counter = 5;
+		boolean pageLoaded = false;
+		
+		while(!pageLoaded && counter < 5) {
+			try {
+				driver.findElement(SettingsTitle_LBL);
+				pageLoaded = true;
+			} catch (Exception e) {
+				counter++;
+				try {
+					Thread.sleep(1000);
+				} catch(Exception eSleep) {}
+			}
+		}
+	}
+
+	protected By Back_BTN = MobileBy.name("Back");
+	protected By SettingsTitle_LBL = MobileBy.name("Settings"); //get text by name
+	protected String headerLabel = "Settings";
+	protected By Notifications_LBL = MobileBy.name("Notifications");
+	protected By BlockedList_LBL = MobileBy.name("Blocked List");
+	protected By Account_LBL = MobileBy.name("Account");
+	protected String accountLabelString = "Account";
+	protected By FreeSMS_LBL = MobileBy.name("Free SMS");
+	protected By SystemHealth_LBL = MobileBy.name("System Health");
+	protected By Media_LBL = MobileBy.name("Media");
+	protected By EnterKeyIsSend_LBL = MobileBy.name("Enter Key Is Send");
+	//protected By EnterKeyIsSend_BTN = MobileBy.name("settings enter return cell ico");
+	protected By FAQ_LBL = MobileBy.name("FAQs");
+	protected By Contact_LBL = MobileBy.name("Contact");
+	protected By stickerShop = MobileBy.name("Sticker Shop");
+
+	//getter methods
+
+	public By getBack_BTN() {
+		return Back_BTN;
+	}
 	
-		public void clickOnBackIcon()
-		{
+	public String getAccountLabelText() {
+		return accountLabelString;
+	}
+	
+	public String getHeaderValue() {
+		return headerLabel;
+	}
+
+	public By getSettingsTitle_LBL() {
+		return SettingsTitle_LBL;
+	}
+
+	public By getNotifications_LBL() {
+		return Notifications_LBL;
+	}
+
+	public By getBlockedList_LBL() {
+		return BlockedList_LBL;
+	}
+
+	public By getAccount_LBL() {
+		return Account_LBL;
+	}
+
+	public By getFreeSMS_LBL() {
+		return FreeSMS_LBL;
+	}
+
+	public By getSystemHealth_LBL() {
+		return SystemHealth_LBL;
+	}
+
+	public By getMedia_LBL() {
+		return Media_LBL;
+	}
+
+	public By getEnterKeyIsSend_LBL() {
+		return EnterKeyIsSend_LBL;
+	}
+
+	public By getFAQ_LBL() {
+		return FAQ_LBL;
+	}
+
+	public By getContact_LBL() {
+		return Contact_LBL;
+	}
+
+	public By getStickerShop() {
+		return stickerShop;
+	}
+
+	//public methods
+
+	public void clickOnBackIcon()
+	{
 		clickOnElement(Back_BTN);
-		}
-	
-		public String getTextSettingsTitle()
-		{
-		return(getText(SettingsTitle_LBL));
-		}
-	
-		public void clickOnNotifications()
-		{
+	}
+
+	public String getTextSettingsTitle()
+	{
+		return(getTextByName(SettingsTitle_LBL));
+	}
+
+	public NotificationsScreen clickOnNotifications()
+	{
 		clickOnElement(Notifications_LBL);
-		}
-	
-		public boolean isNotificationButtonPresent()
-		{
-		return(isElementPresent(Notifications_BTN));
-		}
-	
-		public void clickOnBlockList()
-		{
-		 clickOnElement(BlockedList_LBL);
-		}
-	
-		public boolean isBlockListButtonPresent()
-		{
-		 return(isElementPresent(BlockedList_BTN));
-		}
-	
-		public void clickOnAccount()
-		{
-		 clickOnElement(Account_LBL);
-		}
+		return new NotificationsScreen();
+	}
 
-		public boolean isAccountButtonPresent()
-		{
-		return(isElementPresent(Accountt_BTN));
-		}
-	
-		public void clickOnFreeSMS()
-		{
-		 clickOnElement(FreeSMS_LBL);
-		}
+	public BlockedList clickOnBlockList()
+	{
+		clickOnElement(BlockedList_LBL);
+		return new BlockedList();
+	}
 
-		public boolean isFreeSMSButtonPresent()
-		{
-		return(isElementPresent(FreeSMS_BTN));
-		}
-	
-		public void clickSystemHealth()
-		{
-			clickOnElement(SystemHealth_LBL);
-		}
+	public AccountScreen clickOnAccount()
+	{
+		clickOnElement(Account_LBL);
+		return new AccountScreen();
+	}
 
-		public boolean isSystemHealthButtonPresent()
-		{
-		 return(isElementPresent(SystemHealth_BTN));
-		}
-	
-		public void clickOnAutoSaveMedia()
-		{
-		 clickOnElement(AutoSaveMedia_LBL);
-		}
-	
-		public boolean isAutoSaveMediaButtonPresent()
-		{
-		 return(isElementPresent(AutoSaveMedia_BTN));
-		}
-		
-		public void clickOnEnterKeyIsSend()
-		{
-		 clickOnElement(EnterKeyIsSend_LBL);
-		}
-	
-		public boolean isEnterKeyIsSendButtonPresent()
-		{
-		 return(isElementPresent(EnterKeyIsSend_BTN));
-		}
-		
-		public void clickOnFAQ()
-		{
-		 clickOnElement(FAQ_LBL);
-		}
-	
-		public boolean isFAQButtonPresent()
-		{
-		 return(isElementPresent(FAQ_BTN));
-		}
-	
-		public void clickOnContact()
-		{
+	public void clickOnFreeSMS()
+	{
+		clickOnElement(FreeSMS_LBL);
+	}
+
+	public void clickSystemHealth()
+	{
+		clickOnElement(SystemHealth_LBL);
+	}
+
+	public void clickOnEnterKeyIsSend()
+	{
+		clickOnElement(EnterKeyIsSend_LBL);
+	}
+
+
+	public void clickOnFAQ()
+	{
+		clickOnElement(FAQ_LBL);
+	}
+
+	public FeedbackMail clickOnContact()
+	{
 		clickOnElement(Contact_LBL);
-		}
+		return new FeedbackMail();
+	}
 
-		public boolean isContactButtonPresent()
-		{
-		return(isElementPresent(Contact_BTN));
-		}
+
+	public int getFreeSMSCount() {
 		
+		String count = "";
+		try {
+			WebElement freeSmsCell = driver.findElements(FreeSMS_LBL).get(0);
+			By freeSmsCount = MobileBy.IosUIAutomation(".staticTexts()[1]");
+			WebElement freeSmsText = freeSmsCell.findElement(freeSmsCount);
+			count = freeSmsText.getAttribute("name");
+		} catch(Exception e) {
+			Reporter.log("Not able to fetch sms count");
+		}
+		return Integer.parseInt(count.split(":")[1].trim());
+	}
+
 }
 
