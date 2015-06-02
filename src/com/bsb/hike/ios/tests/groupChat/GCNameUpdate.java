@@ -47,7 +47,7 @@ public class GCNameUpdate extends HikeLibrary {
 		GroupContactSelectionScreen contactSelectionScreenObj = newGroupObj.clickOnNextButton();
 		contactSelectionScreenObj.searchForAContactWithoutClear(HIKE_CONTACT_NAME);
 		contactSelectionScreenObj.selectFirstContactInResults();
-		contactSelectionScreenObj.searchForAContactWithoutClear(HIKE_SMS_CONTACT_NAME_1);
+		contactSelectionScreenObj.searchForAContactWithoutClear(HIKE_SMS_CONTACT_NAME_2);
 		contactSelectionScreenObj.selectFirstContactInResults();
 		
 		GroupThreadScreen groupThreadObj = contactSelectionScreenObj.clickOnDoneButton(groupName);

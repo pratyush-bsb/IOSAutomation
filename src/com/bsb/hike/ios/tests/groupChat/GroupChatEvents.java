@@ -141,7 +141,7 @@ public class GroupChatEvents extends HikeLibrary {
 		groupThreadObj = groupProfileObj.goBackToThread();
 		String lastMessage = groupThreadObj.getLastMessage();
 		
-		Assert.assertTrue(lastMessage.startsWith("Added"), "The event for adding new member to group was not fired");
+		Assert.assertTrue(!lastMessage.startsWith("Added"), "The event for adding new member to group was not fired");
 	}
 	
 	@Test
@@ -250,7 +250,7 @@ public class GroupChatEvents extends HikeLibrary {
 		groupThreadObj = groupProfileObj.goBackToThread();
 		String lastMessage = groupThreadObj.getLastMessage();
 		
-		Assert.assertTrue(lastMessage.startsWith("Added"), "The event for adding new member to group was not fired");
+		Assert.assertTrue(!lastMessage.startsWith("Added"), "The event for adding new member to group was not fired");
 		
 	}
 

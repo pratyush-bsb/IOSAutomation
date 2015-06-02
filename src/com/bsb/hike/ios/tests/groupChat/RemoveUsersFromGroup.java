@@ -70,8 +70,6 @@ public class RemoveUsersFromGroup extends HikeLibrary {
 		Assert.assertTrue(lastMessage.contains("left the group chat!"), "The event for removing user was not fired");
 	}
 	
-	//TODO add server side cases to remove user by participant
-	
 	
 	@Test
 	public void test003_OwnerRemovesAllUsers() {

@@ -98,6 +98,12 @@ public class BlockOrUnblockUser extends HikeLibrary {
 		List<String> usersInGroup = new ArrayList<String>();
 		usersInGroup.add(getDEFAULT_MSISDN());
 		usersInGroup.add(HIKE_NUMBER_2);
+		groupChatMessageSupportObj.createGroupAndSendMessage(HIKE_NUMBER_3, usersInGroup, serverGroupName);
+		
+		groupChatMessageSupportObj = new GroupChatMessageSupport();
+		usersInGroup.clear();
+		usersInGroup.add(getDEFAULT_MSISDN());
+		usersInGroup.add(HIKE_NUMBER_2);
 		groupChatMessageSupportObj.createGroupAndSendMessage(HIKE_NUMBER_1, usersInGroup, serverGroupName);
 		
 		//ensure that no group chat received

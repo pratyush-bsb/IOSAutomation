@@ -47,16 +47,16 @@ public class BlockedList extends HikeLibrary {
 	protected By contactNameSuffix = MobileBy.IosUIAutomation(".staticTexts()[0]");
 
 	protected By someoneTroublingYouDiv = MobileBy.name("Someone troublin' you?  Tap on + to block them");
-	
+
 	//public getters
 	public By getHeader() {
 		return header;
 	}
-	
+
 	public By getStopButton() {
 		return stopButton;
 	}
-	
+
 	public String getHeaderString() {
 		return headerString;
 	}
@@ -171,11 +171,11 @@ public class BlockedList extends HikeLibrary {
 			}
 		} catch(Exception e) {}
 	}
-	
+
 	public int countOfBlockedContacts() {
-		
+
 		int countOfBlockContacts = 0;
-		
+
 		try {
 			boolean noBlocksText = isElementPresent(someoneTroublingYouDiv);
 			if(noBlocksText) {
@@ -183,25 +183,80 @@ public class BlockedList extends HikeLibrary {
 			}
 			List<WebElement> allBlockedUsers = driver.findElements(allUsersFound);
 			countOfBlockContacts = allBlockedUsers.size();
-			
+
 		} catch(Exception e) {
-			
+
 		}
-		
+
 		return countOfBlockContacts;
 	}
-	
+
 	public String getBlockStatus(int iterator) {
-		
+
 		String status = "";
 		try {
 			By blockStatusButton = MobileBy.IosUIAutomation(allUsersFound + "[" + iterator + "]" + contactBlockStatus);
 			status = getTextByValue(blockStatusButton);
 		} catch (Exception e) {
-			
+
 		}
-		
+
 		return status;
+	}
+
+	public void searchForAContactToBlock(String user) {
+
+		try {
+
+		} catch(Exception e) {}
+	}
+
+	public boolean checkIfContactBlocked(String user) {
+
+		boolean contactBlocked = false;
+		try {
+			boolean noBlocksText = isElementPresent(someoneTroublingYouDiv);
+			if(noBlocksText) {
+				return contactBlocked;
+			}
+
+			List<WebElement> allBlockedUsers = driver.findElements(allUsersFound);
+			for(WebElement eachUser : allBlockedUsers) {
+				try {
+					String userName = eachUser.findElement(contactNameSuffix).getAttribute("name");
+					if(user.equalsIgnoreCase(userName)) {
+						contactBlocked = true;
+						break;
+					}
+				} catch (Exception e) {}
+			}
+		} catch(Exception e) {
+
+		}
+		return contactBlocked;
+	}
+	
+	public String getFirstContactName() {
+		
+		String firstContact = "";
+		
+		try {
+			firstContact = driver.findElement(firstContactFound).findElement(contactNameSuffix).getAttribute("name");
+		} catch(Exception e) {}
+		
+		return firstContact;
+	}
+
+	public void blockMultipleContacts(List<String> contactsToBlock) {
+		
+		try {
+			for(String eachUser : contactsToBlock) {
+				clickOnElement(searchForNumberOrName);
+				enterText(searchForNumberOrName, eachUser);
+				clickOnElement(firstContactFound);
+			}
+			clickOnElement(doneButton);
+		} catch(Exception e) {}
 	}
 
 }

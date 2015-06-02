@@ -1,6 +1,7 @@
 package com.bsb.hike.ios.tests;
 
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -53,6 +54,12 @@ public class CreateHikeUser extends HikeLibrary {
 		PushNotificationsScreen pushNotificationScreenObj = ChooseYourProfilePicturePopUp_NameEnteringScreen.clickOnNoBtn();
 		
 		pushNotificationScreenObj.clickOnContinue_Btn();
+		try {
+			driver.switchTo().alert().accept();
+			pushNotificationScreenObj.clickOnContinue_Btn();
+		} catch(Exception e) {
+			Reporter.log("Sync address book button did not come");
+		}
 		
 	}
 	

@@ -70,7 +70,7 @@ public class MuteGroup extends HikeLibrary {
 		groupThreadObj.muteGroup();
 
 		//assert that 'conversation muted' notification appears
-		Assert.assertTrue(isElementPresent(groupThreadObj.getMutedConversationImage()), "The notification that group is muted did not come after muting group");
+		Assert.assertTrue(groupThreadObj.checkIfGroupMute(), "The notification that group is muted did not come after muting group");
 
 	}
 
@@ -94,7 +94,7 @@ public class MuteGroup extends HikeLibrary {
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(serverGroupName, true);
 		groupThreadObj.muteGroup();
 
-		Assert.assertTrue(isElementPresent(groupThreadObj.getMutedConversationImage()), "The notification that group is muted did not come after muting group");
+		Assert.assertTrue(groupThreadObj.checkIfGroupMute(), "The notification that group is muted did not come after muting group");
 
 	}
 
@@ -134,12 +134,19 @@ public class MuteGroup extends HikeLibrary {
 		PushNotificationsScreen pushNotificationScreenObj = ChooseYourProfilePicturePopUp_NameEnteringScreen.clickOnNoBtn();
 
 		homeScreenMenuObj = pushNotificationScreenObj.clickOnContinue_Btn();
+		try {
+			driver.switchTo().alert().accept();
+			pushNotificationScreenObj.clickOnContinue_Btn();
+		} catch(Exception e) {
+			Reporter.log("Sync address book button did not come");
+		}
+		
 		Thread.sleep(10000);
 		homeScreenMenuObj.removeHiddenChatHintButton();
 
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupName, true);
 		//group should be muted
-		Assert.assertFalse(isElementPresent(groupThreadObj.getMutedConversationImage()), "The notification that group is muted came after resetting account");
+		Assert.assertFalse(groupThreadObj.checkIfGroupMute(), "The notification that group is muted came after resetting account");
 		//unmute group for further cases
 		groupThreadObj.unmuteGroup();
 	}
@@ -154,7 +161,7 @@ public class MuteGroup extends HikeLibrary {
 		String groupName = "IOS server automation group";
 		goToHome();
 		//reset account
-		SettingsScreen settingsScreenObj = homeScreenMenuObj.clickOnSettings_Lbl();
+		/*SettingsScreen settingsScreenObj = homeScreenMenuObj.clickOnSettings_Lbl();
 		AccountScreen accountScreenObj = settingsScreenObj.clickOnAccount();
 		WelcomeScreen welcomeScreenObj = accountScreenObj.resetAccount();
 
@@ -179,12 +186,18 @@ public class MuteGroup extends HikeLibrary {
 		PushNotificationsScreen pushNotificationScreenObj = ChooseYourProfilePicturePopUp_NameEnteringScreen.clickOnNoBtn();
 
 		homeScreenMenuObj = pushNotificationScreenObj.clickOnContinue_Btn();
-		Thread.sleep(10000);
+		try {
+			driver.switchTo().alert().accept();
+			pushNotificationScreenObj.clickOnContinue_Btn();
+		} catch(Exception e) {
+			Reporter.log("Sync address book button did not come");
+		}
+		Thread.sleep(10000);*/
 		homeScreenMenuObj.removeHiddenChatHintButton();
 		
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupName, true);
-		//group should be muted
-		Assert.assertFalse(isElementPresent(groupThreadObj.getMutedConversationImage()), "The notification that group is muted came after resetting account");
+		//group should be not muted
+		Assert.assertFalse(groupThreadObj.checkIfGroupMute(), "The notification that group is muted came after resetting account");
 
 	}
 
@@ -224,12 +237,18 @@ public class MuteGroup extends HikeLibrary {
 		PushNotificationsScreen pushNotificationScreenObj = ChooseYourProfilePicturePopUp_NameEnteringScreen.clickOnNoBtn();
 
 		homeScreenMenuObj = pushNotificationScreenObj.clickOnContinue_Btn();
+		try {
+			driver.switchTo().alert().accept();
+			pushNotificationScreenObj.clickOnContinue_Btn();
+		} catch(Exception e) {
+			Reporter.log("Sync address book button did not come");
+		}
 		Thread.sleep(10000);
 		homeScreenMenuObj.removeHiddenChatHintButton();
 
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupName, true);
 		//group should be muted
-		Assert.assertTrue(!isElementPresent(groupThreadObj.getMutedConversationImage()), "The notification that group is muted came after resetting account");
+		Assert.assertFalse(groupThreadObj.checkIfGroupMute(), "The notification that group is muted came after resetting account");
 		//groupThreadObj.unmuteGroup();
 	}
 

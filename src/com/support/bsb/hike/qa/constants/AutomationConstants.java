@@ -34,7 +34,7 @@ public class AutomationConstants {
 	public static String PartialFT = "/v1/user/pft/";
 	
 	//Redis host and port
-	public static final String Redis_Staging_Host = "10.0.1.10";
+	public static final String Redis_Staging_Host = "staging-redis.im.hike.in";
 	public static final int Redis_Staging_Port = 6379;
 	
 	

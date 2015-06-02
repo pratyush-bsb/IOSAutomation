@@ -1,13 +1,16 @@
 package com.bsb.hike.ios.screens;
 
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Reporter;
 
 import com.bsb.hike.ios.library.HikeLibrary;
 
 public class AccountScreen extends HikeLibrary {
-	
+
 	public AccountScreen() {
 		waitForAccountsPageToLoad();
 	}
@@ -15,7 +18,7 @@ public class AccountScreen extends HikeLibrary {
 	private void waitForAccountsPageToLoad() {
 		int counter = 5;
 		boolean pageLoaded = false;
-		
+
 		while(!pageLoaded && counter < 5) {
 			try {
 				driver.findElement(accountScreenHeader);
@@ -28,9 +31,9 @@ public class AccountScreen extends HikeLibrary {
 			}
 		}
 	}
-	
+
 	//protected identifiers
-	
+
 	protected By accountScreenHeader = MobileBy.name("Account");
 	protected String accountScreenHeaderString = "Account";
 	protected By backButton = MobileBy.name("Back");
@@ -45,37 +48,37 @@ public class AccountScreen extends HikeLibrary {
 	protected By cancel = MobileBy.name("Cancel");
 	protected By confirmDeleteAccountButton = MobileBy.name("Continue");
 	protected By confirmPopup = MobileBy.name("Yes");
-	
+
 	protected String deleteAccountTaglineString = "Permanently delete your hike account";
 	protected By deleteAccountTagline = MobileBy.name("Permanently delete your hike account");
-	
+
 	protected String resetAccountTaglineString = "Clear your messages and profile from this device.";
 	protected By resetAccountTagline = MobileBy.IosUIAutomation("Clear your messages and profile from this device.");
-	
+
 	public By getAccountScreenHeader() {
 		return accountScreenHeader;
 	}
-	
+
 	public By getDeleteAccountTagline() {
 		return deleteAccountTagline;
 	}
-	
+
 	public String getResetAccountTaglineString() {
 		return resetAccountTaglineString;
 	}
-	
+
 	public By getResetAccountTagline() {
 		return resetAccountTagline;
 	}
-	
+
 	public String getDeleteAccountTaglineString() {
 		return deleteAccountTaglineString;
 	}
-	
+
 	public String getAccountScreenHeaderString() {
 		return accountScreenHeaderString;
 	}
-	
+
 	//public getters
 
 	public By getBackButton() {
@@ -121,24 +124,32 @@ public class AccountScreen extends HikeLibrary {
 	public By getConfirmDeleteAccountButton() {
 		return confirmDeleteAccountButton;
 	}
-	
+
 	//public methods
-	
+
 	public WelcomeScreen resetAccount() {
-		clickOnElement(resetAccountButton);
-		clickOnElement(confirmResetButton);
+		try {
+			WebElement resetAccount = driver.findElement(resetAccountButton);
+			new TouchAction(driver).press(resetAccount).perform();
+
+			WebElement confirmResetAccount = driver.findElement(confirmResetButton);
+			new TouchAction(driver).press(confirmResetAccount).perform();
+
+		} catch(Exception e) {
+			Reporter.log("Reset account button click did not work conventionally!");
+		}
 		return new WelcomeScreen();
 	}
-	
+
 	public WelcomeScreen deleteAccount() {
 		clickOnElement(deleteAccountButton);
 		clickOnElement(confirmDeleteAccountButton);
 		clickOnElement(confirmPopup);
 		return new WelcomeScreen();
 	}
-	
+
 	public SettingsScreen goBackToSettingsScreen() {
-		
+
 		clickOnElement(backButton);
 		return new SettingsScreen();
 	}

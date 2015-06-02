@@ -125,6 +125,7 @@ public class AppiumLibrary extends AppiumCapabilities {
 			TouchAction action1 = new TouchAction(driver).tap(hikeLogoElement);
 			MultiTouchAction doubleTap = new MultiTouchAction(driver);
 			doubleTap.add(action0).add(action1).perform();
+			//TODO try with 500 ms run
 			doubleTap.add(action0).add(action1).perform();
 		} catch (Exception e) {
 			Reporter.log("Unable to pick hike logo/double tap on hike logo");

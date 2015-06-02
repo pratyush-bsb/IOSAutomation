@@ -190,6 +190,17 @@ public class GroupThreadScreen extends HikeLibrary implements ChatScreenInterfac
 		String textCapturedLater = getTextByName(getLastMessage);
 		return textCapturedLater;
 	}
+	
+	public boolean checkIfGroupMute() {
+		
+		boolean groupMuted = false;
+		clickOnElement(chatThreadOverflowButton);
+		try {
+			groupMuted = isElementPresent(unmuteButton);
+		} catch(Exception e) {}
+		
+		return groupMuted;
+	}
 
 	public void longPressOnLastMessage() {
 
