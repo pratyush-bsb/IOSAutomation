@@ -13,7 +13,7 @@ if [ "$tag_number" != "0" ]; then
 	git checkout $tag_number
 fi
 
-xcodebuild -scheme Hike -workspace Hike.xcworkspace clean archive -archivePath ./build/Hike
+xcodebuild -scheme Hike -workspace Hike.xcworkspace clean archive -archivePath ./build/Hike -destination generic/platform=iOS
 xcodebuild -exportArchive -exportFormat ipa -archivePath ./build/Hike.xcarchive -exportPath ./build/Hike.ipa -exportProvisioningProfile "iOSTeam Provisioning Profile: com.bsb.hike"
 mv build/*.ipa /Users/qa-lab/Documents/iosAutomation/IOSAutomation/Hike.ipa
 
