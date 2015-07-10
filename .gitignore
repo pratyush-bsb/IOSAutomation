@@ -1,1 +1,8 @@
 .DS_Store
+Hike.app
+Hike.ipa
+bin
+build
+reports
+test-output
+ScreenShots
