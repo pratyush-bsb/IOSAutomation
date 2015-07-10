@@ -51,6 +51,10 @@ public class GCAddOrRemoveByParticipants extends HikeLibrary {
 		
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupName, true);
 		
+		if(groupThreadObj == null) {
+			Assert.assertTrue(false, "Server side group was not created/reflected in the UI. Failing test");
+		}
+		
 		GroupProfileScreen groupProfileObj = groupThreadObj.clickOnGroupName();
 		
 		GroupContactSelectionScreen groupContactSelectionObj = groupProfileObj.addMember();
@@ -72,6 +76,10 @@ public class GCAddOrRemoveByParticipants extends HikeLibrary {
 		String groupName = "IOS automation server group";
 		goToHome();
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupName, true);
+		
+		if(groupThreadObj == null) {
+			Assert.assertTrue(false, "Server side group was not created/reflected in the UI. Failing test");
+		}
 		
 		GroupProfileScreen groupProfileObj = groupThreadObj.clickOnGroupName();
 		
@@ -98,10 +106,14 @@ public class GCAddOrRemoveByParticipants extends HikeLibrary {
 		goToHome();
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupName, true);
 		
+		if(groupThreadObj == null) {
+			Assert.assertTrue(false, "Server side group was not created/reflected in the UI. Failing test");
+		}
+		
 		GroupProfileScreen groupProfileObj = groupThreadObj.clickOnGroupName();
 		
-		GroupContactSelectionScreen groupContactSelectionObj = groupProfileObj.addMember();
-		groupProfileObj = groupContactSelectionObj.addNewMember(HIKE_DND_NAME_1, groupName);
+		//GroupContactSelectionScreen groupContactSelectionObj = groupProfileObj.addMember();
+		//groupProfileObj = groupContactSelectionObj.addNewMember(HIKE_DND_NAME_1, groupName);
 		
 		Assert.assertTrue(groupProfileObj.verifyPresenceOfParticularUser(HIKE_DND_NAME_1), "The DND user was not added to GC info list.");
 		Assert.assertEquals(groupProfileObj.getUserTypeForUser(HIKE_DND_NAME_1), "on SMS", "For DND user, in GC, 'on SMS' designation was not displayed");
@@ -122,6 +134,10 @@ public class GCAddOrRemoveByParticipants extends HikeLibrary {
 		String groupName = "IOS automation server group";
 		goToHome();
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupName, true);
+		
+		if(groupThreadObj == null) {
+			Assert.assertTrue(false, "Server side group was not created/reflected in the UI. Failing test");
+		}
 		
 		GroupProfileScreen groupProfileObj = groupThreadObj.clickOnGroupName();
 		List<WebElement> allUsers = groupProfileObj.getElementsOfAllUsers();

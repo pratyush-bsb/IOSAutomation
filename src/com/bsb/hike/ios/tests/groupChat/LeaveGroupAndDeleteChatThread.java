@@ -109,6 +109,9 @@ public class LeaveGroupAndDeleteChatThread extends HikeLibrary {
 		groupChatServerObj.groupCreatorLeavingGroup(HIKE_NUMBER_1, groupId);
 		
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupname, true);
+		if(groupThreadObj == null) {
+			Assert.assertTrue(false, "Server side was not created/notification in UI came late. Failing test");
+		}
 		
 		String lastMessage = groupThreadObj.getLastMessage();
 		

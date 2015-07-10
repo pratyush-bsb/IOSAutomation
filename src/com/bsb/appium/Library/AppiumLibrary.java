@@ -6,6 +6,8 @@ import io.appium.java_client.MultiTouchAction;
 import io.appium.java_client.NetworkConnectionSetting;
 import io.appium.java_client.TouchAction;
 
+import java.util.Set;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Reporter;
@@ -97,7 +99,8 @@ public class AppiumLibrary extends AppiumCapabilities {
 	// To enter some text in any element
 	public static void enterText(By locator, String value) {
 		try {
-			driver.findElement(locator).sendKeys(value);
+			WebElement element = driver.findElement(locator);
+			element.sendKeys(value);
 		} catch (Exception e) {
 			Reporter.log("Unable to enter text : " + value + " in locator : " + locator.toString());
 			e.printStackTrace();
@@ -132,6 +135,19 @@ public class AppiumLibrary extends AppiumCapabilities {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public static void singleTapWithTwoFingers(By locator) {
+		
+		try {
+			MobileElement hikeLogoElement = (MobileElement) driver.findElement(locator);
+			TouchAction action0 = new TouchAction(driver).tap(hikeLogoElement);
+			TouchAction action1 = new TouchAction(driver).tap(hikeLogoElement);
+			MultiTouchAction doubleTap = new MultiTouchAction(driver);
+			doubleTap.add(action0).add(action1).perform();
+		} catch (Exception e) {
+			Reporter.log("Unable to perform double tap");
+		}
 	}
 	
 	//Method checks whether keyboard is visible or not
@@ -196,6 +212,34 @@ public class AppiumLibrary extends AppiumCapabilities {
 		} catch(Exception e) {
 			Reporter.log("Unable to perform long press on pass element");
 		}
+	}
+	
+	public void changeToWebView() {
+		
+		try {
+			Set<String> currentContexts = driver.getContextHandles();
+			for(String context : currentContexts) {
+				if(context.contains("WEBVIEW")) {
+					driver.context(context);
+					break;
+				}
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void changeToNativeView() {
+		
+		try {
+			Set<String> currentContexts = driver.getContextHandles();
+			for(String context : currentContexts) {
+				if(!context.contains("WEBVIEW")) {
+					driver.context(context);
+					break;
+				}
+			}
+		} catch(Exception e) {}
 	}
 	
 }

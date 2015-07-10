@@ -17,7 +17,7 @@ public class BlockedList extends HikeLibrary {
 
 	private void waitForBlockedPageToLoad() {
 
-		int counter = 5;
+		int counter = 0;
 		boolean pageLoaded = false;
 
 		while(!pageLoaded && counter < 5) {
@@ -42,7 +42,7 @@ public class BlockedList extends HikeLibrary {
 	protected By doneButton = MobileBy.name("Done");
 	protected By allUsersFound = MobileBy.IosUIAutomation(".tableViews()[0].cells()");
 	protected By firstContactFound = MobileBy.IosUIAutomation(".tableViews()[0].cells()[0]");
-	protected String contactBlockStatus = "buttons()[0]";
+	protected String contactBlockStatus = ".buttons()";
 	protected By addContactToBlock = MobileBy.name("blockedPlusIcon");
 	protected By contactNameSuffix = MobileBy.IosUIAutomation(".staticTexts()[0]");
 
@@ -92,7 +92,7 @@ public class BlockedList extends HikeLibrary {
 	public void clickOnAddContactToBlock() {
 		clickOnElement(addContactToBlock);
 
-		int counter = 5;
+		int counter = 0;
 		boolean pageLoaded = false;
 
 		while(!pageLoaded && counter < 5) {
@@ -115,7 +115,7 @@ public class BlockedList extends HikeLibrary {
 	public void clickOnDoneButton() {
 		clickOnElement(doneButton);
 
-		int counter = 5;
+		int counter = 0;
 		boolean pageLoaded = false;
 
 		while(!pageLoaded && counter < 5) {
@@ -195,8 +195,10 @@ public class BlockedList extends HikeLibrary {
 
 		String status = "";
 		try {
-			By blockStatusButton = MobileBy.IosUIAutomation(allUsersFound + "[" + iterator + "]" + contactBlockStatus);
-			status = getTextByValue(blockStatusButton);
+			By blockStatusButton = MobileBy.IosUIAutomation(allUsersFound + "[" + iterator + "]");
+			WebElement userElement = driver.findElement(blockStatusButton);
+			WebElement userBlockStatusElement = userElement.findElement(MobileBy.IosUIAutomation(contactBlockStatus));
+			status = userBlockStatusElement.getAttribute("value");
 		} catch (Exception e) {
 
 		}
@@ -215,10 +217,10 @@ public class BlockedList extends HikeLibrary {
 
 		boolean contactBlocked = false;
 		try {
-			boolean noBlocksText = isElementPresent(someoneTroublingYouDiv);
+			/*boolean noBlocksText = isElementPresent(someoneTroublingYouDiv);
 			if(noBlocksText) {
 				return contactBlocked;
-			}
+			}*/
 
 			List<WebElement> allBlockedUsers = driver.findElements(allUsersFound);
 			for(WebElement eachUser : allBlockedUsers) {

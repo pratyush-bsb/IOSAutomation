@@ -74,7 +74,7 @@ public class AddToContactsFromGCInfo extends HikeLibrary {
 
 		String groupName = "IOS automation group";
 		String contactToSave = "+911234567890";
-		
+		goToHome();
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupName, true);
 		GroupProfileScreen groupProfileObj = groupThreadObj.clickOnGroupName();
 		AddToContacts addToContactsObj = groupProfileObj.addUnsavedToContacts(contactToSave);

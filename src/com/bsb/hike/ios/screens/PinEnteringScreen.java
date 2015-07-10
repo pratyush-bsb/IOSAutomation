@@ -1,8 +1,10 @@
 package com.bsb.hike.ios.screens;
 
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import com.bsb.hike.ios.library.HikeLibrary;
 
@@ -14,12 +16,12 @@ public class PinEnteringScreen extends HikeLibrary {
 
 	private void waitForPinEnteringScreenToLoad() {
 
-		int counter = 5;
+		int counter = 0;
 		boolean pageLoaded = false;
 
 		while(!pageLoaded && counter < 5) {
 			try {
-				driver.findElement(Pin_Screen_Title);
+				driver.findElement(pinScreenTitle);
 				pageLoaded = true;
 			} catch (Exception e) {
 				counter++;
@@ -30,49 +32,85 @@ public class PinEnteringScreen extends HikeLibrary {
 		}
 	}
 
-	protected By Back_Icon = MobileBy.name("Back");
-	protected By Pin_Screen_Title=MobileBy.name("Verify");
-	protected By Did_You_Get_SMS_Text=MobileBy.name("Did you get an SMS PIN? Enter it below.");
-	protected By Pin_EditText= MobileBy.IosUIAutomation(".textFields()[0]");
-	protected By Did_not_get_pin_Text=MobileBy.name("Didn't get the PIN? We'll call you.");
-	protected By Call_Me_Btn=MobileBy.name("Call Me (02:58)");    
-	protected By Cross_Btn = MobileBy.name("Clear text");
+	protected By backIcon = MobileBy.name("Back");
+	protected By pinScreenTitle = MobileBy.name("Verify");
+	protected By didYouGetSmsText = MobileBy.name("Did you get an SMS PIN? Enter it below.");
+	protected By pinEditText = MobileBy.IosUIAutomation(".textFields()[0]");
+	protected By didNotGetPinText = MobileBy.name("Didn't get the PIN? We'll call you.");
+	protected By callMeButton = MobileBy.IosUIAutomation(".buttons()[0]");    
+	protected By crossButton = MobileBy.name("Clear text");
 
-	//MobileElement cell=((Object) driver.findElementByIosUIAutomation("tableViews()[0].cells().firstWithPredicate(\"staticTexts[0].label== 'Page Control''\";
 
-	public void clickOnBackIcon()
+	public By getBackIcon() {
+		return backIcon;
+	}
+
+	public By getPinScreenTitle() {
+		return pinScreenTitle;
+	}
+
+	public By getDidYouGetSmsText() {
+		return didYouGetSmsText;
+	}
+
+	public By getPinEditText() {
+		return pinEditText;
+	}
+
+	public By getDidNotGetPinText() {
+		return didNotGetPinText;
+	}
+
+	public By getCallMeButton() {
+		return callMeButton;
+	}
+
+	public By getCrossButton() {
+		return crossButton;
+	}
+
+	//public methods
+	public LoginPhoneNumberScreen clickOnBackIcon()
 	{
-		clickOnElement(Back_Icon);
+		clickOnElement(backIcon);
+		return new LoginPhoneNumberScreen();
 	}
 
 	public String getText_PinScreenTitle()
 	{
-		return(getTextByName(Pin_Screen_Title));
+		return(getTextByName(pinScreenTitle));
 	}
 
 	public String getText_DidYouGetSMSText()
 	{
-		return(getTextByName(Did_You_Get_SMS_Text));
+		return(getTextByName(didYouGetSmsText));
 	}
 
 	public String getText_PinEditField()
 	{
-		return(getTextByName(Pin_EditText));
+		return(getTextByName(pinEditText));
 	}
 
 	public void clickOnCrossBtn()
 	{
-		clickOnElement(Cross_Btn);
+		clickOnElement(crossButton);
 	}
 
 	public void clickOnPinTextField(){
-		clickOnElement(Pin_EditText);
+		clickOnElement(pinEditText);
 	}
 
 	public LoginAboutYouScreen setPin(String value)
 	{
-		enterText(Pin_EditText, value);  //add 1111 in a variable
+		enterText(pinEditText, value);  //add 1111 in a variable
 		return new LoginAboutYouScreen();
+	}
+	
+	public void clearEnteredPin() {
+		try {
+			WebElement clearText = driver.findElement(crossButton);
+			new TouchAction(driver).press(clearText).perform();
+		} catch(Exception e) {}
 	}
 
 

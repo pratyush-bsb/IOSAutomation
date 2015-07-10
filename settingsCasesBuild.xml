@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="IOSAutomation" basedir="." default="build">
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+		<classpath>
+			<pathelement location="lib/ant-contrib-1.0b3.jar" />
+		</classpath>
+	</taskdef>
+
+	<target name="init" description="All the targets need to depend on this target for properties and classpath initilization.">
+		<var name="app.name" value="iostests" />
+		<dirname property="project.dir" file="./IOSAutomation" />
+		<echo message="${project.dir}" />
+		<var name="build.dir" value="${project.dir}/build" />
+		<!--<var name="support.dir" value="${project.dir}/support" /> -->
+		<var name="reports.dir" value="${project.dir}/reports" />
+		<var name="src.dir" value="${project.dir}/src" />
+		<var name="ScreenShots.dir" value="ScreenShots" />
+		<var file="${project.dir}/classpath.properties" />
+			<property environment="cruise" />
+		<path id="build.classpath">
+			<pathelement path="${build.classpath}" />
+		</path>
+		<path id="runtime.classpath">
+			<pathelement path="${runtime.classpath}" />
+		</path>
+		<taskdef resource="testngtasks" classpath="${testng.jar}" />
+	</target>
+	
+	<target name="clean" depends="init" description="Deletes dist and test-reports">
+		<delete dir="${build.dir}" quiet="true" includeemptydirs="true" />
+		<delete dir="${ScreenShots.dir}" quiet="true" includeemptydirs="true" />
+		<delete dir="${reports.dir}" quiet="true" includeemptydirs="true" />
+	</target>
+
+	<target name="prepare" depends="clean" description="creates build, dist, dist/WEB-INF, and test-reports directories.">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${ScreenShots.dir}"/>
+		<mkdir dir="${reports.dir}" />
+	</target>
+		
+	
+	<target name="build" depends="prepare" description="Compile main source tree java files">
+		<javac destdir="${build.dir}" debug="true" deprecation="false" optimize="false" failonerror="true">
+			<!-- <src path="${support.dir}" /> -->
+			<src path="${src.dir}" />
+			<classpath refid="build.classpath" />
+		</javac>
+	</target>
+
+	<!-- <target name="clean.sanity" depends="init" description="Deletes dist and test-reports">
+		<delete dir="${reports.dir}" quiet="true" includeemptydirs="true" />
+		<mkdir dir="${reports.dir}" />
+	</target>
+	 -->
+
+	<target name="ui.ios" depends="build" description="Runs iOS test suite from TestNG">
+		<testng classpathref="runtime.classpath"  outputDir="${reports.dir}" haltOnfailure="true">
+			<classpath>
+				<pathelement path="${build.dir}" />
+			</classpath>
+			<xmlfileset dir="${project.dir}" includes="IOS_SettingsCases_AUTOMATION.xml" />
+		</testng>
+	</target>
+	 
+
+</project>

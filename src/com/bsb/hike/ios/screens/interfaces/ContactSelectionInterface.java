@@ -32,5 +32,7 @@ public interface ContactSelectionInterface {
 	By editForwardingMessageWindow = MobileBy.IosUIAutomation(".textViews()[0]");
 
 	public void getCountOfContacts();
+	public By getPeopleOnHikeTab();
+	public By getSmsContactsTab();
 	
 }

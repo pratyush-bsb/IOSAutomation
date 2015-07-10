@@ -13,7 +13,7 @@ public class NotificationsScreen extends HikeLibrary {
 	}
 
 	private void waitForNotificationsPageToLoad() {
-		int counter = 5;
+		int counter = 0;
 		boolean pageLoaded = false;
 		
 		while(!pageLoaded && counter < 5) {

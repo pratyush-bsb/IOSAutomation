@@ -49,7 +49,7 @@ public class ResetFromDevice extends HikeLibrary {
 		settingScreenObj = homeScreenMenuObj.clickOnSettings_Lbl();
 		accountScreenObj = settingScreenObj.clickOnAccount();
 		
-		Assert.assertEquals(getTextByName(accountScreenObj.getResetAccountTagline()), accountScreenObj.getResetAccountTaglineString(), "The tagline string did not match in reset account");
+		Assert.assertEquals(getTextByValue(accountScreenObj.getResetAccountTagline()), accountScreenObj.getResetAccountTaglineString(), "The tagline string did not match in reset account");
 		
 	}
 
@@ -87,15 +87,17 @@ public class ResetFromDevice extends HikeLibrary {
 		//delete account
 		WelcomeScreen welcomeScreenObj = accountScreenObj.resetAccount();
 		
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
 		setDEFAULT_MSISDN();
 		setPin();
+		singleTapWithTwoFingers(welcomeScreenObj.getSignUpLogo());
+		welcomeScreenObj.selectStagingEnvironment();
 		LoginPhoneNumberScreen loginPhoneNumberObj = welcomeScreenObj.clickOnGetStartedBTN();
 		
 		loginPhoneNumberObj.clickOnPhoneNumberField();
 		loginPhoneNumberObj.setTextPhoneNumberField(getDEFAULT_MSISDN_Create());
 		loginPhoneNumberObj.clickOnNextBtn();
-		PinEnteringScreen pinEnteringScreenObj = ConfirmYourNumberPopUpScreen.clickOnConfirmBtn();
+		PinEnteringScreen pinEnteringScreenObj = ConfirmYourNumberPopUpScreen.clickOnConfirmButton();
 		
 		pinEnteringScreenObj.clickOnPinTextField();
 		LoginAboutYouScreen aboutYouScreenObj = pinEnteringScreenObj.setPin(DEFAULT_PIN);

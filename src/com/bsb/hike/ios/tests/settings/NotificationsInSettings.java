@@ -58,7 +58,7 @@ public class NotificationsInSettings extends HikeLibrary {
 		
 		settingScreenObj = notificationObj.goBackToSettingsPage();
 		
-		Assert.assertEquals(settingScreenObj.getSettingsTitle_LBL(), settingScreenObj.getHeaderValue(), "Settings page did not come after clicking back in notifications page");
+		Assert.assertEquals(getTextByName(settingScreenObj.getSettingsTitle_LBL()), settingScreenObj.getHeaderValue(), "Settings page did not come after clicking back in notifications page");
 		
 	}
 

@@ -173,6 +173,21 @@ public class GroupContactSelectionScreen extends HikeLibrary implements ContactS
 			Reporter.log("No contact found after searching");
 		}
 	}
+	
+	public void selectSearchedContact(String user) {
+		
+		try {
+			List<WebElement> allResults = driver.findElementsByIosUIAutomation(allContactsPrefix);
+			for(WebElement eachContact : allResults) {
+				String contactName = eachContact.findElement(MobileBy.IosUIAutomation(contactNameSuffix)).getAttribute("name");
+				if(contactName.equalsIgnoreCase(user)) {
+					new TouchAction(driver).press(eachContact).perform();
+					break;
+				}
+			}
+		} catch (Exception e) {
+		}
+	}
 
 	public GroupThreadScreen clickOnDoneButton(String groupName) {
 		clickOnElement(doneButton);
@@ -184,6 +199,8 @@ public class GroupContactSelectionScreen extends HikeLibrary implements ContactS
 		searchForAContact(user);
 		try {
 			List<WebElement> allResults = driver.findElementsByIosUIAutomation(allContactsPrefix);
+			//WebElement elementToSwipeToDismissKeyboard = driver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].groups()[0]"));
+			//hideHikeKeyboardBySwipe(elementToSwipeToDismissKeyboard);
 
 			//iterate over all results and pick the one matching the search criteria
 			for(WebElement eachContact : allResults) {

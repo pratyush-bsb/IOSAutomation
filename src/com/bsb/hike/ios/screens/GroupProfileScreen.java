@@ -307,8 +307,8 @@ public class GroupProfileScreen extends HikeLibrary implements ProfileScreenInte
 
 		for(WebElement eachUser : allUsersFound) {
 			try {
-				WebElement eachUserNameElement = eachUser.findElement(eachUserSuffix);
-				String userName = eachUserNameElement.getAttribute("name");
+				//WebElement eachUserNameElement = eachUser.findElement(eachUserSuffix);
+				String userName = eachUser.getAttribute("name");
 				if(user.equalsIgnoreCase(userName)) {
 					//user type found
 					userTypeFound = true;
@@ -329,8 +329,9 @@ public class GroupProfileScreen extends HikeLibrary implements ProfileScreenInte
 
 		for(WebElement eachUser : allUsersFound) {
 			try {
-				WebElement eachUserNameElement = eachUser.findElement(eachUserSuffix);
-				String userName = eachUserNameElement.getAttribute("name");
+				//WebElement eachUserNameElement = eachUser.findElement(eachUserSuffix);
+				String userName = eachUser.getAttribute("name");
+				driver.scrollTo(userName);
 				if(user.equalsIgnoreCase(userName)) {
 					//user type found
 					WebElement eachUserDesignationElement = eachUser.findElement(eachUserDesignationSuffix);
@@ -351,9 +352,10 @@ public class GroupProfileScreen extends HikeLibrary implements ProfileScreenInte
 
 		for(WebElement eachUser : allUsersFound) {
 			try {
-				WebElement eachUserNameElement = eachUser.findElement(eachUserSuffix);
-				String userName = eachUserNameElement.getAttribute("name");
+				//WebElement eachUserNameElement = eachUser.findElement(eachUserSuffix);
+				String userName = eachUser.getAttribute("name");
 				if(contactToSave.equalsIgnoreCase(userName)) {
+					driver.scrollTo(userName);
 					longPressByElement(eachUser);
 					clickOnElement(addToContacts);
 					clickOnElement(addToContacts);

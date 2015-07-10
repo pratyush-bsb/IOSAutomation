@@ -36,6 +36,10 @@ public class StartANewChatScreen extends HikeLibrary implements ContactSelection
 	public String getStartAChatHeaderString() {
 		return startAChatHeaderString;
 	}
+	
+	public By getContactsTab() {
+		return contactsTab;
+	}
 
 	public By getStartAChatBackButton() {
 		return startAChatBackButton;

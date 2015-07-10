@@ -83,7 +83,7 @@ public class BlockOrUnblockUser extends HikeLibrary {
 				"2. Start group chat with blocked user and other users. \n" +
 				"3. Validate the block situation. \n");
 		
-		String serverGroupName = "IOS server side group";
+		String serverGroupName = "IOS server side group from block user";
 		goToHome();
 		StartANewChatScreen startNewChatObj = homeScreenMenuObj.clickOnComposeConversation();
 		ChatThreadScreen chatThreadObj = startNewChatObj.startNewHikeChat(HIKE_CONTACT_NAME);
@@ -98,9 +98,11 @@ public class BlockOrUnblockUser extends HikeLibrary {
 		List<String> usersInGroup = new ArrayList<String>();
 		usersInGroup.add(getDEFAULT_MSISDN());
 		usersInGroup.add(HIKE_NUMBER_2);
-		groupChatMessageSupportObj.createGroupAndSendMessage(HIKE_NUMBER_3, usersInGroup, serverGroupName);
+		groupChatMessageSupportObj.createGroupAndSendMessage(HIKE_NUMBER_1, usersInGroup, serverGroupName);
+		goToHome();
+		Assert.assertFalse(getTextByName(homeScreenMenuObj.getFirstExistingChatName()).equalsIgnoreCase(serverGroupName), "Group notification came from a blocked user");
 		
-		groupChatMessageSupportObj = new GroupChatMessageSupport();
+		/*groupChatMessageSupportObj = new GroupChatMessageSupport();
 		usersInGroup.clear();
 		usersInGroup.add(getDEFAULT_MSISDN());
 		usersInGroup.add(HIKE_NUMBER_2);
@@ -111,7 +113,7 @@ public class BlockOrUnblockUser extends HikeLibrary {
 		goToHome();
 		chatThreadObj = homeScreenMenuObj.clickOnFirstChat();
 		//chatThreadObj = (ChatThreadScreen) homeScreenMenuObj.goToSpecificUserThread(serverGroupName, true);
-		Assert.assertTrue(!(serverGroupName.equalsIgnoreCase(chatThreadObj.getUserName())), "Group notification came to blocked user");
+		Assert.assertTrue(!(serverGroupName.equalsIgnoreCase(chatThreadObj.getUserName())), "Group notification came to blocked user");*/
 		
 		//unblock and still no notification should come
 		SettingsScreen settingScreenObj = homeScreenMenuObj.clickOnSettings_Lbl();
@@ -120,7 +122,7 @@ public class BlockOrUnblockUser extends HikeLibrary {
 		goToHome();
 		Thread.sleep(3000);
 		chatThreadObj = homeScreenMenuObj.clickOnFirstChat();
-		Assert.assertTrue(!(serverGroupName.equalsIgnoreCase(chatThreadObj.getUserName())), "Group notification came to blocked user");
+		//Assert.assertTrue(!(serverGroupName.equalsIgnoreCase(chatThreadObj.getUserName())), "Group notification came to blocked user");
 	}
 	
 	/*@Test

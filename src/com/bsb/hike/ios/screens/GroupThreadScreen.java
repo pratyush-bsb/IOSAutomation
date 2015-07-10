@@ -175,19 +175,24 @@ public class GroupThreadScreen extends HikeLibrary implements ChatScreenInterfac
 		clickOnSendMessage();
 	}
 
+	//use this to capture notification message
 	public String getLastMessage() {
+		
+		String textCapturedLater = "";
 
 		int numberOfMessages = allChatMessagesCells().size();
 		By getLastMessage = MobileBy.IosUIAutomation(allChatMessages + "[" + String.valueOf(numberOfMessages-1) + "].staticTexts()[0]");
-		String textCapturedLater = getTextByName(getLastMessage);
+		textCapturedLater = getTextByName(getLastMessage);
 		return textCapturedLater;
 	}
 	
+	//use this to capture chat message
 	public String getLastChatMessage() {
 
+		String textCapturedLater = ""; 
 		int numberOfMessages = allChatMessagesCells().size();
 		By getLastMessage = MobileBy.IosUIAutomation(allChatMessages + "[" + String.valueOf(numberOfMessages-1) + "].staticTexts()[1]");
-		String textCapturedLater = getTextByName(getLastMessage);
+		textCapturedLater = getTextByName(getLastMessage);
 		return textCapturedLater;
 	}
 	

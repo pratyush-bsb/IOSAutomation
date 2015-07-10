@@ -49,7 +49,8 @@ public class SendMessageInGC extends HikeLibrary {
 		contactSelectionScreenObj.searchForAContactWithoutClear(HIKE_CONTACT_NAME_1);
 		contactSelectionScreenObj.selectFirstContactInResults();
 		contactSelectionScreenObj.searchForAContactWithoutClear(HIKE_SMS_CONTACT_NAME_1);
-		contactSelectionScreenObj.selectFirstContactInResults();
+		contactSelectionScreenObj.selectSearchedContact(HIKE_SMS_CONTACT_NAME_1);
+//		contactSelectionScreenObj.selectFirstContactInResults();
 		contactSelectionScreenObj.searchForAContactWithoutClear("1234567890");
 		contactSelectionScreenObj.selectFirstContactInResults();
 
@@ -79,7 +80,7 @@ public class SendMessageInGC extends HikeLibrary {
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupName, true);
 		GroupProfileScreen groupProfileObj = groupThreadObj.clickOnGroupName();
 		UserProfileScreen userProfileObj = groupProfileObj.goToUserProfile(HIKE_SMS_CONTACT_NAME_1);
-		
+		Assert.assertTrue(isElementPresent(userProfileObj.getSendAMessage()), "Send a message button did not come for SMS user");
 		ChatThreadScreen chatThreadObj = userProfileObj.clickOnSendAMessage();
 		chatThreadObj.sendMessage(messageToSend);
 		
@@ -104,7 +105,7 @@ public class SendMessageInGC extends HikeLibrary {
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupName, true);
 		GroupProfileScreen groupProfileObj = groupThreadObj.clickOnGroupName();
 		UserProfileScreen userProfileObj = groupProfileObj.goToUserProfile(user);
-		
+		Assert.assertTrue(isElementPresent(userProfileObj.getSendAMessage()), "Send a message button did not come for SMS user");
 		ChatThreadScreen chatThreadObj = userProfileObj.clickOnSendAMessage();
 		chatThreadObj.sendMessage(messageToSend);
 		

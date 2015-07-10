@@ -2,6 +2,8 @@ package com.bsb.hike.ios.library;
 
 
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 
@@ -59,51 +61,52 @@ public class HikeLibrary extends AppiumLibrary {
 	public static String STATUS_UPDATE ="Happy";
 	public static String TEST_CHAT_MESSAGE ="Test Message";
 	public static String TEST_GROUP_CHAT_MESSAGE = "Group Chat Message";
-	
+
 	public static String HIKE_CONTACT_NAME ="FirstTestUser";
 	public static String HIKE_NUMBER_1 = "+914444440001";
 
-	
+
 	public static String HIKE_CONTACT_NAME_1 ="SecondTestUser";
 	public static String HIKE_NUMBER_2 = "+914444440002";
-	
+
 	public static String HIKE_CONTACT_NAME_2 ="ThirdTestUser";
 	public static String HIKE_NUMBER_3 = "+914444440003";
-	
+
 	public static String HIKE_CONTACT_NAME_3 ="FourthTestUser";
 	public static String HIKE_NUMBER_4 = "+914444440004";
-	
+
 	public static String HIKE_CONTACT_NAME_4 ="FifthTestUser";
 	public static String HIKE_NUMBER_5 = "+914444440005";
 
-	
-	
+
+
 	public static String INTERNATIONAL_HIKE_USER ="INTERNATIONALHIKEUSER";
 	public static String INTERNATIONAL_HIKE_NUMBER = "+447903524281";
-	
+
 	public static String HIKE_SMS_CONTACT_NAME_1 ="HikeSMSContact";
 	public static String HIKE_SMS_CONTACT_NUMBER_1 ="+911231231232";
-	
+
 	public static String HIKE_SMS_CONTACT_NAME_2 ="SecondHikeSMSContact";
 	public static String HIKE_SMS_CONTACT_NUMBER_2 ="+911231234321";
-	
-	
-	
+
+
+
 	public static String HIKE_SMS_CONTACT_NAME_3 ="ThirdHikeSMSContact";
 	public static String HIKE_SMS_CONTACT_NUMBER_3 ="+911231265473";
-	
+
 	public static String HIKE_SMS_CONTACT_NAME_4 ="FourthHikeSMSContact";
 	public static String HIKE_SMS_CONTACT_NUMBER_4 ="+911231233487";
-	
+
 	public static String HIKE_DND_NAME_1 ="HikeDNDUser";
 	public static String HIKE_DND_NUMBER_1 ="+919818461120";
-	
+
 	public static String NON_HIKE_USER = "+914444445319";
 	public static String HIKE_NOT_SAVED_USER = "+914444442486";
-	
+
 	public static String HIKE_NOT_SAVED_SMS_USER = "+914444445003";
 
 	public static String HIKE_BOT_NATASHA = "Natasha";
+	public static String HIKE_DAILY = "hike daily";
 
 	public static String DEF_DIGIT ="777777";
 	public static String DEFAULT_MSISDN = DEF_DIGIT+"1234"; //RandomStringUtils.randomNumeric(4);
@@ -125,6 +128,7 @@ public class HikeLibrary extends AppiumLibrary {
 
 	}
 	public String getDEFAULT_MSISDN_Create(){
+		setDEFAULT_MSISDN();
 		return DEFAULT_MSISDN;
 
 	}
@@ -155,7 +159,7 @@ public class HikeLibrary extends AppiumLibrary {
 		}
 		return msisdn;
 	}
-	
+
 	public void setPin(){
 		Reporter.log("Setting Pin");
 		RedisServiceManagerUtil.getInstance().setKey("pincodes-"+getDEFAULT_MSISDN(), DEFAULT_PIN);	
@@ -232,7 +236,24 @@ public class HikeLibrary extends AppiumLibrary {
 		}
 
 	}
-	
+
+	//this method hide the keyboard by swiping up in the screen. Used when cancel button changes screen instead of hiding keyboard
+	public void hideHikeKeyboardBySwipe(WebElement elementToHoldAndSwipe) {
+
+		MobileElement elementToHoldMobileElem = (MobileElement) elementToHoldAndSwipe;
+
+		try {
+			/*Point elementMidPoint = */
+			elementToHoldMobileElem.swipe(SwipeElementDirection.LEFT, 500);
+			//int midXCoordinate = elementMidPoint.x;
+			//int midYCoordinate = elementMidPoint.y;
+
+			//new TouchAction(driver).press(elementToHoldAndSwipe).moveTo(midXCoordinate, midYCoordinate+5).perform();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public String getAppVersion() {
 
 		String appVersion = "";
@@ -241,11 +262,20 @@ public class HikeLibrary extends AppiumLibrary {
 		HomeScreenMenu homeScreenObj = new HomeScreenMenu();
 		SettingsScreen settingsObj = homeScreenObj.clickOnSettings_Lbl();
 		FeedbackMail feedbackMailObj = settingsObj.clickOnContact();
-		
+
 		String fullMessage = feedbackMailObj.getMessageBody();
 		appVersion = fullMessage.split(":")[1].split("Build")[0].trim();
-		
+
 		return appVersion;
+	}
+	
+	//scroll the element to the center of screen. Make sure keyboard is hidden for this case
+	public void scrollElementToView(WebElement elementToScroll) {
+		
+		try {
+			//get dimensions of the screen
+			//driver.s
+		} catch(Exception e) {}
 	}
 
 }

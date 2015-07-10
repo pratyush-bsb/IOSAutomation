@@ -31,7 +31,7 @@ public class UserProfileScreen extends HikeLibrary implements ProfileScreenInter
 	
 	private void waitForProfilePageToLoad() {
 		
-		int counter = 5;
+		int counter = 0;
 		boolean pageLoaded = false;
 		
 		while(!pageLoaded && counter < 5) {

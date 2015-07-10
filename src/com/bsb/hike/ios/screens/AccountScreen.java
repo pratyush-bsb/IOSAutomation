@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Reporter;
 
 import com.bsb.hike.ios.library.HikeLibrary;
+import com.bsb.hike.ios.popups.ResetHiddenMode;
 
 public class AccountScreen extends HikeLibrary {
 
@@ -16,7 +17,7 @@ public class AccountScreen extends HikeLibrary {
 	}
 
 	private void waitForAccountsPageToLoad() {
-		int counter = 5;
+		int counter = 0;
 		boolean pageLoaded = false;
 
 		while(!pageLoaded && counter < 5) {
@@ -44,19 +45,41 @@ public class AccountScreen extends HikeLibrary {
 	protected By allAccountOptions = MobileBy.IosUIAutomation(".tableViews()[0].cells()");
 	protected By resetAccountButton = MobileBy.name("Reset Account");
 	protected By deleteAccountButton = MobileBy.name("Delete Account");
-	protected By confirmResetButton = MobileBy.name("Reset Account");
+	protected By confirmResetButton = MobileBy.IosUIAutomation("UIATarget.localTarget().frontMostApp().actionSheet().collectionViews()[0]");
 	protected By cancel = MobileBy.name("Cancel");
 	protected By confirmDeleteAccountButton = MobileBy.name("Continue");
 	protected By confirmPopup = MobileBy.name("Yes");
+	
+	protected String accountTabHeader = ".staticTexts()[0]";
+	protected String accountTabTagline = ".staticTexts()[1]";
 
 	protected String deleteAccountTaglineString = "Permanently delete your hike account";
 	protected By deleteAccountTagline = MobileBy.name("Permanently delete your hike account");
 
 	protected String resetAccountTaglineString = "Clear your messages and profile from this device.";
-	protected By resetAccountTagline = MobileBy.IosUIAutomation("Clear your messages and profile from this device.");
+	protected By resetAccountTagline = MobileBy.name("Clear your messages and profile from this device.");
+	
+	//stealth settings
+	protected By resetHiddenMode = MobileBy.name("Reset Hidden Mode");
+	protected By changePasscode = MobileBy.name("Change Passcode");
+	protected By hideChatsOnAppExitToggle = MobileBy.name("Hide Chats on App Exit, Hide chats everytime you exit hike");
+	
+	
 
 	public By getAccountScreenHeader() {
 		return accountScreenHeader;
+	}
+	
+	public By getResetHiddenMode() {
+		return resetHiddenMode;
+	}
+	
+	public By getChangePasscode() {
+		return changePasscode;
+	}
+	
+	public By getHideChatsOnAppExitToggle() {
+		return hideChatsOnAppExitToggle;
 	}
 
 	public By getDeleteAccountTagline() {
@@ -153,5 +176,42 @@ public class AccountScreen extends HikeLibrary {
 		clickOnElement(backButton);
 		return new SettingsScreen();
 	}
+	
+	public void toggleFreeSMS() {
+		clickOnElement(freeSMSToIndiaSwitch);
+	}
+	
+	public void toggle128bitSSL() {
+		clickOnElement(bitSSLSwitch);
+	}
+	
+	public EnterPasscodeForStealth clickOnChangePasscode() {
+		clickOnElement(changePasscode);
+		return new EnterPasscodeForStealth();
+	}
 
+	public void changeStealthPasscode() {
+		
+		try {
+			EnterPasscodeForStealth enterStealthPasscodeObj = clickOnChangePasscode();
+			enterStealthPasscodeObj.enterPasscode();
+			enterStealthPasscodeObj.enterPasscode();
+			enterStealthPasscodeObj.enterPasscode();
+		} catch(Exception e) {}
+		
+	}
+	
+	public ResetHiddenMode clickOnResetHiddenMode() {
+		
+		clickOnElement(resetHiddenMode);
+		return new ResetHiddenMode();
+	}
+	
+	public HomeScreenMenu resetHiddenMode() {
+		
+		ResetHiddenMode resetHiddenModePopup = clickOnResetHiddenMode();
+		resetHiddenModePopup.confirmResetHiddenMode();
+		return new HomeScreenMenu();
+	}
+	
 }

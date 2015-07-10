@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.bsb.hike.ios.library.HikeLibrary;
+import com.bsb.hike.ios.popups.HiddenModeFTUEPopUp;
 import com.bsb.hike.ios.screens.interfaces.ChatScreenInterface;
 
 public class HomeScreenMenu extends HikeLibrary {
@@ -51,8 +52,10 @@ public class HomeScreenMenu extends HikeLibrary {
 	protected String allExistingChatsString = ".tableViews()[0].cells()";
 	protected By firstExistingChatName = MobileBy.IosUIAutomation(".tableViews()[0].cells()[0].staticTexts()[1]");
 
-	protected String deleteChatButton = ".buttons()[0]";
-	protected By moreChatButton = MobileBy.IosUIAutomation(".buttons()[0]");
+	protected String deleteChatButton = "Delete";
+	protected String hideButton = "Hide";
+	protected String unhideButton = "Unhide";
+	protected By moreChatButton = MobileBy.name("More");
 	protected By moreProfileButton = MobileBy.name("Profile");
 	protected By moreEmailChatButton = MobileBy.name("Email Chat");
 	protected By moreClearChatButton = MobileBy.name("Clear Chat");
@@ -67,12 +70,28 @@ public class HomeScreenMenu extends HikeLibrary {
 	
 	protected By leaveGroupButton = MobileBy.name("Leave Group");
 	protected By deleteChat = MobileBy.name("Delete");
+	protected By moreButton = MobileBy.name("More");
+	
+	protected By hiddenModeSetupConfirmation = MobileBy.name("Hidden mode setup is complete. Swipe chats left to hide.");
+	protected By popupHomeScreenText = MobileBy.IosUIAutomation(".staticTexts()[0]");
 
 	//getters
 	public By getOverflow_Option() {
 		return overflow_Option;
 	}
+	
+	public By getPopupHomeScreenText() {
+		return popupHomeScreenText;
+	}
+	
+	public By getHiddenModeSetupConfirmation() {
+		return hiddenModeSetupConfirmation;
+	}
 
+	public By getHiddenChatHintButton() {
+		return removeHiddenChatHintButton;
+	}
+	
 	public By getDeleteChatConfirmButton() {
 		return deleteChatConfirmButton;
 	}
@@ -161,6 +180,20 @@ public class HomeScreenMenu extends HikeLibrary {
 		clickOnOverflow();
 		clickOnElement(newGroup_Lbl);
 		return new NewGroupScreen();
+	}
+	
+	public HiddenModeFTUEPopUp clickOnHideButton(boolean firstSetup) {
+		
+		HiddenModeFTUEPopUp hiddenFtueObj = null;
+		clickOnElement(conversationHide);
+		if(firstSetup) {
+			hiddenFtueObj = new HiddenModeFTUEPopUp();
+		} else { //TODO add contructor and interface for enter passcode screens
+			
+			//return new EnterPasscodeForStealth();
+		}
+		
+		return hiddenFtueObj;
 	}
 
 	public ChatThreadScreen clickOnFirstChat() {
@@ -392,5 +425,63 @@ public class HomeScreenMenu extends HikeLibrary {
 			}
 		} catch(Exception e) {}
 		return timestampAvailable;
+	}
+	
+	public WebElement swipeLeftParticularUser(String user) {
+		
+		WebElement userElement = getSpecificChatElement(user);
+		try {
+			MobileElement userElementCasted = (MobileElement) userElement;
+			
+			userElementCasted.swipe(SwipeElementDirection.LEFT, 1000);
+		} catch(Exception e) {}
+		
+		return userElement;
+	}
+	
+	public void toggleHideUnhideChat(String user) {
+		
+		WebElement userElement = swipeLeftParticularUser(user);
+		try {
+			MobileElement userElementCasted = (MobileElement) userElement;
+			try {
+				driver.findElement(MobileBy.name(hideButton));
+				if(userElementCasted.findElement(MobileBy.name(hideButton)) != null) {
+					WebElement hideButtonElem = userElementCasted.findElement(MobileBy.name(hideButton));
+					hideButtonElem.click();
+				}
+			} catch(Exception e){}
+			try {
+				if(userElementCasted.findElement(MobileBy.name(unhideButton)) != null) {
+					WebElement unhideButtonElem = userElementCasted.findElement(MobileBy.name(unhideButton));
+					unhideButtonElem.click();
+				}
+			} catch(Exception e) {}
+			
+		} catch(Exception e) {}
+	}
+	
+	public void leaveGroup(String groupName) {
+		
+		WebElement userElement = swipeLeftParticularUser(groupName);
+		WebElement leaveButtonElement = null;
+		WebElement moreButtonElement = null;
+		
+		try {
+			leaveButtonElement = userElement.findElement(leaveGroupButton);
+		} catch (Exception e) {
+			moreButtonElement = userElement.findElement(moreButton);
+		}
+		
+		try {
+			if(leaveButtonElement != null) {
+				leaveButtonElement.click();
+			} else if(moreButtonElement != null) {
+				moreButtonElement.click();
+				clickOnElement(leaveGroupButton);
+			}
+		} catch (Exception e) {}
+		
+		
 	}
 }

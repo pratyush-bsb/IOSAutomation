@@ -104,15 +104,17 @@ public class DeleteAccount extends HikeLibrary {
 		//delete account
 		WelcomeScreen welcomeScreenObj = accountScreenObj.deleteAccount();
 		
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
 		setDEFAULT_MSISDN();
 		setPin();
+		singleTapWithTwoFingers(welcomeScreenObj.getSignUpLogo());
+		welcomeScreenObj.selectStagingEnvironment();
 		LoginPhoneNumberScreen loginPhoneNumberObj = welcomeScreenObj.clickOnGetStartedBTN();
 		
 		loginPhoneNumberObj.clickOnPhoneNumberField();
 		loginPhoneNumberObj.setTextPhoneNumberField(getDEFAULT_MSISDN_Create());
 		loginPhoneNumberObj.clickOnNextBtn();
-		PinEnteringScreen pinEnteringScreenObj = ConfirmYourNumberPopUpScreen.clickOnConfirmBtn();
+		PinEnteringScreen pinEnteringScreenObj = ConfirmYourNumberPopUpScreen.clickOnConfirmButton();
 		
 		pinEnteringScreenObj.clickOnPinTextField();
 		LoginAboutYouScreen aboutYouScreenObj = pinEnteringScreenObj.setPin(DEFAULT_PIN);

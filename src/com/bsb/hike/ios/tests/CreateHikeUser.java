@@ -32,17 +32,18 @@ public class CreateHikeUser extends HikeLibrary {
 
 	@Test
 	public void test001() throws Exception{
-		Thread.sleep(1000*10);
-		//doubleTapWithTwoFingers(MobileBy.name(WelcomeScreen.getHikeMessengerNameIdentifier()));
+		//Thread.sleep(1000*10);
 		setDEFAULT_MSISDN();
 		setPin();
 		WelcomeScreen welcomeScreenObj = new WelcomeScreen();
+		singleTapWithTwoFingers(welcomeScreenObj.getSignUpLogo());
+		welcomeScreenObj.selectStagingEnvironment();
 		LoginPhoneNumberScreen loginPhoneNumberObj = welcomeScreenObj.clickOnGetStartedBTN();
 		
 		loginPhoneNumberObj.clickOnPhoneNumberField();
 		loginPhoneNumberObj.setTextPhoneNumberField(getDEFAULT_MSISDN_Create());
 		loginPhoneNumberObj.clickOnNextBtn();
-		PinEnteringScreen pinEnteringScreenObj = ConfirmYourNumberPopUpScreen.clickOnConfirmBtn();
+		PinEnteringScreen pinEnteringScreenObj = ConfirmYourNumberPopUpScreen.clickOnConfirmButton();
 		
 		pinEnteringScreenObj.clickOnPinTextField();
 		LoginAboutYouScreen aboutYouScreenObj = pinEnteringScreenObj.setPin(DEFAULT_PIN);

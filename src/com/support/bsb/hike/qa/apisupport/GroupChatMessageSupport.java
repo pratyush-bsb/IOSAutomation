@@ -27,12 +27,12 @@ public class GroupChatMessageSupport extends BaseClass{
 	QueueMessageHandler queueHandlerSender;
 	HikeMqttConnection mqttConnectionSender;
 	RedisServiceManagerUtil redis = RedisServiceManagerUtil.getInstance();
-    HTTPService httpService = new HTTPService();
-    private static final String JSONTYPE = "application/json";
-	
+	HTTPService httpService = new HTTPService();
+	private static final String JSONTYPE = "application/json";
+
 	QueueMessageHandler queueHandlerRec;
 	HikeMqttConnection mqttConnectionRec;
-	
+
 	String uidSender = "";
 	String tokenSender = "";
 	public static String groupId = "";
@@ -42,279 +42,309 @@ public class GroupChatMessageSupport extends BaseClass{
 		List<String> list = new ArrayList<String>();
 		list.add("+915544332222");
 		list.add("+919810771083");
-//		list.add("+918375975893");
-//		list.add("+919716549529");
+		//		list.add("+918375975893");
+		//		list.add("+919716549529");
 		for(int counter=0 ; counter<50; counter++){
 			list.add(gc.msisdns[counter]);
 		}
 		//gc.createGroupAndSendMessage("+917838901391", list);	
-//		gc.changeGroupNameByMember("+919810771083", "apiscript");	
-//		gc.changeGroupProfile("+919716549529");
-//		gc.addMemberToGroup("+919810771083", "+919711118690");	//Maybe anyone
-//		gc.removeMemberFromGroup("+915544332222" , "+919716549529");	//owner remove
-//		gc.groupCreatorLeavingGroup("+915544332222");
+		//		gc.changeGroupNameByMember("+919810771083", "apiscript");	
+		//		gc.changeGroupProfile("+919716549529");
+		//		gc.addMemberToGroup("+919810771083", "+919711118690");	//Maybe anyone
+		//		gc.removeMemberFromGroup("+915544332222" , "+919716549529");	//owner remove
+		//		gc.groupCreatorLeavingGroup("+915544332222");
 	}
 	public void setPin(String groupId , String msisdn , String pinText){
-		  try {
-		  String uid = getuidFromMsisdn(msisdn);
-		  String token = getTokenFromMsisdn(msisdn);
-		  QueueMessageHandler queueHandler = new QueueMessageHandler();
-		  HikeMqttConnection mqttConnection = new HikeMqttConnection(msisdn , queueHandler);
+		try {
+			String uid = getuidFromMsisdn(msisdn);
+			String token = getTokenFromMsisdn(msisdn);
+			QueueMessageHandler queueHandler = new QueueMessageHandler();
+			HikeMqttConnection mqttConnection = new HikeMqttConnection(msisdn , queueHandler);
 
-		  mqttConnection.connect(mqtthost , mqttport , uid , token);
-		  Thread.sleep(100);
-		  
-		  JsonObject pin = new JsonObject();
-		  pin.addProperty("pin", 1);
-		  
-		  JsonObject data = new JsonObject();
-		  data.addProperty("ts", System.currentTimeMillis());
-		  data.add("md", pin);
-		  data.addProperty("i", 10);
-		  data.addProperty("hm", pinText);
-		  
-		  JsonObject json = new JsonObject();
-		  json.addProperty("to", groupId);
-		  json.add("d", data);
-		  json.addProperty("t", "m");
-		  
-		  mqttConnection.publish(uid+"/p",json.toString().getBytes(), QoS.AT_LEAST_ONCE);
-		  Thread.sleep(1000);
+			mqttConnection.connect(mqtthost , mqttport , uid , token);
+			Thread.sleep(100);
 
-		  mqttConnection.disconnect();
+			JsonObject pin = new JsonObject();
+			pin.addProperty("pin", 1);
+
+			JsonObject data = new JsonObject();
+			data.addProperty("ts", System.currentTimeMillis());
+			data.add("md", pin);
+			data.addProperty("i", 10);
+			data.addProperty("hm", pinText);
+
+			JsonObject json = new JsonObject();
+			json.addProperty("to", groupId);
+			json.add("d", data);
+			json.addProperty("t", "m");
+
+			mqttConnection.publish(uid+"/p",json.toString().getBytes(), QoS.AT_LEAST_ONCE);
+			Thread.sleep(1000);
+
+			mqttConnection.disconnect();
 		} catch (Exception e) {
-		e.printStackTrace();
+			e.printStackTrace();
 		}
 
-		  }
-	  public void addMemberToGroup(String msisdnAddingMember , String msisdnToAdd){
-		  try {
-			  String uid = getuidFromMsisdn(msisdnAddingMember);
-			  String token = getTokenFromMsisdn(msisdnAddingMember);
-			  QueueMessageHandler queueHandler = new QueueMessageHandler();
-			  HikeMqttConnection mqttConnection = new HikeMqttConnection(msisdnAddingMember , queueHandler);
-			  Reporter.log("groupid2: "+groupId);
-			  
-			  
-			  mqttConnection.connect(mqtthost , mqttport , uid , token);
-			  Thread.sleep(100);
-			  
-			  JsonArray jsonMembersToAdd = new JsonArray();
-			  JsonObject nameAndMsisdn = new JsonObject();
-			  nameAndMsisdn.addProperty("msisdn", msisdnToAdd) ;
-			  nameAndMsisdn.addProperty("name", msisdnToAdd);
-			  jsonMembersToAdd.add(nameAndMsisdn);
+	}
+	public void addMemberToGroup(String msisdnAddingMember , String msisdnToAdd){
+		try {
+			String uid = getuidFromMsisdn(msisdnAddingMember);
+			String token = getTokenFromMsisdn(msisdnAddingMember);
+			QueueMessageHandler queueHandler = new QueueMessageHandler();
+			HikeMqttConnection mqttConnection = new HikeMqttConnection(msisdnAddingMember , queueHandler);
+			Reporter.log("groupid2: "+groupId);
 
-			  JsonObject json = new JsonObject();
-			  json.addProperty("to", groupId);
-			  json.addProperty("f", msisdnAddingMember);
-			  json.add("d", jsonMembersToAdd);
-			  json.addProperty("t", "gcj");
 
-			  mqttConnection.publish(uid+"/p",json.toString().getBytes(), QoS.AT_LEAST_ONCE);
-			  Thread.sleep(100);    
-			  mqttConnection.disconnect();
+			mqttConnection.connect(mqtthost , mqttport , uid , token);
+			Thread.sleep(100);
+
+			JsonArray jsonMembersToAdd = new JsonArray();
+			JsonObject nameAndMsisdn = new JsonObject();
+			nameAndMsisdn.addProperty("msisdn", msisdnToAdd) ;
+			nameAndMsisdn.addProperty("name", msisdnToAdd);
+			jsonMembersToAdd.add(nameAndMsisdn);
+
+			JsonObject json = new JsonObject();
+			json.addProperty("to", groupId);
+			json.addProperty("f", msisdnAddingMember);
+			json.add("d", jsonMembersToAdd);
+			json.addProperty("t", "gcj");
+
+			mqttConnection.publish(uid+"/p",json.toString().getBytes(), QoS.AT_LEAST_ONCE);
+			Thread.sleep(100);    
+			mqttConnection.disconnect();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	  }
-	  
-	  public void removeMemberFromGroup(String msisdnCreator , String msisdnToRemove, String groupId){
-		  try {
-			  String uid = getuidFromMsisdn(msisdnCreator);
-			  String token = getTokenFromMsisdn(msisdnCreator);
+	}
 
-			  QueueMessageHandler queueHandler = new QueueMessageHandler();
-			  HikeMqttConnection mqttConnection = new HikeMqttConnection(msisdnCreator , queueHandler);
+	public void removeMemberFromGroup(String msisdnCreator , String msisdnToRemove, String groupId){
+		try {
+			String uid = getuidFromMsisdn(msisdnCreator);
+			String token = getTokenFromMsisdn(msisdnCreator);
 
-			  mqttConnection.connect(mqtthost , mqttport , uid , token);
-			  Thread.sleep(100);
+			QueueMessageHandler queueHandler = new QueueMessageHandler();
+			HikeMqttConnection mqttConnection = new HikeMqttConnection(msisdnCreator , queueHandler);
 
-			  JSONObject data = new JSONObject();
-			  JSONArray msisdns = new JSONArray();
-			  msisdns.add(msisdnToRemove);
-			  data.put("msisdns", msisdns);        
-			  //String msisdnCreator = randomMSISDN1;
-			  JsonObject jsonGCK = new JsonObject();
-			  jsonGCK.addProperty("to", groupId);
-			  jsonGCK.addProperty("f", msisdnCreator);
-			  jsonGCK.addProperty("d", data.toString());
-			  jsonGCK.addProperty("t", "gck");    
-			  mqttConnection.publish(uid+"/p",jsonGCK.toString().getBytes(), QoS.AT_LEAST_ONCE);
-			  Thread.sleep(100);
-			  mqttConnection.disconnect();
+			mqttConnection.connect(mqtthost , mqttport , uid , token);
+			Thread.sleep(100);
+
+			JSONObject data = new JSONObject();
+			JSONArray msisdns = new JSONArray();
+			msisdns.add(msisdnToRemove);
+			data.put("msisdns", msisdns);        
+			//String msisdnCreator = randomMSISDN1;
+			JsonObject jsonGCK = new JsonObject();
+			jsonGCK.addProperty("to", groupId);
+			jsonGCK.addProperty("f", msisdnCreator);
+			jsonGCK.addProperty("d", data.toString());
+			jsonGCK.addProperty("t", "gck");    
+			mqttConnection.publish(uid+"/p",jsonGCK.toString().getBytes(), QoS.AT_LEAST_ONCE);
+			Thread.sleep(100);
+			mqttConnection.disconnect();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	  }
-	  
+	}
+
 	public void changeGroupNameByMember(String msisdn , String groupNewName){
 		try {
-			
-	        String uidSender = getuidFromMsisdn(msisdn);
-	    	String tokenSender = getTokenFromMsisdn(msisdn);
-	    	
-                String changeGroupName = "http://"+httphost+":"+httpport+"/v1/group/"+groupId + "/name"; 
-                Map<String,String> headers = new HashMap<String,String>();
-                headers.put("Cookie", "user="+tokenSender + "; UID=" + uidSender);
-                JsonObject postData = new JsonObject();
-                postData.addProperty("name", groupNewName);
-                httpService.postDataToUrl(changeGroupName, JSONTYPE, headers, postData.toString() , "POST");
-			
+
+			String uidSender = getuidFromMsisdn(msisdn);
+			String tokenSender = getTokenFromMsisdn(msisdn);
+
+			String changeGroupName = "http://"+httphost+":"+httpport+"/v1/group/"+groupId + "/name"; 
+			Map<String,String> headers = new HashMap<String,String>();
+			headers.put("Cookie", "user="+tokenSender + "; UID=" + uidSender);
+			JsonObject postData = new JsonObject();
+			postData.addProperty("name", groupNewName);
+			httpService.postDataToUrl(changeGroupName, JSONTYPE, headers, postData.toString() , "POST");
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-  public String createGroupAndSendMessage(String msisdnGroupCreator , List<String> msisdnReceiverList, String groupname) {
-      try
-      {  
-    	  String uidSender = getuidFromMsisdn(msisdnGroupCreator);
-    	  String tokenSender = getTokenFromMsisdn(msisdnGroupCreator);
-    	  long timestamp = System.currentTimeMillis();        
-    	  groupId = uidSender + ":" + timestamp;
-          Reporter.log("groupid1: "+groupId);
-          String msisdnCreator = msisdnGroupCreator;
-          JsonArray jsonMembersToAdd = new JsonArray();
-          
-          for(int i=0 ; i<msisdnReceiverList.size() ; i++){
-              JsonObject nameAndMsisdn = new JsonObject();
-              nameAndMsisdn.addProperty("msisdn", msisdnReceiverList.get(i)) ;
-              nameAndMsisdn.addProperty("name", msisdnReceiverList.get(i));
-              jsonMembersToAdd.add(nameAndMsisdn);
-          }
-          
-          JsonObject groupName = new JsonObject();
-          groupName.addProperty("name", groupname);
+	public String createGroupAndSendMessage(String msisdnGroupCreator , List<String> msisdnReceiverList, String groupname) {
+		try
+		{  
+			String uidSender = getuidFromMsisdn(msisdnGroupCreator);
+			String tokenSender = getTokenFromMsisdn(msisdnGroupCreator);
+			long timestamp = System.currentTimeMillis();        
+			groupId = uidSender + ":" + timestamp;
+			Reporter.log("groupid1: "+groupId);
+			String msisdnCreator = msisdnGroupCreator;
+			JsonArray jsonMembersToAdd = new JsonArray();
 
-          JsonObject jsonGCJ = new JsonObject();
-          jsonGCJ.addProperty("to", groupId);
-          //jsonGCJ.addProperty("f", msisdnCreator);
-          jsonGCJ.add("d", jsonMembersToAdd);
-          jsonGCJ.addProperty("t", "gcj");
-          jsonGCJ.add("md", groupName);
-          
-    	  queueHandlerSender = new QueueMessageHandler();
-    	  mqttConnectionSender = new HikeMqttConnection(msisdnGroupCreator , queueHandlerSender);
-    	  
-    	  
-    	  mqttConnectionSender.connect(mqtthost , mqttport , uidSender , tokenSender);
-          Thread.sleep(100);
-          mqttConnectionSender.publish(uidSender+"/p",jsonGCJ.toString().getBytes(), QoS.AT_LEAST_ONCE);
+			for(int i=0 ; i<msisdnReceiverList.size() ; i++){
+				JsonObject nameAndMsisdn = new JsonObject();
+				nameAndMsisdn.addProperty("msisdn", msisdnReceiverList.get(i)) ;
+				nameAndMsisdn.addProperty("name", msisdnReceiverList.get(i));
+				jsonMembersToAdd.add(nameAndMsisdn);
+			}
 
-          Thread.sleep(1000);
-         
-          long ts = System.currentTimeMillis();
-          String message = "Hello ! I am the group intiator";
-          JsonObject jsonDataObj = new JsonObject();
-          jsonDataObj.addProperty("ts", ts); 
-          jsonDataObj.addProperty("hm", message);
-          jsonDataObj.addProperty("i", RandomStringUtils.randomNumeric(2));
+			JsonObject groupName = new JsonObject();
+			groupName.addProperty("name", groupname);
 
-          JsonObject jsonData = new JsonObject();
-          jsonData.addProperty("to", groupId);
-          jsonData.add("d", jsonDataObj);
-          jsonData.addProperty("t", "m");
-          mqttConnectionSender.publish(uidSender+"/p",jsonData.toString().getBytes(), QoS.AT_LEAST_ONCE);
-          Thread.sleep(100);
-          mqttConnectionSender.disconnect();
-          return groupId;
-      }
-      catch (Exception e)
-      {
-    	  e.printStackTrace();
-    	 
-      }
-	return groupId;
-  }
+			JsonObject jsonGCJ = new JsonObject();
+			jsonGCJ.addProperty("to", groupId);
+			//jsonGCJ.addProperty("f", msisdnCreator);
+			jsonGCJ.add("d", jsonMembersToAdd);
+			jsonGCJ.addProperty("t", "gcj");
+			jsonGCJ.add("md", groupName);
+
+			queueHandlerSender = new QueueMessageHandler();
+			mqttConnectionSender = new HikeMqttConnection(msisdnGroupCreator , queueHandlerSender);
 
 
-  public void groupCreatorLeavingGroup(String msisdnCreator, String groupId){
-	  try {
-		  String uid = getuidFromMsisdn(msisdnCreator);
-		  String token = getTokenFromMsisdn(msisdnCreator);
-		  QueueMessageHandler queueHandler = new QueueMessageHandler();
-		  HikeMqttConnection mqttConnection = new HikeMqttConnection(msisdnCreator , queueHandler);
+			mqttConnectionSender.connect(mqtthost , mqttport , uidSender , tokenSender);
+			Thread.sleep(100);
+			mqttConnectionSender.publish(uidSender+"/p",jsonGCJ.toString().getBytes(), QoS.AT_LEAST_ONCE);
 
-		  mqttConnection.connect(mqtthost , mqttport , uid , token);
-		  Thread.sleep(100);
+			Thread.sleep(1000);
 
-		  JsonObject json = new JsonObject();
-		  json.addProperty("to",groupId);
-		  json.addProperty("f", msisdnCreator);
-		  json.addProperty("d", msisdnCreator);
-		  json.addProperty("t", "gcl");
-		  mqttConnection.publish(uid+"/p",json.toString().getBytes(), QoS.AT_LEAST_ONCE);
-		  Thread.sleep(1000);
+			long ts = System.currentTimeMillis();
+			String message = "Hello ! I am the group intiator";
+			JsonObject jsonDataObj = new JsonObject();
+			jsonDataObj.addProperty("ts", ts); 
+			jsonDataObj.addProperty("hm", message);
+			jsonDataObj.addProperty("i", RandomStringUtils.randomNumeric(2));
 
-		  mqttConnection.disconnect();
-          
-	} catch (Exception e) {
-		e.printStackTrace();
+			JsonObject jsonData = new JsonObject();
+			jsonData.addProperty("to", groupId);
+			jsonData.add("d", jsonDataObj);
+			jsonData.addProperty("t", "m");
+			mqttConnectionSender.publish(uidSender+"/p",jsonData.toString().getBytes(), QoS.AT_LEAST_ONCE);
+			Thread.sleep(100);
+			mqttConnectionSender.disconnect();
+			return groupId;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+
+		}
+		return groupId;
 	}
-  }
-  
-  public boolean changeGroupProfile(String msisdnChangingAvatar) throws Exception{
-	  try {
-		  String changeGroupAvatarUrl = "http://"+httphost+":"+httpport+"/v1/group/"+groupId + "/avatar"; 
-		  String uid = getuidFromMsisdn(msisdnChangingAvatar);
-		  String token = getTokenFromMsisdn(msisdnChangingAvatar);
-	      Map<String,String> headers = new HashMap<String,String>();
-	      headers.put("Cookie", "user="+token + "; UID=" + uid);
-	      //String workingDir = AutomationConstants.WorkingDir;
-	      HttpPostResponse response = httpService.postFileToURL(changeGroupAvatarUrl, "", headers, "images.jpeg");   
-	      
-	      if(response.responseCode==200)
-	    	  return true;
-	      else
-	    	  return false;
-	} catch (Exception e) {
-		e.printStackTrace();
+
+
+	public void groupCreatorLeavingGroup(String msisdnCreator, String groupId){
+		try {
+			String uid = getuidFromMsisdn(msisdnCreator);
+			String token = getTokenFromMsisdn(msisdnCreator);
+			QueueMessageHandler queueHandler = new QueueMessageHandler();
+			HikeMqttConnection mqttConnection = new HikeMqttConnection(msisdnCreator , queueHandler);
+
+			mqttConnection.connect(mqtthost , mqttport , uid , token);
+			Thread.sleep(100);
+
+			JsonObject json = new JsonObject();
+			json.addProperty("to",groupId);
+			json.addProperty("f", msisdnCreator);
+			json.addProperty("d", msisdnCreator);
+			json.addProperty("t", "gcl");
+			mqttConnection.publish(uid+"/p",json.toString().getBytes(), QoS.AT_LEAST_ONCE);
+			Thread.sleep(1000);
+
+			mqttConnection.disconnect();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	return false;
 
-  }
+	public boolean changeGroupProfile(String msisdnChangingAvatar) throws Exception{
+		try {
+			String changeGroupAvatarUrl = "http://"+httphost+":"+httpport+"/v1/group/"+groupId + "/avatar"; 
+			String uid = getuidFromMsisdn(msisdnChangingAvatar);
+			String token = getTokenFromMsisdn(msisdnChangingAvatar);
+			Map<String,String> headers = new HashMap<String,String>();
+			headers.put("Cookie", "user="+token + "; UID=" + uid);
+			//String workingDir = AutomationConstants.WorkingDir;
+			HttpPostResponse response = httpService.postFileToURL(changeGroupAvatarUrl, "", headers, "images.jpeg");   
 
-public class QueueMessageHandler {
-    private final BlockingQueue<String> receivedMessages = new LinkedBlockingDeque<String>();
-    
-    public void handleMessage(String message) {
-        try
-        {
-            receivedMessages.put(message);
-        }
-        catch (InterruptedException e)
-        {
-        }
-    }
-    
-    public String getReceivedMessage() throws InterruptedException {
-        return receivedMessages.take();
-    }
-    
-    public void printQueueState() {
-    }
-}
+			if(response.responseCode==200)
+				return true;
+			else
+				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 
-private static class HikeMqttConnection extends MqttConnection
-{
-    private QueueMessageHandler handler;
-    public HikeMqttConnection(String id, QueueMessageHandler handler)
-    {
-        super(id);
-        this.handler = handler;
-    }
-    
-    @Override
-    protected void handleMessage(PublishMessage msg,Runnable ack) {
-        super.handleMessage(msg, ack);
-        Reporter.log("server logs:**** " + msg.getDataAsString());
-        handler.handleMessage(msg.getDataAsString());
-    }
-}
+	}
+
+	public void sendMessageInGC(String msisdnSender,String gId)
+	{
+		try
+		{
+			String uidSender = getuidFromMsisdn(msisdnSender);
+			String tokenSender = getTokenFromMsisdn(msisdnSender);  	
+			queueHandlerSender = new QueueMessageHandler();
+			mqttConnectionSender = new HikeMqttConnection(msisdnSender , queueHandlerSender);
+			mqttConnectionSender.connect(mqtthost , mqttport , uidSender , tokenSender);
+			Thread.sleep(1000);
+			long ts = System.currentTimeMillis();
+			String message = "Hello ! Message from "+msisdnSender;
+			JsonObject jsonDataObj = new JsonObject();
+			jsonDataObj.addProperty("ts", ts); 
+			jsonDataObj.addProperty("hm", message);
+			jsonDataObj.addProperty("i", RandomStringUtils.randomNumeric(2));
+			JsonObject jsonData = new JsonObject();
+			jsonData.addProperty("to", gId);
+			jsonData.add("d", jsonDataObj);
+			jsonData.addProperty("t", "m");
+			mqttConnectionSender.publish(uidSender+"/p",jsonData.toString().getBytes(), QoS.AT_LEAST_ONCE);
+			Thread.sleep(100);
+			mqttConnectionSender.disconnect();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public class QueueMessageHandler {
+		private final BlockingQueue<String> receivedMessages = new LinkedBlockingDeque<String>();
+
+		public void handleMessage(String message) {
+			try
+			{
+				receivedMessages.put(message);
+			}
+			catch (InterruptedException e)
+			{
+			}
+		}
+
+		public String getReceivedMessage() throws InterruptedException {
+			return receivedMessages.take();
+		}
+
+		public void printQueueState() {
+		}
+	}
+
+	private static class HikeMqttConnection extends MqttConnection
+	{
+		private QueueMessageHandler handler;
+		public HikeMqttConnection(String id, QueueMessageHandler handler)
+		{
+			super(id);
+			this.handler = handler;
+		}
+
+		@Override
+		protected void handleMessage(PublishMessage msg,Runnable ack) {
+			super.handleMessage(msg, ack);
+			Reporter.log("server logs:**** " + msg.getDataAsString());
+			handler.handleMessage(msg.getDataAsString());
+		}
+	}
 
 
 }

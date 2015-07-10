@@ -15,12 +15,12 @@ public class WelcomeScreen extends HikeLibrary{
 
 	private void waitForWelcomeScreenToLoad() {
 
-		int counter = 5;
+		int counter = 0;
 		boolean pageLoaded = false;
 
 		while(!pageLoaded && counter < 5) {
 			try {
-				driver.findElement(Get_Started_BTN);
+				driver.findElement(getStartedButton);
 				pageLoaded = true;
 			} catch (Exception e) {
 				counter++;
@@ -31,45 +31,73 @@ public class WelcomeScreen extends HikeLibrary{
 		}
 	}
 
-	protected By Get_Started_BTN = MobileBy.name("Get Started");
-	protected By Terms_and_Privacy_Link= By.name("Terms and Privacy");
-	protected By Made_With_Love_In_India_Txt = By.name("Made with love in India");
+	protected By getStartedButton = MobileBy.name("Get Started");
+	protected By termsAndConditions = By.name("Terms and Conditions");
+	protected By madeWithLoveBy = By.name("Made with love in India");
 	protected String HikeMessengerNameIdentifier = "signupLogo";
+	protected By signUpLogo = MobileBy.name("signupLogo");
+	protected By stagingButton = MobileBy.name("Staging");
 
 	public LoginPhoneNumberScreen clickOnGetStartedBTN()
 	{
-		clickOnElement(Get_Started_BTN);
+		clickOnElement(getStartedButton);
 		return new LoginPhoneNumberScreen();
+	}
+	
+	public By getMadeWithLoveBy() {
+		return madeWithLoveBy;
+	}
+	
+	public By getTermsAndConditions() {
+		return termsAndConditions;
+	}
+	
+	public By getSignUpLogo() {
+		return signUpLogo;
+	}
+	
+	public By getGetStartedButton() {
+		return getStartedButton;
 	}
 
 	public String getText_Get_Started_BTN()
 	{
-		return(getTextByName(Get_Started_BTN));
+		return(getTextByName(getStartedButton));
 	}
 
 
 
 	public void clickOnTermsAndPrivacyLink()
 	{
-		clickOnElement(Terms_and_Privacy_Link);
+		clickOnElement(termsAndConditions);
 	}
 	public String getText_TermsAndPrivacyLink()
 	{
-		return(getTextByName(Terms_and_Privacy_Link));
+		return(getTextByName(termsAndConditions));
 	}
 
 
 
 	public String getText_MadeWithLoveInIndiaText()
 	{
-		return(getTextByName( Made_With_Love_In_India_Txt));
+		return(getTextByName( madeWithLoveBy));
 	}
 
 	public String getHikeMessengerNameIdentifier() {
 		return HikeMessengerNameIdentifier;
 	}
 
-
-
+	public void selectStagingEnvironment() {
+		
+		try {
+			clickOnElement(stagingButton);
+		} catch(Exception e) {}
+	}
+	
+	public TermsAndConditions clickOnTermsAndConditions() {
+		
+		clickOnElement(getTermsAndConditions());
+		return new TermsAndConditions();
+	}
 
 }

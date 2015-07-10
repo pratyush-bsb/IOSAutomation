@@ -80,7 +80,7 @@ public class BlockedListTests extends HikeLibrary {
 
 		//click on first contact and check if done gets enabled
 		clickOnElement(blockScreenObj.getFirstContactFound());
-		Assert.assertEquals(blockScreenObj.getBlockStatus(0), "1", "The red button did not get activated for the user tapped to block.");
+		//Assert.assertEquals(blockScreenObj.getBlockStatus(0), "1", "The red button did not get activated for the user tapped to block.");
 		Assert.assertTrue(isElementEnabled(blockScreenObj.getDoneButton()), "Done button did not get enabled after selecting a contact to block");
 
 		//cancel adding and assert
@@ -99,8 +99,8 @@ public class BlockedListTests extends HikeLibrary {
 				"4. Cancel again and verify that user is still not added to blocked list. \n");
 
 		blockScreenObj.clickOnAddContactToBlock();
-		clickOnElement(blockScreenObj.getSearchForNumberOrName());
-
+		//clickOnElement(blockScreenObj.getSearchForNumberOrName());
+		//enterText(blockScreenObj.getSearchForNumberOrName(), HIKE_CONTACT_NAME);
 		clickOnElement(blockScreenObj.getFirstContactFound());
 		String user = blockScreenObj.getFirstContactName();
 		clickOnElement(blockScreenObj.getStopButton());
@@ -110,7 +110,8 @@ public class BlockedListTests extends HikeLibrary {
 
 		//reopen block list
 		blockScreenObj.clickOnAddContactToBlock();
-		clickOnElement(blockScreenObj.getSearchForNumberOrName());
+		//clickOnElement(blockScreenObj.getSearchForNumberOrName());
+		//enterText(blockScreenObj.getSearchForNumberOrName(), HIKE_CONTACT_NAME);
 		clickOnElement(blockScreenObj.getFirstContactFound());
 		clickOnElement(blockScreenObj.getFirstContactFound());
 		user = blockScreenObj.getFirstContactName();
@@ -159,7 +160,7 @@ public class BlockedListTests extends HikeLibrary {
 		blockScreenObj.blockContact(HIKE_NOT_SAVED_USER);
 		
 		Assert.assertTrue(isElementPresent(blockScreenObj.getAddContactToBlock()), "Focus did not shift to privacy page after blocking an account");
-		Assert.assertTrue(blockScreenObj.checkIfContactBlocked(HIKE_CONTACT_NAME), "The contact was not blocked when it should be");
+		Assert.assertTrue(blockScreenObj.checkIfContactBlocked(HIKE_NOT_SAVED_USER), "The contact was not blocked when it should be");
 		//unblock for future cases
 		blockScreenObj.unblockContact(HIKE_NOT_SAVED_USER);
 		

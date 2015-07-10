@@ -68,6 +68,7 @@ public class MuteGroup extends HikeLibrary {
 		}
 
 		groupThreadObj.muteGroup();
+		groupThreadObj.clickOnOverflowButton();
 
 		//assert that 'conversation muted' notification appears
 		Assert.assertTrue(groupThreadObj.checkIfGroupMute(), "The notification that group is muted did not come after muting group");
@@ -92,7 +93,11 @@ public class MuteGroup extends HikeLibrary {
 
 		//group created from server side. mute and check validity.
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(serverGroupName, true);
+		if(groupThreadObj == null) {
+			Assert.assertTrue(false, "Not able to reset application. Failing.");
+		}
 		groupThreadObj.muteGroup();
+		groupThreadObj.clickOnOverflowButton();
 
 		Assert.assertTrue(groupThreadObj.checkIfGroupMute(), "The notification that group is muted did not come after muting group");
 
@@ -116,13 +121,15 @@ public class MuteGroup extends HikeLibrary {
 		//make account again
 		setDEFAULT_MSISDN();
 		setPin();
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
+		singleTapWithTwoFingers(welcomeScreenObj.getSignUpLogo());
+		welcomeScreenObj.selectStagingEnvironment();
 		LoginPhoneNumberScreen loginPhoneNumberObj = welcomeScreenObj.clickOnGetStartedBTN();
 
 		loginPhoneNumberObj.clickOnPhoneNumberField();
 		loginPhoneNumberObj.setTextPhoneNumberField(getDEFAULT_MSISDN_Create());
 		loginPhoneNumberObj.clickOnNextBtn();
-		PinEnteringScreen pinEnteringScreenObj = ConfirmYourNumberPopUpScreen.clickOnConfirmBtn();
+		PinEnteringScreen pinEnteringScreenObj = ConfirmYourNumberPopUpScreen.clickOnConfirmButton();
 
 		pinEnteringScreenObj.clickOnPinTextField();
 		LoginAboutYouScreen aboutYouScreenObj = pinEnteringScreenObj.setPin(DEFAULT_PIN);
@@ -148,7 +155,7 @@ public class MuteGroup extends HikeLibrary {
 		//group should be muted
 		Assert.assertFalse(groupThreadObj.checkIfGroupMute(), "The notification that group is muted came after resetting account");
 		//unmute group for further cases
-		groupThreadObj.unmuteGroup();
+		//groupThreadObj.unmuteGroup();
 	}
 
 	@Test
@@ -219,13 +226,15 @@ public class MuteGroup extends HikeLibrary {
 		//sign up again
 		setDEFAULT_MSISDN();
 		setPin();
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
+		singleTapWithTwoFingers(welcomeScreenObj.getSignUpLogo());
+		welcomeScreenObj.selectStagingEnvironment();
 		LoginPhoneNumberScreen loginPhoneNumberObj = welcomeScreenObj.clickOnGetStartedBTN();
 
 		loginPhoneNumberObj.clickOnPhoneNumberField();
 		loginPhoneNumberObj.setTextPhoneNumberField(getDEFAULT_MSISDN_Create());
 		loginPhoneNumberObj.clickOnNextBtn();
-		PinEnteringScreen pinEnteringScreenObj = ConfirmYourNumberPopUpScreen.clickOnConfirmBtn();
+		PinEnteringScreen pinEnteringScreenObj = ConfirmYourNumberPopUpScreen.clickOnConfirmButton();
 
 		pinEnteringScreenObj.clickOnPinTextField();
 		LoginAboutYouScreen aboutYouScreenObj = pinEnteringScreenObj.setPin(DEFAULT_PIN);

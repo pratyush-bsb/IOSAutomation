@@ -1,8 +1,10 @@
 package com.bsb.hike.ios.screens;
 
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import com.bsb.hike.ios.library.HikeLibrary;
 
@@ -14,12 +16,12 @@ public class LoginPhoneNumberScreen extends HikeLibrary {
 
 	private void waitForPhoneNumberScreenToLoad() {
 
-		int counter = 5;
+		int counter = 0;
 		boolean pageLoaded = false;
 
 		while(!pageLoaded && counter < 5) {
 			try {
-				driver.findElement(Phone_Number_Title);
+				driver.findElement(phoneNumberHeader);
 				pageLoaded = true;
 			} catch (Exception e) {
 				counter++;
@@ -30,53 +32,91 @@ public class LoginPhoneNumberScreen extends HikeLibrary {
 		}
 	}
 
-	protected By Phone_Number_Title = MobileBy.name("Phone Number");
-	protected By Back_Icon=MobileBy.name("Back");
-	protected By Next_Btn=MobileBy.name("Next");
-	protected By Hi_Whats_Your_Number_Lbl=MobileBy.name("Hi! What's your number?");
-	protected By Country_Code_Btn=MobileBy.name("+91 India");
-	protected By Phone_Number_EditText = MobileBy.IosUIAutomation(".textFields()[0]");
+	protected By phoneNumberHeader = MobileBy.name("Phone Number");
+	protected By backIcon = MobileBy.name("Back");
+	protected By nextButton = MobileBy.name("Next");
+	protected By whatsYourNumberLabel = MobileBy.name("Hi! What's your number?");
+	protected By countryCodeButton = MobileBy.name("+91 India");
+	protected By phoneNumberEdit = MobileBy.IosUIAutomation(".textFields()[0]");
+	protected By clearTextButton = MobileBy.name("Clear text");
 
+
+	public By getPhoneNumberHeader() {
+		return phoneNumberHeader;
+	}
+	
+	public By getClearTextButton() {
+		return clearTextButton;
+	}
+
+	public By getBackIcon() {
+		return backIcon;
+	}
+
+	public By getNextButton() {
+		return nextButton;
+	}
+
+	public By getWhatsYourNumberLabel() {
+		return whatsYourNumberLabel;
+	}
+
+	public By getCountryCodeButton() {
+		return countryCodeButton;
+	}
+
+	public By getPhoneNumberEdit() {
+		return phoneNumberEdit;
+	}
 
 	public String getText_PhoneNumberScreenTitle()
 	{
-		return(getTextByName(Phone_Number_Title));
+		return(getTextByName(phoneNumberHeader));
 	}	
 	public void clickOnBackIcon()
 	{
-		clickOnElement(Back_Icon);
+		clickOnElement(backIcon);
 	}	
 	public boolean isNextBtnEnabled()
 	{
-		return(isEnabled(Next_Btn));
+		return(isEnabled(nextButton));
 	}
 	public void clickOnNextBtn()
 	{
-		clickOnElement(Next_Btn);
+		clickOnElement(nextButton);
 	}
 	public String getText_WhatsYourNumberLbl()
 	{
-		return(getTextByName(Hi_Whats_Your_Number_Lbl));
+		return(getTextByName(whatsYourNumberLabel));
 	}
-	public void clickOnCountryCode()
+	public CountryScreen clickOnCountryCode()
 	{
-		clickOnElement(Country_Code_Btn);
+		clickOnElement(countryCodeButton);
+		return new CountryScreen();
 	}
 	public String getText_CountryCodeField()
 	{
-		return(getTextByName(Country_Code_Btn));
+		return(getTextByName(countryCodeButton));
 	}
 	public void clickOnPhoneNumberField()
 	{
-		clickOnElement(Phone_Number_EditText);
+		clickOnElement(phoneNumberEdit);
 	}
 	public String getText_PhoneNumberField()
 	{
-		return(getTextByName(Phone_Number_EditText));
+		return(getTextByName(phoneNumberEdit));
 	}
 	public void setTextPhoneNumberField(String value)
 	{
-		enterText(Phone_Number_EditText, value);
+		enterText(phoneNumberEdit, value);
+	}
+	
+	public void removeEnteredText() {
+		
+		try {
+			WebElement clearTextElement = driver.findElement(clearTextButton);
+			new TouchAction(driver).press(clearTextElement).perform();
+		} catch(Exception e) {}
 	}
 
 

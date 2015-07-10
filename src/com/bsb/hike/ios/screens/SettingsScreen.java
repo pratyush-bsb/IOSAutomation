@@ -15,7 +15,7 @@ public class SettingsScreen extends HikeLibrary{
 	}
 
 	private void waitForSettingsPageToLoad() {
-		int counter = 5;
+		int counter = 0;
 		boolean pageLoaded = false;
 		
 		while(!pageLoaded && counter < 5) {
@@ -43,14 +43,19 @@ public class SettingsScreen extends HikeLibrary{
 	protected By Media_LBL = MobileBy.name("Media");
 	protected By EnterKeyIsSend_LBL = MobileBy.name("Enter Key Is Send");
 	//protected By EnterKeyIsSend_BTN = MobileBy.name("settings enter return cell ico");
-	protected By FAQ_LBL = MobileBy.name("FAQs");
+	protected By FAQ_LBL = MobileBy.name("FAQ");
 	protected By Contact_LBL = MobileBy.name("Contact");
 	protected By stickerShop = MobileBy.name("Sticker Shop");
+	protected By madeWithLoveFooter = MobileBy.name("madeWithLoveFooter");
 
 	//getter methods
 
 	public By getBack_BTN() {
 		return Back_BTN;
+	}
+	
+	public By getMadeWithLoveFooter() {
+		return madeWithLoveFooter;
 	}
 	
 	public String getAccountLabelText() {
@@ -135,9 +140,10 @@ public class SettingsScreen extends HikeLibrary{
 		return new AccountScreen();
 	}
 
-	public void clickOnFreeSMS()
+	public FreeSMS clickOnFreeSMS()
 	{
 		clickOnElement(FreeSMS_LBL);
+		return new FreeSMS();
 	}
 
 	public void clickSystemHealth()
@@ -151,9 +157,10 @@ public class SettingsScreen extends HikeLibrary{
 	}
 
 
-	public void clickOnFAQ()
+	public FAQScreen clickOnFAQ()
 	{
 		clickOnElement(FAQ_LBL);
+		return new FAQScreen();
 	}
 
 	public FeedbackMail clickOnContact()

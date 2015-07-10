@@ -53,7 +53,7 @@ public class GroupChatThreadCreation extends HikeLibrary {
 		Assert.assertTrue(isElementPresent(newGroupObj.getAddPhoto()), "Add photo button did not appear");
 		Assert.assertTrue(getTextByName(newGroupObj.getNewGroupInfo()).startsWith(newGroupObj.getNewGroupInfoString()), "The group info string did not match with the expected value");
 		Assert.assertEquals(getTextByValue(newGroupObj.getTypeGroupName()), newGroupObj.getDefaultGroupText(), "Default text in 'type group name' field did not match");
-		Assert.assertTrue(isElementEnabled(newGroupObj.getNextButton()), "The next button is not disabled by default");
+		Assert.assertFalse(isElementEnabled(newGroupObj.getNextButton()), "The next button is not disabled by default");
 		Assert.assertTrue(isKeyboardVisible(), "The keyboard is not visible by default");
 		newGroupObj.clickOnAddPhoto();
 		Assert.assertTrue(isElementEnabled(newGroupObj.getTakePhotoButton()), "The take photo button is not visible");
@@ -211,7 +211,8 @@ public class GroupChatThreadCreation extends HikeLibrary {
 		groupThreadObj.typeInMessageBox(testMessage);
 		groupThreadObj.sendEmoji();
 		groupThreadObj.clickOnSendMessage();
-		Assert.assertEquals("You: " + groupThreadObj.getLastMessage().trim(), testMessage, "The same message was not sent that was typed with emoji.");
+		String lastMessage = groupThreadObj.getLastMessage();
+		Assert.assertTrue(lastMessage.trim().contains(testMessage), "The same message was not sent that was typed with emoji.");
 	}
 
 	@Test

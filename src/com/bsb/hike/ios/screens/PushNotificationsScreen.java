@@ -14,7 +14,7 @@ public class PushNotificationsScreen extends HikeLibrary {
 
 	private void waitForPushNotificationScreenToLoad() {
 
-		int counter = 5;
+		int counter = 0;
 		boolean pageLoaded = false;
 
 		while(!pageLoaded && counter < 5) {

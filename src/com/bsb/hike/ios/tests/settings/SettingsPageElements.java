@@ -46,6 +46,7 @@ public class SettingsPageElements extends HikeLibrary {
 		Assert.assertTrue(isElementPresent(settingsObj.getEnterKeyIsSend_LBL()));
 		Assert.assertTrue(isElementPresent(settingsObj.getFAQ_LBL()));
 		Assert.assertTrue(isElementPresent(settingsObj.getContact_LBL()));
+		Assert.assertTrue(isElementPresent(settingsObj.getMadeWithLoveFooter()));
 				
 	}
 
