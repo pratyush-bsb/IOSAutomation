@@ -3,7 +3,7 @@
 build_type="$1"
 tag_number="$2"
 
-cd /Users/kumarpratyush/.jenkins/jobs/iOS_suite_run/workspace
+cd /Users/kumarpratyush/.jenkins/jobs/iOS_AutomationSuite/workspace
 rm -rf ./build
 git fetch
 git checkout origin/dev
@@ -18,6 +18,7 @@ xcodebuild -exportArchive -exportFormat ipa -archivePath ./build/Hike.xcarchive 
 mv build/*.ipa /Users/kumarpratyush/Documents/workspace/IOSAutomation/Hike.ipa
 
 cd /Users/kumarpratyush/Documents/workspace/IOSAutomation
+git pull
 
 #parse for build number and version number
 
@@ -64,4 +65,5 @@ done < /Users/kumarpratyush/.jenkins/jobs/iOS_suite_run/workspace/Hike-Info.plis
 ./b build
 
 #move reports folder to apache folder
+mkdir -p /Library/WebServer/Documents/Reports/$build_number/$version_number/One-to-one
 mv reports/html /Library/WebServer/Documents/Reports/$build_number/$version_number/One-to-one/
