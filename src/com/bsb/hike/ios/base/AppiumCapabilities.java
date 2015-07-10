@@ -10,6 +10,9 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class AppiumCapabilities {
 	public static IOSDriver driver;
+	
+	//TODO make appPath, deviceName, Version and udid generic.
+	
 	public static String appPath = "/Users/qa-lab/Documents/iosAutomation/IOSAutomation/Hike.ipa";
 	public static String bundleId = "com.bsb.hike";
 	public void setUp() throws Exception {
