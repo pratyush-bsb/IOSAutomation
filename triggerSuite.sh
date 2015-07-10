@@ -3,7 +3,7 @@
 build_type="$1"
 tag_number="$2"
 
-cd /Users/kumarpratyush/.jenkins/jobs/iOS_AutomationSuite/workspace
+cd /Users/qa-lab/.jenkins/jobs/iOS_AutomationSuite/workspace
 rm -rf ./build
 git fetch
 git checkout origin/dev
@@ -15,9 +15,9 @@ fi
 
 xcodebuild -scheme Hike -workspace Hike.xcworkspace clean archive -archivePath ./build/Hike
 xcodebuild -exportArchive -exportFormat ipa -archivePath ./build/Hike.xcarchive -exportPath ./build/Hike.ipa -exportProvisioningProfile "iOSTeam Provisioning Profile: com.bsb.hike"
-mv build/*.ipa /Users/kumarpratyush/Documents/workspace/IOSAutomation/Hike.ipa
+mv build/*.ipa /Users/qa-lab/Documents/iosAutomation/IOSAutomation/Hike.ipa
 
-cd /Users/kumarpratyush/Documents/workspace/IOSAutomation
+cd /Users/qa-lab/Documents/iosAutomation/IOSAutomation
 git pull
 
 #parse for build number and version number
@@ -57,7 +57,7 @@ do
 	fi
 
 		#statements
-done < /Users/kumarpratyush/.jenkins/jobs/iOS_suite_run/workspace/Hike-Info.plist
+done < /Users/qa-lab/.jenkins/jobs/iOS_AutomationSuite/workspace/Hike-Info.plist
 
 #run setup here. changes in every machine
 
