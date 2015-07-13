@@ -3,7 +3,7 @@
 build_type="$1"
 tag_number="$2"
 
-#cd /Users/qa-lab/.jenkins/jobs/iOS_AutomationSuite/workspace
+cd /Users/qa-lab/.jenkins/jobs/iOS_AutomationSuite/workspace
 rm -rf ./build
 git fetch
 git checkout origin/dev
