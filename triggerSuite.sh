@@ -3,7 +3,7 @@
 build_type="$1"
 tag_number="$2"
 
-cd /Users/qa-lab/.jenkins/jobs/iOS_AutomationSuite/workspace
+#cd /Users/qa-lab/.jenkins/jobs/iOS_AutomationSuite/workspace
 rm -rf ./build
 git fetch
 git checkout origin/dev
@@ -15,7 +15,7 @@ fi
 
 xcodebuild -scheme Hike -workspace Hike.xcworkspace clean archive -archivePath ./build/Hike -destination generic/platform=iOS
 xcodebuild -exportArchive -exportFormat ipa -archivePath ./build/Hike.xcarchive -exportPath ./build/Hike.ipa -exportProvisioningProfile "iOSTeam Provisioning Profile: com.bsb.hike"
-mv build/*.ipa /Users/qa-lab/Documents/iosAutomation/IOSAutomation/Hike.ipa
+mv build/*.ipa /Users/qa-lab/Documents/iosAutomation/IOSAutomation/
 
 cd /Users/qa-lab/Documents/iosAutomation/IOSAutomation
 git pull
