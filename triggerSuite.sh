@@ -66,5 +66,6 @@ done < /Users/qa-lab/.jenkins/jobs/iOS_AutomationSuite/workspace/Hike-Info.plist
 ./b ui.ios
 
 #move reports folder to apache folder
+rm -rf /Library/WebServer/Documents/Reports/$build_number/$version_number/One-to-one/*
 mkdir -p /Library/WebServer/Documents/Reports/$build_number/$version_number/One-to-one
-mv reports/html /Library/WebServer/Documents/Reports/$build_number/$version_number/One-to-one/
+mv reports/html/* /Library/WebServer/Documents/Reports/$build_number/$version_number/One-to-one/
