@@ -14,6 +14,7 @@ import com.bsb.hike.ios.popups.HiddenModeFTUEPopUp;
 import com.bsb.hike.ios.screens.AccountScreen;
 import com.bsb.hike.ios.screens.ChatThreadScreen;
 import com.bsb.hike.ios.screens.EnterPasscodeForStealth;
+import com.bsb.hike.ios.screens.ForwardScreen;
 import com.bsb.hike.ios.screens.GroupContactSelectionScreen;
 import com.bsb.hike.ios.screens.HomeScreenMenu;
 import com.bsb.hike.ios.screens.LoginAboutYouScreen;
@@ -229,14 +230,14 @@ public class SettingUpWrongPassword extends HikeLibrary {
 		ChatThreadScreen chatScreenObj = newChatScreenObj.startNewHikeChat(HIKE_CONTACT_NAME_1);
 		chatScreenObj.sendMessage("Testing stealth visibility");
 		chatScreenObj.longPressOnLastMessage();
-		newChatScreenObj = chatScreenObj.clickOnForwardButton();
+		ForwardScreen forwardScreenObj = chatScreenObj.clickOnForwardButton();
 		
-		clickOnElement(newChatScreenObj.getContactsTab());
-		newChatScreenObj.clickOnSearchTab();
-		enterText(newChatScreenObj.getSearchOrEnterNumber(), HIKE_CONTACT_NAME);
+		clickOnElement(forwardScreenObj.getContactsTab());
+		forwardScreenObj.clickOnSearchTab();
+		enterText(forwardScreenObj.getSearchOrEnterNumber(), HIKE_CONTACT_NAME);
 		
-		Assert.assertTrue(isElementPresent(newChatScreenObj.getNoResultsBy()), "Results were shown when trying to forward message to hidden contact");
-		newChatScreenObj.cancelTyping();
+		Assert.assertTrue(isElementPresent(forwardScreenObj.getNoResultsBy()), "Results were shown when trying to forward message to hidden contact");
+		forwardScreenObj.cancelTyping();
 		
 	}
 	

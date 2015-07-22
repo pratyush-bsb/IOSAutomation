@@ -7,8 +7,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.bsb.hike.ios.screens.ForwardScreen;
 import com.bsb.hike.ios.screens.HomeScreenMenu;
-import com.bsb.hike.ios.screens.StartANewChatScreen;
 
 
 public interface ChatScreenInterface {
@@ -91,7 +91,7 @@ public interface ChatScreenInterface {
 
 	public void longPressOnLastMessage();
 
-	public StartANewChatScreen clickOnForwardButton();
+	public ForwardScreen clickOnForwardButton();
 
 	public void clickOnCopyButton();
 

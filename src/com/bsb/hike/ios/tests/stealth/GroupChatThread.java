@@ -18,6 +18,7 @@ import com.bsb.hike.ios.popups.ResetHiddenMode;
 import com.bsb.hike.ios.screens.AccountScreen;
 import com.bsb.hike.ios.screens.ChatThreadScreen;
 import com.bsb.hike.ios.screens.EnterPasscodeForStealth;
+import com.bsb.hike.ios.screens.ForwardScreen;
 import com.bsb.hike.ios.screens.GroupThreadScreen;
 import com.bsb.hike.ios.screens.HomeScreenMenu;
 import com.bsb.hike.ios.screens.SettingsScreen;
@@ -104,11 +105,11 @@ public class GroupChatThread extends HikeLibrary {
 		chatScreenObj.sendMessage("random text");
 		chatScreenObj.longPressOnLastMessage();
 
-		newChatScreenObj = chatScreenObj.clickOnForwardButton();
+		ForwardScreen forwardScreenObj = chatScreenObj.clickOnForwardButton();
 		try {
-			List<WebElement> allResults = driver.findElementsByIosUIAutomation(newChatScreenObj.getAllContactsPrefix());
+			List<WebElement> allResults = driver.findElementsByIosUIAutomation(forwardScreenObj.getAllContactsPrefix());
 			for(WebElement eachContact : allResults) {
-				String contactName = eachContact.findElement(MobileBy.IosUIAutomation(newChatScreenObj.getContactNameSuffix())).getAttribute("name");
+				String contactName = eachContact.findElement(MobileBy.IosUIAutomation(forwardScreenObj.getContactNameSuffix())).getAttribute("name");
 				if(contactName.equalsIgnoreCase(groupName)) {
 					Assert.assertTrue(false, "Group appeared in forward contacts screen when it is in hidden mode");
 				}

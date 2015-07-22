@@ -24,6 +24,7 @@
 			<pathelement path="${runtime.classpath}" />
 		</path>
 		<taskdef resource="testngtasks" classpath="${testng.jar}" />
+		<echo message="${testng.jar}" />
 	</target>
 	
 	<target name="clean" depends="init" description="Deletes dist and test-reports">
@@ -38,7 +39,27 @@
 		<mkdir dir="${reports.dir}" />
 	</target>
 		
-	
+	<!--  <target name="TestNG" depends="prepare">
+	     <var file="${project.dir}/classpath.properties" />
+			<property environment="cruise" />
+		<path id="build.classpath">
+			<pathelement path="${build.classpath}" />
+		</path>
+		<path id="runtime.classpath">
+			<pathelement path="${runtime.classpath}" />
+		</path>
+			<testng outputDir="${report.dir}" 
+				haltonfailure="false"
+				useDefaultListeners="false"
+				listeners="org.uncommons.reportng.HTMLReporter"
+				>
+				<xmlfileset dir="${project.dir}" includes="IOS_AUTOMATION.xml"/>  
+				<sysproperty key="org.uncommons.reportng.escape-output" value="false"/>
+			</testng> 
+		<taskdef resource="testngtasks1" classpathref="${build.classpath}"/>
+	</target>
+	 -->
+	 
 	<target name="build" depends="prepare" description="Compile main source tree java files">
 		<javac destdir="${build.dir}" debug="true" deprecation="false" optimize="false" failonerror="true">
 			<!-- <src path="${support.dir}" /> -->
@@ -52,6 +73,7 @@
 		<mkdir dir="${reports.dir}" />
 	</target>
 	 -->
+	 
 
 	<target name="ui.ios" depends="build" description="Runs iOS test suite from TestNG">
 		<testng classpathref="runtime.classpath"  outputDir="${reports.dir}" haltOnfailure="true">

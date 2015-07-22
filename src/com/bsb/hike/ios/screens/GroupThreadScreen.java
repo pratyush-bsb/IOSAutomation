@@ -219,10 +219,10 @@ public class GroupThreadScreen extends HikeLibrary implements ChatScreenInterfac
 		}
 	}
 
-	public StartANewChatScreen clickOnForwardButton() {
+	public ForwardScreen clickOnForwardButton() {
 
 		clickOnElement(forwardMessage);
-		return new StartANewChatScreen();
+		return new ForwardScreen();
 	}
 
 	public void clickOnCopyButton() {

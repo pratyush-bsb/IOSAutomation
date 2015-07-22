@@ -15,6 +15,7 @@ fi
 
 xcodebuild -scheme Hike -workspace Hike.xcworkspace clean archive -archivePath ./build/Hike -destination generic/platform=iOS
 xcodebuild -exportArchive -exportFormat ipa -archivePath ./build/Hike.xcarchive -exportPath ./build/Hike.ipa -exportProvisioningProfile "iOSTeam Provisioning Profile: com.bsb.hike"
+rm -rf /Users/qa-lab/Documents/iosAutomation/IOSAutomation/*.ipa
 mv build/*.ipa /Users/qa-lab/Documents/iosAutomation/IOSAutomation/
 
 cd /Users/qa-lab/Documents/iosAutomation/IOSAutomation

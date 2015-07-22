@@ -1,8 +1,15 @@
 package com.bsb.hike.ios.tests;
 
+import java.io.File;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -33,6 +40,7 @@ public class CreateHikeUser extends HikeLibrary {
 	@Test
 	public void test001() throws Exception{
 		//Thread.sleep(1000*10);
+		Assert.assertTrue(false);
 		setDEFAULT_MSISDN();
 		setPin();
 		WelcomeScreen welcomeScreenObj = new WelcomeScreen();
@@ -61,11 +69,13 @@ public class CreateHikeUser extends HikeLibrary {
 		} catch(Exception e) {
 			Reporter.log("Sync address book button did not come");
 		}
+		Assert.assertTrue(false);
 		
 	}
 	
 	@Test
 	public void test002() throws InterruptedException{
+		Assert.assertTrue(false);
 		String name="HikeIosUserName";
 		homeScreenObj.clickOnOverflow();
 		homeScreenObj.clickOnProfile_Lbl();
@@ -85,7 +95,7 @@ public class CreateHikeUser extends HikeLibrary {
 		}
 		
 		Assert.assertFalse(EditProfileScreen.getState_Done_BTN(), "The done button is enable even after clicking on 'Done'");
-		
+		Assert.assertTrue(false);
 		//go to home
 		goToHome();
 	}
@@ -95,4 +105,29 @@ public class CreateHikeUser extends HikeLibrary {
 			 driver.quit();
 			 
 	}
+	
+	@AfterMethod
+	public void tearDown(ITestResult result) {
+
+		if(result.getStatus() == ITestResult.FAILURE) {
+
+			//it is a failure. create screenshot and push according to file name and test name
+
+			try {
+				final String ESCAPE_PROPERTY = "org.uncommons.reportng.escape-output";
+				System.setProperty(ESCAPE_PROPERTY, "false");
+				String className = 	result.getTestClass().getName();
+				String testName = result.getMethod().getMethodName();
+				String failureScreenshotName = className+"_"+testName+".png";
+				File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE); 
+				FileUtils.copyFile(file, new File("Screenshot/"+failureScreenshotName));
+				Reporter.log("<a href=\"Screenshot/" + failureScreenshotName + " ><img src=\"Screenshot/" + failureScreenshotName + "height='100' width='100'/> Test123 </a>");
+				Reporter.setCurrentTestResult(null); 
+			} catch(Exception e) {
+				Reporter.log("Not able to store screenshot");
+			}
+
+		}
+	}
+
 }

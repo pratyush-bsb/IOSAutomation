@@ -214,6 +214,12 @@ public class ChatThreadScreen extends AppiumLibrary implements ChatScreenInterfa
 	public void clickOverlaybutton() {
 		clickOnElement(chatThreadOverflowButton);
 	}
+	
+	public RecordAudio clickOnAudioButton() {
+		clickOnElement(attachmentButton);
+		clickOnElement(audioButton);
+		return new RecordAudio();
+	}
 
 	public void clickOnStickers() {
 		clickOnElement(stickerButton);
@@ -326,12 +332,12 @@ public class ChatThreadScreen extends AppiumLibrary implements ChatScreenInterfa
 		}
 	}
 
-	public StartANewChatScreen clickOnForwardButton() {
+	public ForwardScreen clickOnForwardButton() {
 		if(!isElementPresent(forwardMessage)) {
 			longPressOnLastMessage();
 		}
 		clickOnElement(forwardMessage);
-		return new StartANewChatScreen();
+		return new ForwardScreen();
 	}
 	
 	public void clickOnCopyButton() {

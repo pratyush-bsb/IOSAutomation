@@ -13,7 +13,7 @@ public class AppiumCapabilities {
 	
 	//TODO make appPath, deviceName, Version and udid generic.
 	
-	public static String appPath = "/Users/qa-lab/Documents/iosAutomation/IOSAutomation/Hike.ipa";
+	public static String appPath = "/Users/kumarpratyush/Documents/workspace/IOSAutomation/Hike.app";
 	public static String bundleId = "com.bsb.hike";
 	public void setUp() throws Exception {
 		boolean sessionCreated = false;

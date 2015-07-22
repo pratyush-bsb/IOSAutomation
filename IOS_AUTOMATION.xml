@@ -5,6 +5,15 @@
 	<listeners>
 		<listener class-name="org.uncommons.reportng.HTMLReporter" />
 	</listeners>
+	<!-- <listeners>
+		<listener class-name="Screenshot" /> 
+	</listeners>
+	<test verbose="6" name="Summary and Submit Page">
+		<classes>
+			<class name="com.bsb.appium.Library.ScreenshotsListener" />
+		</classes>
+	</test> -->
+	
 
 	<test name="One-to-One Create Hike User" preserve-order="true">
 		<classes>
@@ -12,7 +21,7 @@
 		</classes>
 	</test>
 	
-	<test name="One-to-One New Messaging Test" preserve-order="true">
+	<!-- <test name="One-to-One New Messaging Test" preserve-order="true">
 		<classes>
 			<class name="com.bsb.hike.ios.tests.NewMessagingTest" />
 		</classes>
@@ -52,6 +61,6 @@
 		<classes>
 			<class name="com.bsb.hike.ios.tests.SMSChat" />
 		</classes>
-	</test>
+	</test> -->
 	
 </suite>

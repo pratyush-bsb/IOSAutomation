@@ -6,10 +6,15 @@ import io.appium.java_client.MultiTouchAction;
 import io.appium.java_client.NetworkConnectionSetting;
 import io.appium.java_client.TouchAction;
 
+import java.io.File;
 import java.util.Set;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
+import org.testng.ITestResult;
 import org.testng.Reporter;
 
 import com.bsb.hike.ios.base.AppiumCapabilities;
@@ -241,5 +246,23 @@ public class AppiumLibrary extends AppiumCapabilities {
 			}
 		} catch(Exception e) {}
 	}
+	
+	/*public static void createScreenshot(ITestResult result) {
+		
+		try {
+			Reporter.setCurrentTestResult(result);
+			String className = 	result.getTestClass().getName();
+			String testName = result.getMethod().getMethodName();
+			String failureScreenshotName = className+"_"+testName+".jpg";
+			File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE); 
+			FileUtils.copyFile(file, new File("Screenshot/"+failureScreenshotName));
+			Reporter.log("<a href=\"Screenshot/" + failureScreenshotName + " <img src=\"Screenshot/" + failureScreenshotName + "height='100' width='100'/> </a>");
+			Reporter.setCurrentTestResult(null);
+		} catch(Exception e) {
+			Reporter.log("Not able to store screenshot");
+		}
+
+		
+	}*/
 	
 }

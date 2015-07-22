@@ -29,16 +29,10 @@ public class StartANewChatScreen extends HikeLibrary implements ContactSelection
 	protected By cancelTyping = MobileBy.name("Cancel");
 	protected By noResultsBy = MobileBy.name("No Results");
 	protected String noResultsString = "No Results";
-	
-	protected By contactsTab = MobileBy.name("Contacts");
 
 	//getters
 	public String getStartAChatHeaderString() {
 		return startAChatHeaderString;
-	}
-	
-	public By getContactsTab() {
-		return contactsTab;
 	}
 
 	public By getStartAChatBackButton() {
@@ -72,7 +66,7 @@ public class StartANewChatScreen extends HikeLibrary implements ContactSelection
 	public By getCancelTyping() {
 		return cancelTyping;
 	}
-	
+
 	public By getForwardButton() {
 		return forwardButton;
 	}
@@ -117,14 +111,6 @@ public class StartANewChatScreen extends HikeLibrary implements ContactSelection
 	public void clickOnSearchTab() {
 		clickOnElement(searchOrEnterNumber);
 	}
-	
-	public By getEditForwardingMessageWindow() {
-		return editForwardingMessageWindow;
-	}
-	
-	public void clickOnForwardMessage() {
-		clickOnElement(forwardButton);
-	}
 
 	public void clickOnBackButton() {
 		clickOnElement(startAChatBackButton);
@@ -134,9 +120,9 @@ public class StartANewChatScreen extends HikeLibrary implements ContactSelection
 		//clickOnElement(cancelTyping);
 		driver.hideKeyboard();
 	}
-	
+
 	public void cancelTyping() {
-		
+
 		try {
 			WebElement cancelElement = driver.findElement(cancelTyping);
 			new TouchAction(driver).press(cancelElement).perform();
@@ -192,13 +178,13 @@ public class StartANewChatScreen extends HikeLibrary implements ContactSelection
 				}
 			}
 		} catch (Exception e) {
-			
+
 		}
-		
+
 		if(chatThreadObj == null) {
 			Assert.fail("Name/number did not match with the one searched with");
 		}
-		
+
 		//Assert.assertEquals(userNumber.toLowerCase(), getTextByName(MobileBy.IosUIAutomation(firstContact + contactNameSuffix)).toLowerCase(), "Name/number did not match with the one searched with");
 		//ChatThreadScreen chatThreadObj = clickOnFirstContact();
 		return chatThreadObj;
@@ -270,98 +256,6 @@ public class StartANewChatScreen extends HikeLibrary implements ContactSelection
 		}
 
 		return new ChatThreadScreen(user);
-	}
-
-	public void headersWhenForwardingMessage() {
-
-		try {
-			clickOnElement(contactsTab);
-			//if group chats available
-			boolean groupChats = isElementPresent(groupChatsTab);
-			if(groupChats) {
-				//list all groups and their numbers
-				boolean groupContinued = true;
-				int counter = 0;
-				List<WebElement> allContacts = driver.findElements(MobileBy.IosUIAutomation(allContactsPrefix));
-				int contactsSize = allContacts.size();
-				while (groupContinued && counter < contactsSize) {
-					try {
-						String members = allContacts.get(counter).findElement(MobileBy.IosUIAutomation(contactNumberSuffix)).getAttribute("name");
-						if (members.contains("people")) {
-							//this is a group. Print group name and members
-							Reporter.log("Group name : " + allContacts.get(counter).findElement(MobileBy.IosUIAutomation(contactNameSuffix)).getAttribute("name") + " Members : " + members);
-						} else {
-							groupContinued = false;
-						}
-						counter++;
-					} catch (Exception e) { groupContinued = false; }
-				}
-			}
-
-			if(isElementPresent(favoritesTab)) {
-				WebElement favoriteCounts = driver.findElements(favoritesTab).get(0).findElement(MobileBy.IosUIAutomation(contactNumberSuffix));
-				Reporter.log("Count of Favorites : " + favoriteCounts.getAttribute("name"));
-			}
-
-			WebElement peopleOnHikeCounts = driver.findElements(peopleOnHikeTab).get(0).findElement(MobileBy.IosUIAutomation(contactNumberSuffix));
-			Reporter.log("Count of People on Hike : " + peopleOnHikeCounts.getAttribute("name"));
-
-			//TODO fix this. 'SMS CONTACTS' takes the text instead of the tableGroup.
-			WebElement peopleOnSMSCounts = driver.findElements(smsContactsTab).get(0).findElement(MobileBy.IosUIAutomation(contactNumberSuffix));
-			Reporter.log("Count of People on SMS : " + peopleOnSMSCounts.getAttribute("name"));
-		} catch (Exception e) {}
-	}
-
-	public ChatThreadScreen selectContactToForwardMessage() {
-		clickOnElement(contactsTab);
-		clickOnSearchTab();
-		enterText(searchOrEnterNumber, HIKE_CONTACT_NAME_3);
-		try {
-			List<WebElement> allResults = driver.findElementsByIosUIAutomation(allContactsPrefix);
-
-			//iterate over all results and pick the one matching the search criteria
-			for(WebElement eachContact : allResults) {
-				String contactName = eachContact.findElement(MobileBy.IosUIAutomation(contactNameSuffix)).getAttribute("name");
-				if(contactName.equalsIgnoreCase(HIKE_CONTACT_NAME_3)) {
-					new TouchAction(driver).press(eachContact).perform();
-					clickOnElement(forwardButton);
-				}
-			}
-		} catch (Exception e) {
-
-		}
-
-		return new ChatThreadScreen(HIKE_CONTACT_NAME_3);
-	}
-	
-	public void selectContactToEditandForwardMessage() {
-		clickOnElement(contactsTab);
-		clickOnSearchTab();
-		enterText(searchOrEnterNumber, HIKE_CONTACT_NAME_3);
-		try {
-			List<WebElement> allResults = driver.findElementsByIosUIAutomation(allContactsPrefix);
-
-			//iterate over all results and pick the one matching the search criteria
-			for(WebElement eachContact : allResults) {
-				String contactName = eachContact.findElement(MobileBy.IosUIAutomation(contactNameSuffix)).getAttribute("name");
-				if(contactName.equalsIgnoreCase(HIKE_CONTACT_NAME_3)) {
-					new TouchAction(driver).press(eachContact).perform();
-					clickOnElement(editAndForwardButton);
-					//delete some text and check
-					for(int i=0; i < 7; i++) {
-						performPartialDelete();
-					}
-				}
-			}
-		} catch (Exception e) {
-
-		}
-
-	}
-	
-	public void typeInMessageBox(String textToType) {
-		
-		enterText(editForwardingMessageWindow, textToType);
 	}
 
 }
