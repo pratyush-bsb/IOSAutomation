@@ -75,23 +75,28 @@ public class CreateHikeUser extends HikeLibrary {
 	public void test002() throws InterruptedException{
 		String name="HikeIosUserName";
 		homeScreenObj.clickOnOverflow();
-		homeScreenObj.clickOnProfile_Lbl();
+		MyProfileScreen myProfileScreenObj = homeScreenObj.clickOnProfile_Lbl();
 		
-		Assert.assertEquals(MyProfileScreen.getText_MyProfileTitle(), MyProfileScreen.MyProfileTitle_LBL_Txt);
-		MyProfileScreen.clickOnEdit_BTN();
+		Assert.assertEquals(getTextByName(myProfileScreenObj.getMyProfileTitle()), myProfileScreenObj.getMyProfileTitleString(), "The header for my profile page did not match");
 		
-		Assert.assertEquals(EditProfileScreen.getText_EditProfileScreenTitle_LBL(), EditProfileScreen.EditProfileScreenTitle_LBL_Txt);
-		Assert.assertEquals(EditProfileScreen.getText_Back_BTN(), EditProfileScreen.Back_BTN_Txt);
+		Assert.assertTrue(isElementPresent(myProfileScreenObj.getBackButton()), "Back button not available in profile screen");
+		Assert.assertTrue(isElementPresent(myProfileScreenObj.getStatusButton()), "Status button not available in profile screen");
+		Assert.assertTrue(isElementPresent(myProfileScreenObj.getPhotoButton()), "Photo button not available in profile screen");
 		
-		EditProfileScreen.setName(name);
-		EditProfileScreen.clickOnDone_BTN();
+		clickOnElement(myProfileScreenObj.getProfileOverflowButton());
+		Assert.assertTrue(isElementPresent(myProfileScreenObj.getEditProfileButton()), "The option for edit profile did not come after clicking on overflow button");
+		
+		EditProfileScreen editProfileScreenObj = myProfileScreenObj.goToEditProfile();
+		
+		editProfileScreenObj.setName(name);
+		editProfileScreenObj.clickOnDone_BTN();
 		
 		//wait for keyboard to hide
 		while(isKeyboardVisible()) {
 			Thread.sleep(100);
 		}
 		
-		Assert.assertFalse(EditProfileScreen.getState_Done_BTN(), "The done button is enable even after clicking on 'Done'");
+		Assert.assertFalse(editProfileScreenObj.getState_Done_BTN(), "The done button is enable even after clicking on 'Done'");
 		//go to home
 		goToHome();
 	}

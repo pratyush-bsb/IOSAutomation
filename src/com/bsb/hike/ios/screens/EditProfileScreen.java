@@ -8,80 +8,101 @@ import com.bsb.appium.Library.AppiumLibrary;
 
 public class EditProfileScreen extends AppiumLibrary {
 
-	public static By Back_BTN = MobileBy.name("Edit Profile");
-	public static String Back_BTN_Txt = "Edit Profile";
-	public static By EditProfileScreenTitle_LBL = MobileBy.name("Edit Profile");
-	public static String EditProfileScreenTitle_LBL_Txt = "Edit Profile";
-	public static By Done_BTN = MobileBy.name("Done");
-	public static By Name_LBL = MobileBy.IosUIAutomation(".tableViews()[0].cells()[0].textFields()");
-	public static By Mobile_LBL = MobileBy.name("Mobile");
-	public static By Email_LBL = MobileBy.name("E-mail");
-	public static By EditPicture_BTN = MobileBy.name("Edit Picture");
-	public static By Male_BTN = MobileBy.name("Male");
-	public static By Female_BTN = MobileBy.name("Female");
+	protected By backButton = MobileBy.name("Back");
+	protected By doneButton = MobileBy.name("Done");
+	protected By nameLabel = MobileBy.IosUIAutomation(".tableViews()[0].cells()[0].textFields()");
+	protected By mobileNumberLabel = MobileBy.name("Mobile");
+	protected By emailLabel = MobileBy.name("E-mail");
+	protected By editPictureLabel = MobileBy.name("Update Profile Picture");
+	protected By maleButton = MobileBy.name("Male");
+	protected By femaleButton = MobileBy.name("Female");
 
 
-	public static void setName(String value)	
+	public By getBackButton() {
+		return backButton;
+	}
+
+	public By getDoneButton() {
+		return doneButton;
+	}
+
+	public By getNameLabel() {
+		return nameLabel;
+	}
+
+	public By getMobileNumberLabel() {
+		return mobileNumberLabel;
+	}
+
+	public By getEmailLabel() {
+		return emailLabel;
+	}
+
+	public By getEditPictureLabel() {
+		return editPictureLabel;
+	}
+
+	public By getMaleButton() {
+		return maleButton;
+	}
+
+	public By getFemaleButton() {
+		return femaleButton;
+	}
+
+	public  void setName(String value)	
 	{
-		
-		enterTextWithClear(Name_LBL, value);
-		//WebElement m = driver.findElement(Name_LBL);
-		//		m.getAttribute("value").length();
-		//m.clear();
-		//enterText(Name_LBL, value);
+
+		enterTextWithClear(nameLabel, value);
 	}
 
-	public static void clickOnDone_BTN()
+	public  void clickOnDone_BTN()
 	{
-		clickOnElement(Done_BTN);
+		clickOnElement(doneButton);
 	}
-	public static boolean getState_Done_BTN(){
-		return isEnabled(Done_BTN);
+	public  boolean getState_Done_BTN(){
+		return isEnabled(doneButton);
 	}
 
-	
+
 	public void clickOnBack_BTN()
 	{
-		clickOnElement(Back_BTN);
+		clickOnElement(backButton);
 	}
 
-	public static String getText_EditProfileScreenTitle_LBL()
+	public  String getText_Back_BTN()
 	{
-		return(getTextByName(EditProfileScreenTitle_LBL));				
-	}
-	public static String getText_Back_BTN()
-	{
-		return(getTextByName(Back_BTN));				
+		return(getTextByName(backButton));				
 	}
 
 
 	public String getTextName_LBL()
 	{
-		return(getTextByName(Name_LBL));
+		return(getTextByName(nameLabel));
 	}
 
 	public String getTextMobile_LBL()
 	{
-		return(getTextByName(Mobile_LBL));
+		return(getTextByName(mobileNumberLabel));
 	}
 
 	public String getTextEmail_LBL()
 	{
-		return(getTextByName(Email_LBL));
+		return(getTextByName(emailLabel));
 	}
 
 	public void clickOnEditPicture_BTN()
 	{
-		clickOnElement(EditPicture_BTN);
+		clickOnElement(editPictureLabel);
 	}
 
 	public void clickOnMale_BTN()
 	{
-		clickOnElement(Male_BTN);
+		clickOnElement(maleButton);
 	}
 
 	public void clickOnFemale_BTN()
 	{	
-		clickOnElement(Female_BTN);	
+		clickOnElement(femaleButton);	
 	}
 }

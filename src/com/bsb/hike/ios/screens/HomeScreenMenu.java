@@ -220,9 +220,10 @@ public class HomeScreenMenu extends HikeLibrary {
 		clickOnElement(inviteFriends_Lbl);
 	}
 
-	public void clickOnProfile_Lbl()
+	public MyProfileScreen clickOnProfile_Lbl()
 	{
 		clickOnElement(profile_Lbl);
+		return new MyProfileScreen();
 	}
 
 	public SettingsScreen clickOnSettings_Lbl()

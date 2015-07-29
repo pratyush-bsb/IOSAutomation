@@ -8,42 +8,47 @@ import com.bsb.appium.Library.AppiumLibrary;
 
 public class MyProfileScreen extends AppiumLibrary{
 
-	public static By Back_BTN = MobileBy.name("Back");
-	public static By MyProfileTitle_LBL = By.name("My Profile");
-	public static String MyProfileTitle_LBL_Txt = "My Profile";
-	public static By Edit_BTN = MobileBy.name("Edit");
-	public static By Camera_BTN = MobileBy.name("largeCamera");
-	public static By ProfileName_LBL = MobileBy.name("tgg"); // ** To be added in a variable
-	public static By PostStatus_BTN = MobileBy.name("Post a Status");
+	protected By backButton = MobileBy.name("Back");
+	protected By myProfileTitle = By.name("My Profile");
+	protected String myProfileTitleString = "My Profile";
+	protected By statusButton = MobileBy.name("Status");
+	protected By photoButton = MobileBy.name("Photo");
+	protected By profileOverflowButton = MobileBy.name("ic post three dot");
+	protected By editProfileButton = MobileBy.name("Edit Profile");
 	
-	public void clickOnBack_BTN()
-		{
-		clickOnElement(Back_BTN);
-		}
 	
-	public static String getText_MyProfileTitle()
-		{
-		return(getTextByName(MyProfileTitle_LBL));
-		}
+	public By getProfileOverflowButton() {
+		return profileOverflowButton;
+	}
+	public By getEditProfileButton() {
+		return editProfileButton;
+	}
+	public By getBackButton() {
+		return backButton;
+	}
+	public By getMyProfileTitle() {
+		return myProfileTitle;
+	}
+	public String getMyProfileTitleString() {
+		return myProfileTitleString;
+	}
+	public By getStatusButton() {
+		return statusButton;
+	}
 	
-	public static void clickOnEdit_BTN()
-		{
-		clickOnElement(Edit_BTN);
-		}
+	public By getPhotoButton() {
+		return photoButton;
+	}
 	
-	public void clickOnCamera_BTN()
-		{
-		clickOnElement(Camera_BTN);
-		}
-	
-	public String getText_ProfileName()
-		{	
-		 return(getTextByName(ProfileName_LBL));
-		}
-	
-	public void clickOnPostStatus_BTN()
-		{
-		clickOnElement(PostStatus_BTN);
-		}
-	
+	public EditProfileScreen goToEditProfile() {
+		try {
+			if(!isElementPresent(editProfileButton)) {
+				clickOnElement(profileOverflowButton);
+			}
+			clickOnElement(editProfileButton);
+		} catch(Exception e) {}
+		return new EditProfileScreen();
+	}
+
+
 }
