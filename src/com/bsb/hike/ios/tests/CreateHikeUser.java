@@ -40,7 +40,6 @@ public class CreateHikeUser extends HikeLibrary {
 	@Test
 	public void test001() throws Exception{
 		//Thread.sleep(1000*10);
-		Assert.assertTrue(false);
 		setDEFAULT_MSISDN();
 		setPin();
 		WelcomeScreen welcomeScreenObj = new WelcomeScreen();
@@ -69,13 +68,11 @@ public class CreateHikeUser extends HikeLibrary {
 		} catch(Exception e) {
 			Reporter.log("Sync address book button did not come");
 		}
-		Assert.assertTrue(false);
 		
 	}
 	
 	@Test
 	public void test002() throws InterruptedException{
-		Assert.assertTrue(false);
 		String name="HikeIosUserName";
 		homeScreenObj.clickOnOverflow();
 		homeScreenObj.clickOnProfile_Lbl();
@@ -95,7 +92,6 @@ public class CreateHikeUser extends HikeLibrary {
 		}
 		
 		Assert.assertFalse(EditProfileScreen.getState_Done_BTN(), "The done button is enable even after clicking on 'Done'");
-		Assert.assertTrue(false);
 		//go to home
 		goToHome();
 	}
@@ -121,7 +117,7 @@ public class CreateHikeUser extends HikeLibrary {
 				String failureScreenshotName = className+"_"+testName+".png";
 				File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE); 
 				FileUtils.copyFile(file, new File("Screenshot/"+failureScreenshotName));
-				Reporter.log("<a href=\"Screenshot/" + failureScreenshotName + " ><img src=\"Screenshot/" + failureScreenshotName + "height='100' width='100'/> Test123 </a>");
+				Reporter.log("<a href=\"Screenshot/" + failureScreenshotName + " > Test123 </a>");
 				Reporter.setCurrentTestResult(null); 
 			} catch(Exception e) {
 				Reporter.log("Not able to store screenshot");
