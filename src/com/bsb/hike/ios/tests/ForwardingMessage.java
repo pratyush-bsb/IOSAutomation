@@ -7,7 +7,6 @@ import java.io.File;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
@@ -86,8 +85,8 @@ public class ForwardingMessage extends HikeLibrary {
 		//search for any 1-1 contact
 		forwardScreenObj.clickOnSearchTab();
 		enterText(forwardScreenObj.getSearchOrEnterNumber(), HIKE_CONTACT_NAME_1);
-
-		Assert.assertFalse(isElementPresent(forwardScreenObj.getGroupsTab()), "Groups tab appeared when only recents tab should have come");
+		WebElement currentScreenElement = forwardScreenObj.getcurrentScreenElement();
+		Assert.assertFalse(isElementPresentUnderParentElement(forwardScreenObj.getGroupsTab(), currentScreenElement), "Groups tab appeared when only recents tab should have come");
 		Assert.assertTrue(isElementPresent(forwardScreenObj.getRecentsTab()), "Recents tab did not appear when recents tab should have come");
 
 		forwardScreenObj.cancelTyping();
@@ -100,7 +99,7 @@ public class ForwardingMessage extends HikeLibrary {
 		forwardScreenObj.clickOnSearchTab();
 		enterText(forwardScreenObj.getSearchOrEnterNumber(), HIKE_CONTACT_NAME_1);
 
-		Assert.assertFalse(isElementPresent(forwardScreenObj.getSmsContactsTab()), "SMS tab appeared when only people on hike tab should have come");
+		Assert.assertFalse(isElementPresentUnderParentElement(forwardScreenObj.getSmsContactsTab(), currentScreenElement), "SMS tab appeared when only people on hike tab should have come");
 		Assert.assertTrue(isElementPresent(forwardScreenObj.getPeopleOnHikeTab()), "People on hike tab did not appear when it should have come");
 
 		forwardScreenObj.cancelTyping();
@@ -108,8 +107,10 @@ public class ForwardingMessage extends HikeLibrary {
 		forwardScreenObj.clickOnSearchTab();
 		enterText(forwardScreenObj.getSearchOrEnterNumber(), HIKE_SMS_CONTACT_NAME_1);
 
-		Assert.assertFalse(isElementPresent(forwardScreenObj.getPeopleOnHikeTab()), "People on hike tab appeared when only SMS contacts tab should have come");
+		Assert.assertFalse(isElementPresentUnderParentElement(forwardScreenObj.getPeopleOnHikeTab(), currentScreenElement), "People on hike tab appeared when only SMS contacts tab should have come");
 		Assert.assertTrue(isElementPresent(forwardScreenObj.getSmsContactsTab()), "SMS contacts tab did not appear when only it should have come");
+		
+		forwardScreenObj.cancelForwarding();
 	}
 
 	@Test
@@ -171,11 +172,11 @@ public class ForwardingMessage extends HikeLibrary {
 		String textInActionBar = getTextByName(forwardScreenObj.getForwardActionBarHeader());
 		Assert.assertTrue(textInActionBar.contains(HIKE_CONTACT_NAME), "The header does not contain the selected contact name");
 
-		forwardScreenObj.cancelForwarding();
+		forwardScreenObj.cancelForwardingActionMenuBar();
+		forwardScreenObj.cancelTyping();
 
 		//try forwarding from chats tab
-		chatScreenObj.longPressOnLastMessage();
-		forwardScreenObj = chatScreenObj.clickOnForwardButton();
+		clickOnElement(forwardScreenObj.getChatsTab());
 		clickOnElement(forwardScreenObj.getSearchOrEnterNumber());
 		enterText(forwardScreenObj.getSearchOrEnterNumber(), HIKE_CONTACT_NAME);
 		try {
@@ -190,6 +191,7 @@ public class ForwardingMessage extends HikeLibrary {
 		textInActionBar = getTextByName(forwardScreenObj.getForwardActionBarHeader());
 		Assert.assertTrue(textInActionBar.contains(HIKE_CONTACT_NAME), "The header does not contain the selected contact name");
 
+		forwardScreenObj.cancelForwardingActionMenuBar();
 		forwardScreenObj.cancelForwarding();
 
 	}
@@ -237,6 +239,7 @@ public class ForwardingMessage extends HikeLibrary {
 		ForwardScreen forwardScreenObj = chatScreenObj.clickOnForwardButton();
 		chatScreenObj = (ChatThreadScreen) forwardScreenObj.forwardMessageToContact("+911234567890", false);
 		Assert.assertTrue((chatScreenObj != null) && (chatScreenObj.getUserName().equalsIgnoreCase("+911234567890")), "The message was not forwarded to unsaved contact");
+		goToHome();
 	}
 
 	@Test
@@ -303,7 +306,7 @@ public class ForwardingMessage extends HikeLibrary {
 		chatScreenObj.longPressOnLastMessage();
 		ForwardScreen forwardScreenObj = chatScreenObj.clickOnForwardButton();
 		chatScreenObj = (ChatThreadScreen) forwardScreenObj.forwardMessageToContact(INTERNATIONAL_HIKE_USER, false);
-		Assert.assertTrue((chatScreenObj != null) && (chatScreenObj.getUserName().equalsIgnoreCase(HIKE_CONTACT_NAME)), "The message was not forwarded to unsaved contact");
+		Assert.assertTrue((chatScreenObj != null) && (chatScreenObj.getUserName().equalsIgnoreCase(INTERNATIONAL_HIKE_USER)), "The message was not forwarded to international contact");
 	}
 
 	@Test
@@ -343,7 +346,7 @@ public class ForwardingMessage extends HikeLibrary {
 		UserBlockedConfirmationToast blockToastObj = new UserBlockedConfirmationToast();
 		Assert.assertTrue(isElementPresent(blockToastObj.getUnblockButton()), "Blocked user did not have 'Unblock' toast in chat thread");
 		blockToastObj.unblockUser();
-
+		Assert.assertTrue(isElementPresent(blockToastObj.getUnblockButton()), "Blocked user did not have 'Unblock' toast in chat thread");
 	}
 
 	@Test
@@ -360,9 +363,10 @@ public class ForwardingMessage extends HikeLibrary {
 		try {
 			List<WebElement> allChats = driver.findElementsByIosUIAutomation(chatScreenObj.getAllChatMessages());
 			allChats.get(allChats.size() - 1).click();
-			changeToWebView();
-			driver.findElement(By.name("Share")).click();
-			clickOnElement(forwardScreenObj.getForwardLinkActionBarHeader());
+			Thread.sleep(5000); //wait for page to load
+			//changeToWebView();
+			driver.findElement(MobileBy.IosUIAutomation(".toolbars()[0].buttons().withPredicate(\"name MATCHES \'Share\'\")")).click();
+			driver.findElement(MobileBy.name("Forward Link")).click();
 		} catch (Exception e) {
 			Reporter.log("Not able to automate web view share process.");
 		}
@@ -402,12 +406,14 @@ public class ForwardingMessage extends HikeLibrary {
 			contactFound.click();
 		} catch(Exception e) {}
 		clickOnElement(forwardScreenObj.getEditAndForwardButton());
-		longPress(forwardScreenObj.getEditAndForwardButton());
+		longPress(forwardScreenObj.getEditForwardingMessageWindow());
 		clickOnElement(pasteButton);
 
 		String newText = getTextByValue(forwardScreenObj.getEditForwardingMessageWindow());
 
 		Assert.assertTrue(newText.equalsIgnoreCase(toForward+toCopy), "The text was not copied in the edit window of the forwarded message");
+		clickOnElement(forwardScreenObj.getCancelEditingMessageButton());
+		forwardScreenObj.cancelTyping();
 	}
 
 	@Test
@@ -420,6 +426,7 @@ public class ForwardingMessage extends HikeLibrary {
 		String textToForward = "This is a random string to forward";
 		goToHome();
 		ChatThreadScreen chatScreenObj = (ChatThreadScreen) homeScreenMenuObj.goToSpecificUserThread(HIKE_CONTACT_NAME, false);
+		chatScreenObj.sendMessage(textToForward);
 		chatScreenObj.longPressOnLastMessage();
 		ForwardScreen forwardScreenObj = chatScreenObj.clickOnForwardButton();
 		forwardScreenObj.selectContactToEditandForwardMessage();

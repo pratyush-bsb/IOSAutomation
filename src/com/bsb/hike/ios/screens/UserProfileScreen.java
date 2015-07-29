@@ -24,6 +24,8 @@ public class UserProfileScreen extends HikeLibrary implements ProfileScreenInter
 	protected By profileScreenHeader = MobileBy.name("Profile");
 	protected String profileScreenHeaderString = "Profile";
 	protected By profilePic = MobileBy.name("avatarPlaceholderMedium0");
+	protected By oneToOneUserNameBy = MobileBy.IosUIAutomation(".staticTexts()[0]");
+	protected By userOnHikeSince = MobileBy.IosUIAutomation(".staticTexts()[1]");
 	
 	protected By sendAMessage = MobileBy.IosUIAutomation(".tableViews()[0].groups()[0].buttons()[0]");
 	protected By addAsFavorite = MobileBy.name("Add as a favorite");
@@ -36,8 +38,8 @@ public class UserProfileScreen extends HikeLibrary implements ProfileScreenInter
 		
 		while(!pageLoaded && counter < 5) {
 			try {
-				driver.findElement(userNameBy);
-				pageLoaded = getTextByName(userNameBy).equalsIgnoreCase(this.userName);
+				driver.findElement(oneToOneUserNameBy);
+				pageLoaded = getTextByName(oneToOneUserNameBy).equalsIgnoreCase(this.userName);
 			} catch (Exception e) {
 				counter++;
 				try {
@@ -78,12 +80,12 @@ public class UserProfileScreen extends HikeLibrary implements ProfileScreenInter
 
 
 	public By getUserNameBy() {
-		return userNameBy;
+		return oneToOneUserNameBy;
 	}
 
 
 	public By getOnHikeSince() {
-		return onHikeSince;
+		return userOnHikeSince;
 	}
 
 

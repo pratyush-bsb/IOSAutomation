@@ -6,15 +6,10 @@ import io.appium.java_client.MultiTouchAction;
 import io.appium.java_client.NetworkConnectionSetting;
 import io.appium.java_client.TouchAction;
 
-import java.io.File;
 import java.util.Set;
 
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
-import org.testng.ITestResult;
 import org.testng.Reporter;
 
 import com.bsb.hike.ios.base.AppiumCapabilities;
@@ -34,6 +29,18 @@ public class AppiumLibrary extends AppiumCapabilities {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+	
+	//finds if an element is present under the given parent element
+	public boolean isElementPresentUnderParentElement(By element, WebElement parentElement) {
+		
+		try {
+			parentElement.findElement(element);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+		
 	}
 	
 	public static boolean isElementEnabled(By element) {

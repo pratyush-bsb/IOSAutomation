@@ -39,7 +39,7 @@ public class ChatThreadScreen extends AppiumLibrary implements ChatScreenInterfa
 		}
 	}
 
-	protected String initialTypeBoxMessageString = "Hike message...";
+	protected String initialTypeBoxMessageString = "hike message...";
 	protected String freeSmsTypeBoxString = "Free SMS...";
 
 	//overlay options

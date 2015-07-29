@@ -8,8 +8,7 @@ public interface ProfileScreenInterface {
 
 	By backButtonProfileScreen = MobileBy.name("Back");
 	String profileScreenHeaderString = "Profile";
-	By userNameBy = MobileBy.IosUIAutomation(".tableViews()[0].staticTexts()[0]"); //get text by name
-	By onHikeSince = MobileBy.IosUIAutomation(".tableViews()[0].staticTexts()[1]"); //get text by value
+	By onHikeSince = MobileBy.IosUIAutomation(".tableViews()[0].staticTexts()[0]"); //get text by value
 	By inviteToHike = MobileBy.name("Invite to hike");
 	
 }

@@ -57,6 +57,7 @@ public class GroupProfileScreen extends HikeLibrary implements ProfileScreenInte
 	protected By cameraIcon = MobileBy.name("largeCamera");
 	protected By takePhotoButton = MobileBy.IosUIAutomation(".elements()[0].collectionViews()[0].cells()[0].buttons()[0]");
 	protected By chooseExistingButton = MobileBy.IosUIAutomation(".elements()[0].collectionViews()[0].cells()[1].buttons()[0]");
+	protected By groupNameBy = MobileBy.IosUIAutomation(".tableViews()[0].textFields()[0]"); //get text by value
 
 	//public getters
 	public String getGroupName() {
@@ -199,7 +200,7 @@ public class GroupProfileScreen extends HikeLibrary implements ProfileScreenInte
 
 	public GroupThreadScreen goBackToThread() {
 		clickOnElement(backButtonProfileScreen);
-		String groupName = getTextByName(userNameBy);
+		String groupName = getTextByValue(groupNameBy);
 		return new GroupThreadScreen(groupName);
 	}
 

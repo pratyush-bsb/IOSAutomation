@@ -11,6 +11,7 @@ public interface ContactSelectionInterface {
 	By smsContactsTab = MobileBy.name("SMS CONTACTS");
 	By groupChatsTab = MobileBy.name("GROUP CHATS");
 	String searchOrEnterNumberString = "Search or Enter Number";
+	By contactsOnFront = MobileBy.IosUIAutomation(".tableViews()[0]");
 
 	//to search for all tabs
 	By allTabs = MobileBy.IosUIAutomation(".tableViews()[0].groups()");

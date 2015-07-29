@@ -200,6 +200,15 @@ public class ForwardScreen extends HikeLibrary implements ContactSelectionInterf
 		} catch(Exception e) {}
 		return countOfRecents;
 	}
+	
+	//clicks on 'cancel' in the action bar which comes as popup
+	public void cancelForwardingActionMenuBar() {
+		
+		try {
+			WebElement cancelElement = driver.findElement(cancelTyping);
+			new TouchAction(driver).press(cancelElement).perform();
+		} catch(Exception e){}
+	}
 
 	
 	//returns the most recent contact in forward screen under 'recent' tab
@@ -236,7 +245,7 @@ public class ForwardScreen extends HikeLibrary implements ContactSelectionInterf
 		try {
 			//clickOnElement(contactsTab);
 			//if group chats available
-			boolean groupChats = isElementPresent(groupChatsTab);
+			boolean groupChats = isElementPresent(groupsTab);
 			List<WebElement> allContacts = driver.findElements(MobileBy.IosUIAutomation(allContactsPrefix));
 			int contactsSize = allContacts.size();
 			int countOfRecentsListed = 0;
@@ -288,7 +297,8 @@ public class ForwardScreen extends HikeLibrary implements ContactSelectionInterf
 			List<WebElement> allTabsElements = driver.findElements(allTabs);
 			if(allTabsElements.get(0).getAttribute("name").equalsIgnoreCase("GROUPS")) {
 				//groups tab is there. get recent tabs count
-				countOfGroups = Integer.parseInt(allTabsElements.get(0).getAttribute("name"));
+				WebElement countField = allTabsElements.get(0).findElement(MobileBy.IosUIAutomation(contactNumberSuffix));
+				countOfGroups = Integer.parseInt(countField.getAttribute("name"));
 			}
 		} catch(Exception e) {}
 		return countOfGroups;
@@ -323,7 +333,7 @@ public class ForwardScreen extends HikeLibrary implements ContactSelectionInterf
 	public void selectContactToEditandForwardMessage() {
 		clickOnElement(contactsTab);
 		clickOnSearchTab();
-		enterText(searchOrEnterNumber, HIKE_CONTACT_NAME_3);
+		enterTextWithClear(searchOrEnterNumber, HIKE_CONTACT_NAME_3);
 		try {
 			List<WebElement> allResults = driver.findElementsByIosUIAutomation(allContactsPrefix);
 
@@ -334,8 +344,10 @@ public class ForwardScreen extends HikeLibrary implements ContactSelectionInterf
 					new TouchAction(driver).press(eachContact).perform();
 					clickOnElement(editAndForwardButton);
 					//delete some text and check
+					By deleteBy = MobileBy.name("Delete");
+					WebElement deleteButton = driver.findElement(deleteBy);
 					for(int i=0; i < 7; i++) {
-						performPartialDelete();
+						deleteButton.click();
 					}
 				}
 			}
@@ -349,9 +361,13 @@ public class ForwardScreen extends HikeLibrary implements ContactSelectionInterf
 	public void deleteFullText() {
 		
 		String populatedText = getTextByValue(editForwardingMessageWindow);
-		for(int i = 0; i < populatedText.length(); i++) {
-			performPartialDelete();
-		}
+		try {
+			By deleteBy = MobileBy.name("Delete");
+			WebElement deleteButton = driver.findElement(deleteBy);
+			for(int i = 0; i < populatedText.length(); i++) {
+				deleteButton.click();
+			}
+		} catch(Exception e) {}
 	}
 
 	//types in the edit box of forward message screen
@@ -368,6 +384,16 @@ public class ForwardScreen extends HikeLibrary implements ContactSelectionInterf
 			WebElement cancelElement = driver.findElement(cancelTyping);
 			new TouchAction(driver).press(cancelElement).perform();
 		} catch(Exception e) {}
+	}
+	
+	public WebElement getcurrentScreenElement() {
+		
+		WebElement element = null;
+		try {
+			element = driver.findElement(contactsOnFront);
+		} catch(Exception e) {}
+		
+		return element;
 	}
 	
 	//cancels forwarding of message. 
