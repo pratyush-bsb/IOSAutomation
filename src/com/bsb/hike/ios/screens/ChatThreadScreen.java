@@ -309,6 +309,7 @@ public class ChatThreadScreen extends AppiumLibrary implements ChatScreenInterfa
 	public void assertInviteToHikeButton() {
 
 		clickOnElement(chatThreadOverflowButton);
+		clickOnElement(moreButton);
 		Assert.assertTrue(isElementPresent(inviteToHike), "Invite to Hike button not present for sms user.");
 	}
 

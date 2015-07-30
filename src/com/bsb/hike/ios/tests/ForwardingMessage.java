@@ -117,7 +117,6 @@ public class ForwardingMessage extends HikeLibrary {
 		String textToForward = "This is a random string to forward";
 
 		goToHome();
-		String mostRecentChat = getTextByName(homeScreenMenuObj.getFirstExistingChatName());
 
 		StartANewChatScreen newChatScreenObj = homeScreenMenuObj.clickOnComposeConversation();
 		ChatThreadScreen chatScreenObj = newChatScreenObj.startNewHikeChat(HIKE_CONTACT_NAME_1);
@@ -128,6 +127,7 @@ public class ForwardingMessage extends HikeLibrary {
 		chatScreenObj = newChatScreenObj.startNewHikeChat(HIKE_CONTACT_NAME);
 		chatScreenObj.sendMessage(textToForward);
 		goToHome();
+		String mostRecentChat = getTextByName(homeScreenMenuObj.getFirstExistingChatName());
 		chatScreenObj = (ChatThreadScreen) homeScreenMenuObj.goToSpecificUserThread(HIKE_CONTACT_NAME_1, false);
 
 		chatScreenObj.longPressOnLastMessage();
@@ -232,6 +232,7 @@ public class ForwardingMessage extends HikeLibrary {
 		ChatThreadScreen chatScreenObj = (ChatThreadScreen) homeScreenMenuObj.goToSpecificUserThread(HIKE_CONTACT_NAME_1, false);
 		chatScreenObj.longPressOnLastMessage();
 		ForwardScreen forwardScreenObj = chatScreenObj.clickOnForwardButton();
+		clickOnElement(forwardScreenObj.getContactsTab());
 		chatScreenObj = (ChatThreadScreen) forwardScreenObj.forwardMessageToContact("+911234567890", false);
 		Assert.assertTrue((chatScreenObj != null) && (chatScreenObj.getUserName().equalsIgnoreCase("+911234567890")), "The message was not forwarded to unsaved contact");
 		goToHome();

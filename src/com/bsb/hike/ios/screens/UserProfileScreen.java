@@ -27,7 +27,7 @@ public class UserProfileScreen extends HikeLibrary implements ProfileScreenInter
 	protected By oneToOneUserNameBy = MobileBy.IosUIAutomation(".staticTexts()[0]");
 	protected By userOnHikeSince = MobileBy.IosUIAutomation(".staticTexts()[1]");
 	
-	protected By sendAMessage = MobileBy.IosUIAutomation(".tableViews()[0].groups()[0].buttons()[0]");
+	protected By sendAMessage = MobileBy.name("ic message profile screen");
 	protected By addAsFavorite = MobileBy.name("Add as a favorite");
 	protected By addAsFavoriteStatus = MobileBy.IosUIAutomation(".tableViews()[0].groups()[0].staticTexts()[0]"); //get text by name, split on " ", second element is name
 	
