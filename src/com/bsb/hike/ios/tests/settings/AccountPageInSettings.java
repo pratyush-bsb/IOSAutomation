@@ -30,7 +30,7 @@ public class AccountPageInSettings extends HikeLibrary {
 		driver.quit();
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void test001_AccountPageElements() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to settings page from home page. \n" +
@@ -45,7 +45,7 @@ public class AccountPageInSettings extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002_GoToAccountPage() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to account from settings page. \n" +
@@ -63,7 +63,7 @@ public class AccountPageInSettings extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=3)
 	public void test003_GoBackToSettingsPage() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go back to settings page. \n" +

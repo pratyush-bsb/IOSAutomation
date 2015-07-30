@@ -32,7 +32,7 @@ public class RemoveUsersFromGroup extends HikeLibrary {
 		driver.quit();
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void test001_OwnerRemovesHikeUser() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Open an existing group. \n" +
@@ -51,7 +51,7 @@ public class RemoveUsersFromGroup extends HikeLibrary {
 		Assert.assertTrue(lastMessage.contains("left the group chat!"), "The event for removing user was not fired");
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002_OwnerRemovesSMSUser() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Open an existing group. \n" +
@@ -71,7 +71,7 @@ public class RemoveUsersFromGroup extends HikeLibrary {
 	}
 	
 	
-	@Test
+	@Test(priority=3)
 	public void test003_OwnerRemovesAllUsers() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Open an existing group. \n" +
@@ -90,7 +90,7 @@ public class RemoveUsersFromGroup extends HikeLibrary {
 		Assert.assertTrue(!lastMessage.equalsIgnoreCase("This group chat has ended"), "The event for removing all users was not fired");
 	}
 	
-	@Test
+	@Test(priority=4)
 	public void test004_ParticipantRemovesHikeUser() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Create a server side group. \n" +
@@ -116,7 +116,7 @@ public class RemoveUsersFromGroup extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=5)
 	public void test005_ParticipantRemovesSMSUser() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to server group created in above test. \n" +

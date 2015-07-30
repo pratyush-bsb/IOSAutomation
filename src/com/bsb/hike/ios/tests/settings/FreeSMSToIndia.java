@@ -36,7 +36,7 @@ public class FreeSMSToIndia extends HikeLibrary {
 		driver.quit();
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void test001_FreeSMSToIndiaButton() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to options in home - Navigate to settings page. \n" +
@@ -50,7 +50,7 @@ public class FreeSMSToIndia extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002_DefaultOnForIndian() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to options in home - Navigate to settings page. \n" +
@@ -60,7 +60,7 @@ public class FreeSMSToIndia extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=3)
 	public void test003_WhenEnableCase() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Enable Free SMS. \n" +
@@ -82,7 +82,7 @@ public class FreeSMSToIndia extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=4)
 	public void test004_InviteSMSUsers() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to home. \n" +
@@ -99,7 +99,7 @@ public class FreeSMSToIndia extends HikeLibrary {
 		inviteSMSScreenObj.cancelInvite();
 	}
 	
-	@Test 
+	@Test(priority=5)
 	public void test005_HikeToSMS() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to home. \n" +
@@ -117,7 +117,7 @@ public class FreeSMSToIndia extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=6)
 	public void test006_ValidateInFavoritesTab() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to home. \n" +
@@ -137,7 +137,7 @@ public class FreeSMSToIndia extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=8)
 	public void test008_DisableFreeSMSAndCheck() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to home. \n" +
@@ -155,7 +155,7 @@ public class FreeSMSToIndia extends HikeLibrary {
 		Assert.assertFalse(isElementPresent(newChatObj.getSmsContactsTab()), "SMS contacts tab appeared even when free sms is turned off");
 	}
 	
-	@Test
+	@Test(priority=9)
 	public void test009_ValidateInGroupChat() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to home. \n" +
@@ -170,7 +170,7 @@ public class FreeSMSToIndia extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=10)
 	public void test010_InviteToSMSOff() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to home. \n" +
@@ -187,7 +187,7 @@ public class FreeSMSToIndia extends HikeLibrary {
 		inviteSMSScreenObj.cancelInvite();
 	}
 	
-	@Test
+	@Test(priority=11)
 	public void test011_ValidateInFavoritesTab() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to home. \n" +

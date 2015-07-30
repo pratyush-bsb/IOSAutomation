@@ -34,7 +34,7 @@ public class FAQ extends HikeLibrary {
 		driver.quit();
 	}
 
-	@Test
+	@Test(priority=1)
 	public void test001_ValidateFAQScreen() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to settings. \n" +
@@ -48,7 +48,7 @@ public class FAQ extends HikeLibrary {
 		Assert.assertTrue(isElementPresent(faqScreenObj.getBackButton()), "Back button is not available in FAQ screen");
 	}
 
-	@Test
+	@Test(priority=2)
 	public void test002_ScrollToEndOfPage() throws InterruptedException {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to FAQs page. \n" +
@@ -80,7 +80,7 @@ public class FAQ extends HikeLibrary {
 		changeToNativeView();
 	}
 
-	@Test
+	@Test(priority=3)
 	public void test003_GoBackToSettings() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go back to settings. \n" +

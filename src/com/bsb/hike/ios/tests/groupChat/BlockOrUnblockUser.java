@@ -35,7 +35,7 @@ public class BlockOrUnblockUser extends HikeLibrary {
 		driver.quit();
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void test001_BlockAUser() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start a new chat. \n" +
@@ -56,7 +56,7 @@ public class BlockOrUnblockUser extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002_UnblockUser() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start a new chat. \n" +
@@ -76,7 +76,7 @@ public class BlockOrUnblockUser extends HikeLibrary {
 		
 	}
 
-	@Test
+	@Test(priority=3)
 	public void test003_BlockUserFromGroup() throws InterruptedException {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Block a user. \n" +

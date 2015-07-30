@@ -3,18 +3,12 @@ package com.bsb.hike.ios.tests;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 
-import java.io.File;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -44,7 +38,7 @@ public class ForwardingMessage extends HikeLibrary {
 		driver.quit();
 	}
 
-	@Test
+	@Test(priority=1)
 	public void test001_ForwardAMessageValidate() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start chat with any existing chat. \n" +
@@ -66,7 +60,7 @@ public class ForwardingMessage extends HikeLibrary {
 
 	}
 
-	@Test
+	@Test(priority=2)
 	public void test002_ForwardScreenSanity() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start chat with any existing chat. \n" +
@@ -113,7 +107,7 @@ public class ForwardingMessage extends HikeLibrary {
 		forwardScreenObj.cancelForwarding();
 	}
 
-	@Test
+	@Test(priority=3)
 	public void test003_RecentChatOnTopInForwardScreen() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Record the most recent chat in home screen. \n" +
@@ -146,7 +140,7 @@ public class ForwardingMessage extends HikeLibrary {
 
 	}
 
-	@Test
+	@Test(priority=4)
 	public void test004_ForwardMessageActionBarSanityCheck() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Select any contact to forward message to. \n" +
@@ -196,7 +190,7 @@ public class ForwardingMessage extends HikeLibrary {
 
 	}
 
-	@Test
+	@Test(priority=5)
 	public void test005_ForwardMessageToContact() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Click on forward button. \n" +
@@ -227,12 +221,13 @@ public class ForwardingMessage extends HikeLibrary {
 
 	}
 
-	@Test
+	@Test(priority=6)
 	public void test006_ForwardMessageToUnsavedContact() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Click on forward button. \n" +
 				"2. Type unsaved number to forward message to. \n" +
 				"3. Ensure that message is sent to unsaved contact. \n");
+		goToHome();
 
 		ChatThreadScreen chatScreenObj = (ChatThreadScreen) homeScreenMenuObj.goToSpecificUserThread(HIKE_CONTACT_NAME_1, false);
 		chatScreenObj.longPressOnLastMessage();
@@ -242,14 +237,14 @@ public class ForwardingMessage extends HikeLibrary {
 		goToHome();
 	}
 
-	@Test
+	@Test(priority=7)
 	public void test007_ForwardMessageToSavedContactViaMSISDN() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Click on forward button. \n" +
 				"2. Type saved number to forward message to. \n" +
 				"3. Ensure that message is sent to saved contact. \n");
 
-
+		goToHome();
 		ChatThreadScreen chatScreenObj = (ChatThreadScreen) homeScreenMenuObj.goToSpecificUserThread(HIKE_CONTACT_NAME_1, false);
 		chatScreenObj.longPressOnLastMessage();
 		ForwardScreen forwardScreenObj = chatScreenObj.clickOnForwardButton();
@@ -265,7 +260,7 @@ public class ForwardingMessage extends HikeLibrary {
 		Assert.assertTrue((chatScreenObj != null) && (chatScreenObj.getUserName().equalsIgnoreCase(HIKE_CONTACT_NAME)), "The message was not forwarded to unsaved contact");
 	}
 
-	@Test
+	@Test(priority=8)
 	public void test008_ForwardMessageToUnsavedRecent() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Have an unsaved chat in recent. \n" +
@@ -294,7 +289,7 @@ public class ForwardingMessage extends HikeLibrary {
 		Assert.assertTrue(topChat.equalsIgnoreCase(unsavedContact), "The unsaved contact did not come at top in the home screen");
 	}
 
-	@Test
+	@Test(priority=9)
 	public void test009_ForwardToInternationalNumber() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Click on forward button. \n" +
@@ -305,12 +300,13 @@ public class ForwardingMessage extends HikeLibrary {
 		ChatThreadScreen chatScreenObj = (ChatThreadScreen) homeScreenMenuObj.goToSpecificUserThread(HIKE_CONTACT_NAME_1, false);
 		chatScreenObj.longPressOnLastMessage();
 		ForwardScreen forwardScreenObj = chatScreenObj.clickOnForwardButton();
+		clickOnElement(forwardScreenObj.getContactsTab());
 		chatScreenObj = (ChatThreadScreen) forwardScreenObj.forwardMessageToContact(INTERNATIONAL_HIKE_USER, false);
 		Assert.assertTrue((chatScreenObj != null) && (chatScreenObj.getUserName().equalsIgnoreCase(INTERNATIONAL_HIKE_USER)), "The message was not forwarded to international contact");
 	}
 
-	@Test
-	public void test0010_ForwardMessageToBlockedContact() {
+	@Test(priority=10)
+	public void test010_ForwardMessageToBlockedContact() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Block a contact. \n" +
 				"2. Forward message to blocked contact and validate. \n");
@@ -346,10 +342,10 @@ public class ForwardingMessage extends HikeLibrary {
 		UserBlockedConfirmationToast blockToastObj = new UserBlockedConfirmationToast();
 		Assert.assertTrue(isElementPresent(blockToastObj.getUnblockButton()), "Blocked user did not have 'Unblock' toast in chat thread");
 		blockToastObj.unblockUser();
-		Assert.assertTrue(isElementPresent(blockToastObj.getUnblockButton()), "Blocked user did not have 'Unblock' toast in chat thread");
+		Assert.assertFalse(isElementPresent(blockToastObj.getUnblockButton()), "Blocked user did not have 'Unblock' toast in chat thread");
 	}
 
-	@Test
+	@Test(priority=11)
 	public void test011_ForwardURL() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Have a URl in some chat thread. \n" +
@@ -357,6 +353,7 @@ public class ForwardingMessage extends HikeLibrary {
 
 		String url = "www.google.com";
 
+		goToHome();
 		ChatThreadScreen chatScreenObj = (ChatThreadScreen) homeScreenMenuObj.goToSpecificUserThread(HIKE_CONTACT_NAME_1, false);
 		chatScreenObj.sendMessage(url);
 		ForwardScreen forwardScreenObj = new ForwardScreen();
@@ -379,8 +376,8 @@ public class ForwardingMessage extends HikeLibrary {
 		Assert.assertTrue(lastMessage.equalsIgnoreCase(url), "The forwarded link and the recieved link do not match");
 	}
 
-	@Test
-	public void test0012_CopyPasteInEditWindow() {
+	@Test(priority=12)
+	public void test012_CopyPasteInEditWindow() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start a chat and copy a message. \n" +
 				"2. Forward some other message. \n" +
@@ -416,8 +413,8 @@ public class ForwardingMessage extends HikeLibrary {
 		forwardScreenObj.cancelTyping();
 	}
 
-	@Test
-	public void test0013_EditForwardedMessageSanityCheck() {
+	@Test(priority=13)
+	public void test013_EditForwardedMessageSanityCheck() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Add and remove text from the pre populated field. \n" +
 				"2. Send button should be activated. \n" +
@@ -454,7 +451,7 @@ public class ForwardingMessage extends HikeLibrary {
 		forwardScreenObj.clickOnForwardMessage();
 	}
 
-	@AfterMethod
+	/*@AfterMethod
 	public void tearDown(ITestResult result) {
 
 		if(result.getStatus() == ITestResult.FAILURE) {
@@ -472,6 +469,6 @@ public class ForwardingMessage extends HikeLibrary {
 			}
 
 		}
-	}
+	}*/
 
 }

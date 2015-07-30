@@ -42,7 +42,7 @@ public class MuteGroup extends HikeLibrary {
 		driver.quit();
 	}
 
-	@Test
+	@Test(priority=1)
 	public void test001_OwnerMutesGC() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to options in home - Select New group. \n" +
@@ -75,7 +75,7 @@ public class MuteGroup extends HikeLibrary {
 
 	}
 
-	@Test
+	@Test(priority=2)
 	public void test002_ParticipantMutesGC() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Create group from server side and add self as participant. \n" +
@@ -103,7 +103,7 @@ public class MuteGroup extends HikeLibrary {
 
 	}
 
-	@Test
+	@Test(priority=3)
 	public void test003_ResetAndCheckIfGroupMuted() throws InterruptedException {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Reset account and create again. \n" +
@@ -158,7 +158,7 @@ public class MuteGroup extends HikeLibrary {
 		//groupThreadObj.unmuteGroup();
 	}
 
-	@Test
+	@Test(priority=4)
 	public void test004_ResetAndCheckIfServerGroupMuted() throws InterruptedException {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Reset account and create again. \n" +
@@ -208,7 +208,7 @@ public class MuteGroup extends HikeLibrary {
 
 	}
 
-	@Test
+	@Test(priority=5)
 	public void test005_DeleteAndCheckIfServerGroupMuted() throws InterruptedException {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Delete account and create again. \n" +

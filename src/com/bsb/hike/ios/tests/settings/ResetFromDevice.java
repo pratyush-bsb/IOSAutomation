@@ -38,7 +38,7 @@ public class ResetFromDevice extends HikeLibrary {
 		driver.quit();
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void test001_ValidateResetTagline() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to options in home - Navigate to settings page. \n" +
@@ -53,7 +53,7 @@ public class ResetFromDevice extends HikeLibrary {
 		
 	}
 
-	@Test
+	@Test(priority=2)
 	public void test002_TapOnResetAccount() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Tap on reset account. \n" +
@@ -66,7 +66,7 @@ public class ResetFromDevice extends HikeLibrary {
 		Assert.assertTrue(isElementPresent(accountScreenObj.getCancel()), "Alert popup did not occur with cancel button");
 	}
 	
-	@Test
+	@Test(priority=3)
 	public void test003_CancelResettingAccount() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Cancel resetting account. \n" +
@@ -78,7 +78,7 @@ public class ResetFromDevice extends HikeLibrary {
 		Assert.assertTrue(isElementPresent(accountScreenObj.getResetAccountButton()));
 	}
 	
-	@Test
+	@Test(priority=4)
 	public void test004_ConfirmResetAccount() throws InterruptedException {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Confirm resetting account. \n" +

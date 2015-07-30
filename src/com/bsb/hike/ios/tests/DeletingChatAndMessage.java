@@ -41,7 +41,7 @@ public class DeletingChatAndMessage extends HikeLibrary {
 		
 	}*/
 	
-	@Test
+	@Test(priority=1)
 	public void test002_ClearChatFromInsideChat() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+ " : 1. Go to a chat. \n" +
@@ -61,7 +61,7 @@ public class DeletingChatAndMessage extends HikeLibrary {
 		Assert.assertTrue(chatScreenObj.getLastMessage().startsWith("Chat with"), "All messages were not cleared.");
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test003_DeletingSingleMessageAndValidate() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+ " : 1. Go to a chat. \n" +
@@ -94,7 +94,7 @@ public class DeletingChatAndMessage extends HikeLibrary {
 		Assert.assertEquals(currentLastMessage, updatedLastMessage, "Last message in the chat thread does not match the one in home screen preview");
 	}
 	
-	@Test
+	@Test(priority=3)
 	public void test004_ValidateStickerAsLastMessage() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+ " : 1. Go to a chat. \n" +

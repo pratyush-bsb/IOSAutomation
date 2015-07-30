@@ -31,7 +31,7 @@ public class AddToContactsFromGCInfo extends HikeLibrary {
 		driver.quit();
 	}
 
-	@Test
+	@Test(priority=1)
 	public void test001_AddUnsavedContactToGC() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start a new group chat. \n" +
@@ -65,7 +65,7 @@ public class AddToContactsFromGCInfo extends HikeLibrary {
 		Assert.assertTrue(lastMessage.startsWith("Added"), "The event for adding new member to group was not fired");
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002_AddToContacts() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to group chat created in first test. \n" +

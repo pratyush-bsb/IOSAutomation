@@ -44,7 +44,7 @@ public class SignUpFlow extends HikeLibrary {
 		driver.quit();
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void test001_uninstallApp() throws MalformedURLException {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Uninstall the app if it's installed. \n" +
@@ -56,7 +56,7 @@ public class SignUpFlow extends HikeLibrary {
 		}
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002_installApp() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Install the app if it isn't installed. \n" +
@@ -71,7 +71,7 @@ public class SignUpFlow extends HikeLibrary {
 		Assert.assertTrue(driver.isAppInstalled(bundleId), "App was not installed even after trying to install it.");
 	}
 	
-	@Test
+	@Test(priority=3)
 	public void test003_hikeLogoPresence() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Launch the app. \n" +
@@ -80,7 +80,7 @@ public class SignUpFlow extends HikeLibrary {
 		Assert.assertTrue(isElementPresent(welcomeScreenObj.getSignUpLogo()), "Hike logo not visible in welcome screen");
 	}
 	
-	@Test
+	@Test(priority=4)
 	public void test004_hikeWelcomePage() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Verify different elements on hike welcome page. \n");
@@ -93,7 +93,7 @@ public class SignUpFlow extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=5)
 	public void test005_termsAndConditions() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Tap on terms and conditions. \n" +
@@ -109,7 +109,7 @@ public class SignUpFlow extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=6)
 	public void test006_signUpOnWifi() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Click on 'get started' button on welcome screen. \n" +
@@ -126,7 +126,7 @@ public class SignUpFlow extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=7)
 	public void test007_countrySelection() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Click on 'country code' button on phone number screen. \n" +
@@ -152,7 +152,7 @@ public class SignUpFlow extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=9)
 	public void test009_enterNumber() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start entering number in phone number screen. \n" +
@@ -165,7 +165,7 @@ public class SignUpFlow extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=10)
 	public void test010_removeEnteredNumber() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Remove the entered number. \n" +
@@ -177,7 +177,7 @@ public class SignUpFlow extends HikeLibrary {
 		Assert.assertFalse(isElementPresent(loginPhoneNumberObj.getClearTextButton()), "'Clear Text' button did not get disabled after removing number in text field");
 	}
 
-	@Test
+	@Test(priority=11)
 	public void test011_invalidNumberValidation() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Enter a number less that 7 digits. \n" +
@@ -196,7 +196,7 @@ public class SignUpFlow extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=12)
 	public void test012_MSISDNFieldValidation() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Enter a correct number. \n" +
@@ -219,7 +219,7 @@ public class SignUpFlow extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=13)
 	public void test013_ConfirmMSISDN() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Enter a correct number. \n" +
@@ -245,7 +245,7 @@ public class SignUpFlow extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=14)
 	public void test014_ReenterMSISDN() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Re-enter a correct number. \n" +
@@ -259,7 +259,7 @@ public class SignUpFlow extends HikeLibrary {
 		Assert.assertTrue(isElementPresent(pinEnteringScreenObj.getPinScreenTitle()), "PIN screen title did not come as 'Verify'");
 	}
 	
-	@Test
+	@Test(priority=15)
 	public void test015_EnterWrongPin() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Enter incorrect pin. \n" +
@@ -288,7 +288,7 @@ public class SignUpFlow extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=16)
 	public void test016_EnterCorrectPIN() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Enter correct pin. \n" +
@@ -313,7 +313,7 @@ public class SignUpFlow extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=17)
 	public void test017_ProfilePhoto() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Click on add photo logo. \n" +
@@ -339,7 +339,7 @@ public class SignUpFlow extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=18)
 	public void test018_ChooseCamera() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Click on add photo logo. \n" +
@@ -368,7 +368,7 @@ public class SignUpFlow extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=19)
 	public void test019_SetCameraImage() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Click on take photo. \n" +
@@ -382,7 +382,7 @@ public class SignUpFlow extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=20)
 	public void test020_SetGalleryImage() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Click on choose existing. \n" +
@@ -393,7 +393,7 @@ public class SignUpFlow extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=21)
 	public void test021_UsernameValidationCases() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Enter different cases of username. \n" +

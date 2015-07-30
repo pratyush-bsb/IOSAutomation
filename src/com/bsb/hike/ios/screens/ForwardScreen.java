@@ -399,8 +399,11 @@ public class ForwardScreen extends HikeLibrary implements ContactSelectionInterf
 	//cancels forwarding of message. 
 	public void cancelForwarding() {
 		
-			clickOnElement(cancelTyping);
-			clickOnElement(cancelTyping);
+		try {
+			WebElement cancelElement = driver.findElement(cancelTyping);
+			new TouchAction(driver).press(cancelElement).perform();
+			new TouchAction(driver).press(cancelElement).perform();
+		} catch(Exception e) {}
 	}
 	
 	public ChatScreenInterface forwardMessageToContact(String user, boolean group) {

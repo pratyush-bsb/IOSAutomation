@@ -41,7 +41,7 @@ public class DeleteAccount extends HikeLibrary {
 		driver.quit();
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void test001_VerifyDeleteTab() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to options in home - Navigate to settings page. \n" +
@@ -56,7 +56,7 @@ public class DeleteAccount extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002_TapOnDeleteAccount() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Tap on delete account. \n" +
@@ -69,7 +69,7 @@ public class DeleteAccount extends HikeLibrary {
 		Assert.assertTrue(isElementPresent(accountScreenObj.getCancel()), "Alert popup did not occur with cancel button");
 	}
 	
-	@Test
+	@Test(priority=3)
 	public void test003_CancelDeletion() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Cancel deleting account. \n" +
@@ -81,7 +81,7 @@ public class DeleteAccount extends HikeLibrary {
 		Assert.assertTrue(isElementPresent(accountScreenObj.getDeleteAccountButton()));
 	}
 	
-	@Test
+	@Test(priority=4)
 	public void test004_ConfirmDeletion() throws InterruptedException {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Confirm deleting account. \n" +
@@ -129,7 +129,7 @@ public class DeleteAccount extends HikeLibrary {
 		
 	}
 
-	@Test
+	@Test(priority=5)
 	public void test005_VerifySettingsPersist() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Verify block list remains. \n" +

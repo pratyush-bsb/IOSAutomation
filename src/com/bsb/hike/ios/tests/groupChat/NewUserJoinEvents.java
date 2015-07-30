@@ -29,7 +29,7 @@ public class NewUserJoinEvents extends HikeLibrary {
 		driver.quit();
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void test001_CreateGroupChatWithNUJ() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to options in home - Select New group. \n" +

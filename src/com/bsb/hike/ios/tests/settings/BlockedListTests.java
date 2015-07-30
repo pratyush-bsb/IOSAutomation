@@ -36,7 +36,7 @@ public class BlockedListTests extends HikeLibrary {
 		driver.quit();
 	}
 
-	@Test
+	@Test(priority=1)
 	public void test001_ValidateBlockedListPageHeader() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to options in home - Navigate to settings page. \n" +
@@ -49,7 +49,7 @@ public class BlockedListTests extends HikeLibrary {
 		Assert.assertEquals(getTextByName(blockScreenObj.getHeader()), blockScreenObj.getHeaderString(), "Header text does not match!");
 	}
 
-	@Test
+	@Test(priority=2)
 	public void test002_TapOnBlockList() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Validate elements of block list page. \n");
@@ -63,7 +63,7 @@ public class BlockedListTests extends HikeLibrary {
 		Reporter.log("Number of blocked contacts : " + blockedContacts);
 	}
 
-	@Test
+	@Test(priority=3)
 	public void test003_AddContactToBlockListCancel() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Tap on add button to add contact to block list. \n" +
@@ -90,7 +90,7 @@ public class BlockedListTests extends HikeLibrary {
 
 	}
 
-	@Test
+	@Test(priority=4)
 	public void test004_ReopenBlockListAndCancel() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Tap on add button to add contact to block list. \n" +
@@ -121,7 +121,7 @@ public class BlockedListTests extends HikeLibrary {
 		Assert.assertFalse(blockScreenObj.checkIfContactBlocked(user), "The contact was blocked even after cancelling blocking");
 	}
 	
-	@Test
+	@Test(priority=5)
 	public void test005_BlockAContact() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Tap on add button to add contact to block list. \n" +
@@ -139,7 +139,7 @@ public class BlockedListTests extends HikeLibrary {
 		blockScreenObj.unblockContact(HIKE_CONTACT_NAME);
 	}
 	
-	@Test
+	@Test(priority=6)
 	public void test006_BlockUnsavedContact() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start chat with unsaved contact. \n" +
@@ -166,7 +166,7 @@ public class BlockedListTests extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=7)
 	public void test007_BlockMultipleContacts() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to add contacts to block screen. \n" +
@@ -187,7 +187,7 @@ public class BlockedListTests extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=8)
 	public void test008_UnblockContact() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to blocked list screen. \n" +

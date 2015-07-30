@@ -32,7 +32,7 @@ public class SendMessageInGC extends HikeLibrary {
 		driver.quit();
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void test001_SendMessageToHikeContact() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Create a group with hike contact, sms contact and unsaved contact. \n" +
@@ -66,7 +66,7 @@ public class SendMessageInGC extends HikeLibrary {
 		Assert.assertEquals(lastMessage, messageToSend, "The message was not sent to user.");
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002_SendMessageToUnsavedContact() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to GC created in above test. \n" +
@@ -90,7 +90,7 @@ public class SendMessageInGC extends HikeLibrary {
 		
 	}
 
-	@Test
+	@Test(priority=3)
 	public void test003_SendMessageToSMSContact() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to GC created in above test. \n" +

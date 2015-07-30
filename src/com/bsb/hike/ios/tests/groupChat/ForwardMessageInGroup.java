@@ -34,7 +34,7 @@ public class ForwardMessageInGroup extends HikeLibrary {
 		driver.quit();
 	}
 
-	@Test
+	@Test(priority=1)
 	public void test001_ForwardingMessageValidate() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start chat with any existing group. \n" +
@@ -55,7 +55,7 @@ public class ForwardMessageInGroup extends HikeLibrary {
 		Assert.assertTrue(isElementPresent(groupThreadObj.getForwardMessage()), "Forward message did not appear after long press on element");
 	}
 
-	@Test
+	@Test(priority=2)
 	public void test002_ForwardScreenSanity() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start chat with any existing group. \n" +
@@ -113,7 +113,7 @@ public class ForwardMessageInGroup extends HikeLibrary {
 
 	}
 
-	@Test
+	@Test(priority=3)
 	public void test003_ForwardAudioAndValidate() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to a chat and make a recording. \n" +
@@ -152,7 +152,7 @@ public class ForwardMessageInGroup extends HikeLibrary {
 
 	}
 
-	@Test
+	@Test(priority=4)
 	public void test004_RecentChatOnTopInForwardScreen() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Record the most recent chat in home screen. \n" +
@@ -178,7 +178,7 @@ public class ForwardMessageInGroup extends HikeLibrary {
 
 	}
 
-	@Test
+	@Test(priority=5)
 	public void test005_ForwardMessageActionBarSanityCheck() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Select any contact to forward message to. \n" +
@@ -253,7 +253,7 @@ public class ForwardMessageInGroup extends HikeLibrary {
 
 	}
 
-	@Test
+	@Test(priority=6)
 	public void test006_ForwardMessageToContact() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Click on forward button. \n" +
@@ -280,7 +280,7 @@ public class ForwardMessageInGroup extends HikeLibrary {
 
 	}
 
-	@Test
+	@Test(priority=7)
 	public void test007_ForwardAndEditMessageToContact() {
 
 
@@ -321,7 +321,7 @@ public class ForwardMessageInGroup extends HikeLibrary {
 
 	}
 
-	@Test
+	@Test(priority=8)
 	public void test008_CreateNewGCToCheckInForwardScreen() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Create new GC. \n" +

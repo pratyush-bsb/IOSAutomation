@@ -193,8 +193,9 @@ public class HikeLibrary extends AppiumLibrary {
 		boolean hideLogo = false;
 		//HomeScreenMenu homeScreenMenuObj = new HomeScreenMenu();
 		By universalBackButtonIdentifier = MobileBy.IosUIAutomation(".navigationBars()[0].buttons()[0]");
-
-		while(!hideLogo) {
+		int counter = 0;
+		
+		while(!hideLogo && counter < 10) {
 			try {
 				if(driver.findElement(conversationHide).isDisplayed()) {
 					hideLogo = true;
@@ -203,6 +204,7 @@ public class HikeLibrary extends AppiumLibrary {
 				}
 			} catch (Exception e) {
 				hideLogo = false;
+				counter++;
 				clickOnElement(universalBackButtonIdentifier);
 			}
 		}

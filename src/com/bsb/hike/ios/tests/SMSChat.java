@@ -32,7 +32,7 @@ public class SMSChat extends HikeLibrary {
 
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void test001_NewChatValidity() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start new chat with sms user \n" +
@@ -61,7 +61,7 @@ public class SMSChat extends HikeLibrary {
 		Assert.assertFalse(isElementEnabled(chatScreenObj.getContactButton()), "Contact button not disabled for SMS user.");
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002_StartTypingAndValidateBehavior() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start typing a message \n" +
@@ -86,7 +86,7 @@ public class SMSChat extends HikeLibrary {
 		Assert.assertTrue(isElementPresent(homeScreenMenuObj.getConversationHide()), "Back button did not take to home.");
 	}
 	
-	@Test
+	@Test(priority=3)
 	public void test003_SendMessageAndCheckCount() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to settings and fetch sms count. \n" +
@@ -133,7 +133,7 @@ public class SMSChat extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=4)
 	public void test004_SendMessageWith0FreeCount() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Set message count as 0 from server side. \n" +

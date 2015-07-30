@@ -37,7 +37,7 @@ public class CreateHikeUser extends HikeLibrary {
 		//driver.launchApp();
 	}
 
-	@Test
+	@Test(priority=1)
 	public void test001() throws Exception{
 		//Thread.sleep(1000*10);
 		setDEFAULT_MSISDN();
@@ -71,7 +71,7 @@ public class CreateHikeUser extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002() throws InterruptedException{
 		String name="HikeIosUserName";
 		homeScreenObj.clickOnOverflow();

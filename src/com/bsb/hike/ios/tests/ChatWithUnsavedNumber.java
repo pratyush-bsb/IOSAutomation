@@ -31,7 +31,7 @@ public class ChatWithUnsavedNumber extends HikeLibrary {
 
 	}
 
-	@Test
+	@Test(priority=1)
 	public void test001_SearchForUnsavedNumber() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+ " : 1. Tap on new chat icon. \n" +
@@ -47,7 +47,7 @@ public class ChatWithUnsavedNumber extends HikeLibrary {
 		newChatScreenObj.cancelTyping();
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002_StartChatWithUnsavedNumber() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+ " : 1. Tap on new chat icon. \n" +

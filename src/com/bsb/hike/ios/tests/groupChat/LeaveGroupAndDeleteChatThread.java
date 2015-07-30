@@ -34,7 +34,7 @@ public class LeaveGroupAndDeleteChatThread extends HikeLibrary {
 		driver.quit();
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void test001_LeaveGroupCancelValidate() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Create a group chat. \n" +
@@ -72,7 +72,7 @@ public class LeaveGroupAndDeleteChatThread extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002_GCParticipantLeaveGroup() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to GC created in above chat. \n" +
@@ -92,7 +92,7 @@ public class LeaveGroupAndDeleteChatThread extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=3)
 	public void test003_GCOwnerLeaveGroup() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Create group from server side. \n" +

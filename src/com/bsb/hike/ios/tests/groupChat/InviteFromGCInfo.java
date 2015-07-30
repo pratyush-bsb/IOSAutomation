@@ -30,7 +30,7 @@ public class InviteFromGCInfo extends HikeLibrary {
 		driver.quit();
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void test001_InviteFromGCInfoAndValidate() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to options in home - Select New group. \n" +
@@ -70,7 +70,7 @@ public class InviteFromGCInfo extends HikeLibrary {
 		Assert.assertTrue(isElementPresent(groupProfileObj.getInviteToHikeButton()), "The invite to hike is not present.");
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002_TapOnInviteButton() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to group created in the previous step. \n" +

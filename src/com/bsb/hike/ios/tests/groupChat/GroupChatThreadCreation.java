@@ -39,7 +39,7 @@ public class GroupChatThreadCreation extends HikeLibrary {
 		driver.quit();
 	}
 
-	@Test
+	@Test(priority=1)
 	public void test001_StartGroupChat() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to options in home - Select New group. \n" +
@@ -61,7 +61,7 @@ public class GroupChatThreadCreation extends HikeLibrary {
 		newGroupObj.cancelAddingPhoto();
 	}
 
-	@Test
+	@Test(priority=2)
 	public void test002_ContactSelectionValidation() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Type a group name and click on next. \n" +
@@ -95,7 +95,7 @@ public class GroupChatThreadCreation extends HikeLibrary {
 		Assert.assertTrue(contactSelectionScreenObj.getTotalCountOfContacts() > 0, "Results should have come for a saved contact.");
 	}
 
-	@Test
+	@Test(priority=3)
 	public void test003_ContactSelection() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Select two contacts from the list. \n" +
@@ -117,7 +117,7 @@ public class GroupChatThreadCreation extends HikeLibrary {
 		contactSelectionScreenObj.clickOnDoneButton(groupName);
 	}
 
-	@Test
+	@Test(priority=4)
 	public void test004_GroupNameEdit() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Find the test group created in above test. \n" +
@@ -151,7 +151,7 @@ public class GroupChatThreadCreation extends HikeLibrary {
 		groupThreadObj = groupProfileObj.goBackToThread();
 	}
 
-	@Test
+	@Test(priority=5)
 	public void test005_InviteToHike() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Find the test group created in above test. \n" +
@@ -178,7 +178,7 @@ public class GroupChatThreadCreation extends HikeLibrary {
 
 	}
 
-	@Test
+	@Test(priority=6)
 	public void test006_CheckFocus() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Find the test group created in above test. \n" +
@@ -196,7 +196,7 @@ public class GroupChatThreadCreation extends HikeLibrary {
 		Assert.assertFalse(isKeyboardVisible(), "Keyboard is visible after locking and unlocking device, when it should not be");
 	}
 
-	@Test
+	@Test(priority=7)
 	public void test007_ComposeMessage() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Find the test group created in above test. \n" +
@@ -215,7 +215,7 @@ public class GroupChatThreadCreation extends HikeLibrary {
 		Assert.assertTrue(lastMessage.trim().contains(testMessage), "The same message was not sent that was typed with emoji.");
 	}
 
-	@Test
+	@Test(priority=8)
 	public void test008_MembersName() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Find the test group created in above test. \n" +
@@ -239,7 +239,7 @@ public class GroupChatThreadCreation extends HikeLibrary {
 		}
 	}
 
-	@Test
+	@Test(priority=9)
 	public void test009_AddNonAddressBookParticipant() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Create group with two non-saved numbers. \n" +
@@ -271,7 +271,7 @@ public class GroupChatThreadCreation extends HikeLibrary {
 		Assert.assertEquals(groupThreadObj.getLastMessage(), messageToSend, "New notification was sent for the already added member");
 	}
 
-	@Test
+	@Test(priority=10)
 	public void test010_AddToContactsFromGCInfo() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Create group with saved and unsaved contacts. \n" +
@@ -322,7 +322,7 @@ public class GroupChatThreadCreation extends HikeLibrary {
 		}
 	}
 
-	@Test
+	@Test(priority=11)
 	public void test11_HikeUserBlocksGroupOwner() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Create group from server side. \n" +

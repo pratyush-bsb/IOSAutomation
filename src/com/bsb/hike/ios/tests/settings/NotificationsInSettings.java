@@ -30,7 +30,7 @@ public class NotificationsInSettings extends HikeLibrary {
 		driver.quit();
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void test001_OpenNotifications() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to options in home - Navigate to settings page. \n" +
@@ -50,7 +50,7 @@ public class NotificationsInSettings extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002_GoBackAndVerify() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go back to settings page. \n" +

@@ -31,7 +31,7 @@ public class Contact extends HikeLibrary {
 		driver.quit();
 	}
 
-	@Test
+	@Test(priority=1)
 	public void test001_ValidateMailDraftElements() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to settings. \n" +

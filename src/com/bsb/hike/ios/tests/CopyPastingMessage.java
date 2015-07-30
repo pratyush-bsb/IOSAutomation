@@ -29,7 +29,7 @@ public class CopyPastingMessage extends HikeLibrary {
 
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void test001_ValidateCopyButtonPresence() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start chat with any existing chat. \n" +
@@ -51,7 +51,7 @@ public class CopyPastingMessage extends HikeLibrary {
 
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002_CopyAMessage() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start chat with any existing chat. \n" +
@@ -71,7 +71,7 @@ public class CopyPastingMessage extends HikeLibrary {
 		Assert.assertFalse(isElementPresent(chatScreenObj.getCopyMessage()), "Copy button still present after tapping on the button.");
 	}
 	
-	@Test
+	@Test(priority=3)
 	public void test003_ValidatePasteButtonPresence() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start chat with any existing chat. \n" +

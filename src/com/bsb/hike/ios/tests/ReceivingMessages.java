@@ -31,7 +31,7 @@ public class ReceivingMessages extends HikeLibrary {
 	}
 
 
-	@Test
+	@Test(priority=1)
 	public void test001_ReceiveMessageWhenNoChatThread() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start new chat with user with no chat roaster. \n" +
@@ -60,7 +60,7 @@ public class ReceivingMessages extends HikeLibrary {
 		Assert.assertTrue(homeScreenMenuObj.checkTimestampAvailability(senderName), "Timestamp is not available for sender on homepage");	
 	}
 
-	@Test
+	@Test(priority=2)
 	public void test002_ReceiveMessageWhenInChatThread() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start new chat with user with existing chat roster. \n" +
@@ -89,7 +89,7 @@ public class ReceivingMessages extends HikeLibrary {
 		Assert.assertTrue(homeScreenMenuObj.checkTimestampAvailability(senderName), "Timestamp is not available for sender on homepage");
 	}
 	
-	@Test
+	@Test(priority=3)
 	public void test003_ReadReceivedMessageAndValidate() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Open chat with unread messages. \n" +

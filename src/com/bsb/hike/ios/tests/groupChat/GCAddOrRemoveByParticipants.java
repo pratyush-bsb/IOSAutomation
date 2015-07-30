@@ -34,7 +34,7 @@ public class GCAddOrRemoveByParticipants extends HikeLibrary {
 		driver.quit();
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void test001_AddParticipantByParticipant() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Create a group chat from server side. \n" +
@@ -66,7 +66,7 @@ public class GCAddOrRemoveByParticipants extends HikeLibrary {
 		Assert.assertTrue(lastMessage.contains("Added"), "User added by participant notification was not sent.");
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002_AddSMSUserByParticipant() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to server chat created in above test. \n" +
@@ -95,7 +95,7 @@ public class GCAddOrRemoveByParticipants extends HikeLibrary {
 		Assert.assertTrue(lastMessage.startsWith("Added"), "User added by participant notification was not sent.");
 	}
 	
-	@Test
+	@Test(priority=3)
 	public void test003_AddDNDUserByParticipant() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to server chat created in above test. \n" +
@@ -124,7 +124,7 @@ public class GCAddOrRemoveByParticipants extends HikeLibrary {
 		Assert.assertTrue(lastMessage.contains("is on DND"), "User added by participant notification was not sent.");
 	}
 	
-	@Test
+	@Test(priority=4)
 	public void test004_ParticipantRemovesParticipant() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to server chat created in above test. \n" +

@@ -35,7 +35,7 @@ public class GroupChatEvents extends HikeLibrary {
 		driver.quit();
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void test001_GroupChatCreationEvent() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to options in home - Select New group. \n" +
@@ -62,7 +62,7 @@ public class GroupChatEvents extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002_GroupChatImageChange() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Open an existing group. \n" +
@@ -82,7 +82,7 @@ public class GroupChatEvents extends HikeLibrary {
 		Assert.assertTrue(lastMessage.contains("changed the group image"), "The event for group image change was not fired");
 	}
 	
-	@Test
+	@Test(priority=3)
 	public void test003_GroupNameChange() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Open an existing group. \n" +
@@ -106,7 +106,7 @@ public class GroupChatEvents extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=4)
 	public void test004_AddNewMember() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Open an existing group. \n" +
@@ -125,7 +125,7 @@ public class GroupChatEvents extends HikeLibrary {
 		Assert.assertTrue(lastMessage.startsWith("Added"), "The event for adding new member to group was not fired");
 	}
 	
-	@Test
+	@Test(priority=5)
 	public void test005_AddDNDUser() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Open an existing group. \n" +
@@ -144,7 +144,7 @@ public class GroupChatEvents extends HikeLibrary {
 		Assert.assertTrue(!lastMessage.startsWith("Added"), "The event for adding new member to group was not fired");
 	}
 	
-	@Test
+	@Test(priority=6)
 	public void test006_ServerGroupChatCreation() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Create a server side chat with self as member. \n" +
@@ -167,7 +167,7 @@ public class GroupChatEvents extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=8)
 	public void test007_ParticipantGroupImageChange() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to group created in previous test. \n" +
@@ -189,7 +189,7 @@ public class GroupChatEvents extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=9)
 	public void test008_ParticipantGroupNameChange() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to group created in previous test. \n" +
@@ -213,7 +213,7 @@ public class GroupChatEvents extends HikeLibrary {
 		groupProfileObj.editGroupName(groupName);
 	}
 	
-	@Test
+	@Test(priority=9)
 	public void test009_ParticipantAddsMember() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to group created in previous test. \n" +
@@ -233,7 +233,7 @@ public class GroupChatEvents extends HikeLibrary {
 		Assert.assertTrue(lastMessage.startsWith("Added"), "The event for adding new member to group was not fired");
 	}
 	
-	@Test
+	@Test(priority=10)
 	public void test010_ParticipantAddsDNDUser() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to group created in previous test. \n" +

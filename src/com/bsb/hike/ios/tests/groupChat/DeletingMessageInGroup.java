@@ -41,7 +41,7 @@ public class DeletingMessageInGroup extends HikeLibrary {
 		
 	}*/
 	
-	@Test
+	@Test(priority=1)
 	public void test002_ClearChatFromInsideChat() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+ " : 1. Go to a group. \n" +
@@ -75,7 +75,7 @@ public class DeletingMessageInGroup extends HikeLibrary {
 		Assert.assertTrue(groupThreadObj.getLastMessage().startsWith("Group chat with"), "All messages were not cleared.");
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test003_ValidateOptions() {
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Start chat with any existing group. \n" +
 				"2. Long press on any message. \n" +
@@ -95,7 +95,7 @@ public class DeletingMessageInGroup extends HikeLibrary {
 		Assert.assertTrue(isElementPresent(groupThreadObj.getForwardMessage()), "Forward message did not appear after long press on element");
 	}
 	
-	@Test
+	@Test(priority=3)
 	public void test004_DeletingSingleMessageAndValidate() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+ " : 1. Go to a group. \n" +
@@ -129,7 +129,7 @@ public class DeletingMessageInGroup extends HikeLibrary {
 		Assert.assertEquals(updatedLastMessage, "You: " + currentLastMessage, "Last message in the chat thread does not match the one in home screen preview");
 	}
 	
-	@Test
+	@Test(priority=4)
 	public void test005_ValidateStickerAsLastMessage() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+ " : 1. Go to a chat. \n" +

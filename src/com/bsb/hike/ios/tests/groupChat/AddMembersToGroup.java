@@ -30,7 +30,7 @@ public class AddMembersToGroup extends HikeLibrary {
 		driver.quit();
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void test001_OwnerAddsUser() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to options in home - Select New group. \n" +
@@ -62,7 +62,7 @@ public class AddMembersToGroup extends HikeLibrary {
 		
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void test002_OwnerAddsSMSUser() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to existing group. \n" +

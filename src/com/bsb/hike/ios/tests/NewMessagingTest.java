@@ -31,7 +31,7 @@ public class NewMessagingTest extends HikeLibrary {
 
 	}
 
-	@Test
+	@Test(priority=1)
 	public void test001_AssertingHomeScreenButtons() {
 		ignoreLoveUsingHikePopup();
 		Reporter.log(iOSAutomation_DESCRIPTION+" : Launch app\n"+
@@ -52,7 +52,7 @@ public class NewMessagingTest extends HikeLibrary {
 		goToHome();
 	}
 
-	@Test
+	@Test(priority=2)
 	public void test002_AssertingStartAChat() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : Tap on the new chat icon\n"+
@@ -76,7 +76,7 @@ public class NewMessagingTest extends HikeLibrary {
 		goToHome();
 	}
 
-	@Test//(dependsOnMethods = {"test002_AssertingStartAChat"})
+	@Test(priority=3)
 	public void test003_AssertingANewChat() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Tap on the compose new message icon \n" +
@@ -121,7 +121,7 @@ public class NewMessagingTest extends HikeLibrary {
 		
 	}
 
-	@Test
+	@Test(priority=4)
 	public void test004_AssertNewChatSearchCases() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Search for a MSISDN or contact that does not exist. \n" +
@@ -153,8 +153,8 @@ public class NewMessagingTest extends HikeLibrary {
 		
 	}
 	
-	@Test
-	public void test006_FavoriteNotFavoriteUserValidity() {
+	@Test(priority=5)
+	public void test005_FavoriteNotFavoriteUserValidity() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+ " : 1. If no user is marked as favorites. \n" +
 				"2. If user is marked as favorites. \n" +
@@ -210,8 +210,8 @@ public class NewMessagingTest extends HikeLibrary {
 		
 	}
 	
-	@Test
-	public void test007_validateUserProfilePage() {
+	@Test(priority=6)
+	public void test006_validateUserProfilePage() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+ " : 1. Tap on user head should take to profile page. \n" +
 				"2. Assert all elements on the page. \n" +
@@ -239,8 +239,8 @@ public class NewMessagingTest extends HikeLibrary {
 		Assert.assertEquals(getTextByName(chatThreadObj.getChatThreadHeader()), user, "Send a message button did not take chat to same user");
 	}
 	
-	@Test
-	public void test008_contactWithExistingChat() {
+	@Test(priority=7)
+	public void test007_contactWithExistingChat() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+ " : 1. Tap on new chat icon. \n" +
 				"2. Select a contact with whom chat exists. \n" +

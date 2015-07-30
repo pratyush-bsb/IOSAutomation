@@ -37,7 +37,7 @@ public class BitSSLTest extends HikeLibrary {
 		driver.quit();
 	}
 
-	@Test
+	@Test(priority=1)
 	public void test001_ValidateSSLHeaderAndTagline() {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to options in home - Navigate to settings page. \n" +
@@ -52,7 +52,7 @@ public class BitSSLTest extends HikeLibrary {
 		Assert.assertEquals(getTextByValue(accountScreenObj.getBitSSLSwitch()), "0", "128 bit SSl is enable by default for Indian user.");
 	}
 
-	@Test
+	@Test(priority=2)
 	public void test002_ChangeSettingsAndReset() throws InterruptedException {
 
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Enable 128-bit SSL. \n" +

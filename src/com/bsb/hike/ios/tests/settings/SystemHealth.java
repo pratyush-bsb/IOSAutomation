@@ -31,7 +31,7 @@ public class SystemHealth extends HikeLibrary {
 		driver.quit();
 	}
 
-	@Test
+	@Test(priority=1)
 	public void test001_CheckSystemHealth() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Go to settings. \n" +
