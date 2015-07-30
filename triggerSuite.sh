@@ -63,10 +63,10 @@ done < /Users/qa-lab/.jenkins/jobs/iOS_AutomationSuite/workspace/Hike-Info.plist
 #run setup here. changes in every machine
 
 #for one-to-one and settings
-./b build
-./b ui.ios
+./runSignUpCases build
+./runSignUpCases ui.ios
 
 #move reports folder to apache folder
-rm -rf /Library/WebServer/Documents/Reports/$build_number/$version_number/One-to-one/*
-mkdir -p /Library/WebServer/Documents/Reports/$build_number/$version_number/One-to-one
-mv reports/html/* /Library/WebServer/Documents/Reports/$build_number/$version_number/One-to-one/
+rm -rf /Library/WebServer/Documents/Reports/$build_number/$version_number/Sign-Up-Flow/*
+mkdir -p /Library/WebServer/Documents/Reports/$build_number/$version_number/Sign-Up-Flow
+mv reports/html/* /Library/WebServer/Documents/Reports/$build_number/$version_number/Sign-Up-Flow/

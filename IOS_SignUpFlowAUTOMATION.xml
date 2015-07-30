@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="IOS Automation" parallel="tests" thread-count="1">
+
+	<listeners>
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+	</listeners>
+	
+
+	<test name="Sign up flow" preserve-order="true">
+		<classes>
+			<class name="com.bsb.hike.ios.tests.signUpFlow.SignUpFlow" />
+		</classes>
+	</test>
+	
+</suite>

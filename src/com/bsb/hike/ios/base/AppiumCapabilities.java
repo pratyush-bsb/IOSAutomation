@@ -18,14 +18,14 @@ public class AppiumCapabilities {
 	public void setUp() throws Exception {
 		boolean sessionCreated = false;
 		DesiredCapabilities capabilities = new DesiredCapabilities();
-		capabilities.setCapability("deviceName","Pankaj");
+		capabilities.setCapability("deviceName","iPhone");
 		capabilities.setCapability("platformName", "iOS" );
 		capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
-		capabilities.setCapability(CapabilityType.VERSION, "8.1.3");
+		capabilities.setCapability(CapabilityType.VERSION, "7.1.2");
 		capabilities.setCapability(CapabilityType.PLATFORM, "MAC");
 		capabilities.setCapability("app", appPath);
 		capabilities.setCapability("bundleId", bundleId);
-		capabilities.setCapability("udid", "63b94c683a786b34e090c1a72fe54b8cf82a34de");
+		capabilities.setCapability("udid", "96819cc61af06b88f06eadb1d62944c473a54bb3");
 		//capabilities.setCapability("showIOSLog", true);
 		while(!sessionCreated) {
 			try {
