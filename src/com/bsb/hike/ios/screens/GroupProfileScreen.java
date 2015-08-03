@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Reporter;
 
 import com.bsb.hike.ios.library.HikeLibrary;
 import com.bsb.hike.ios.screens.interfaces.ProfileScreenInterface;
@@ -41,9 +42,9 @@ public class GroupProfileScreen extends HikeLibrary implements ProfileScreenInte
 	String profileScreenHeaderString = "Group Info";
 	protected By profileScreenHeader = MobileBy.name("Group Info");
 	protected By profilePic = MobileBy.name("groupAvatarPlaceholderMedium0");
-	protected By addMemberButton = MobileBy.name("Add Member");
+	protected By addMemberButton = MobileBy.name("Add Members");
 	protected By leaveGroupButton = MobileBy.name("Leave Group");
-	protected By editButton = MobileBy.name("Edit");
+	protected By editButton = MobileBy.name("ic edit banner group info");
 	protected By doneButton = MobileBy.name("Done");
 	protected By allUsers = MobileBy.IosUIAutomation(".tableViews()[0].cells()");
 	protected By eachUserSuffix = MobileBy.IosUIAutomation(".staticTexts()[0]");
@@ -204,9 +205,14 @@ public class GroupProfileScreen extends HikeLibrary implements ProfileScreenInte
 		return new GroupThreadScreen(groupName);
 	}
 
-	public void clickOnCameraIcon() {
-		WebElement cameraButton = driver.findElement(cameraIcon);
-		new TouchAction(driver).press(cameraButton).perform();
+	public PhotosScreen clickOnCameraIcon() {
+		try {
+			WebElement cameraButton = driver.findElement(cameraIcon);
+			new TouchAction(driver).press(cameraButton).perform();
+		} catch(Exception e) {
+			Reporter.log("Not able to click on change image in group info screen");
+		}
+		return new PhotosScreen();
 	}
 
 	public CameraScreen takePhoto() {
@@ -377,11 +383,12 @@ public class GroupProfileScreen extends HikeLibrary implements ProfileScreenInte
 
 		for(WebElement eachUser : allUsersFound) {
 			try {
-				WebElement eachUserNameElement = eachUser.findElement(eachUserSuffix);
-				String userName = eachUserNameElement.getAttribute("name");
+				//WebElement eachUserNameElement = eachUser.findElement(eachUserSuffix);
+				String userName = eachUser.getAttribute("name");
 				if(user.equalsIgnoreCase(userName)) {
 					//user found. Tap on the element and return
-					driver.tap(1, eachUser, 1);
+					driver.scrollTo(userName);
+					eachUser.click();
 					userProfileScreen = new UserProfileScreen(user);
 				}
 			} catch(Exception e) {}

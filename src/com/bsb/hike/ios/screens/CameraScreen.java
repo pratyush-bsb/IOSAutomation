@@ -44,6 +44,7 @@ public class CameraScreen extends HikeLibrary {
 	protected By usePhotoButton = MobileBy.name("Use Photo");
 	protected By cancelButton = MobileBy.name("Cancel");
 	protected By retakeButton = MobileBy.name("Retake");
+	protected By updateButton = MobileBy.name("Update");
 
 	//public getters
 	public By getCapturePhotoButton() {
@@ -85,6 +86,7 @@ public class CameraScreen extends HikeLibrary {
 			} catch(Exception e) {}
 		}
 		clickOnElement(usePhotoButton);
+		clickOnElement(updateButton);
 		return new GroupProfileScreen(groupName);
 	}
 

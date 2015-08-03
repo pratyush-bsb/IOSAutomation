@@ -26,6 +26,7 @@ public interface ContactSelectionInterface {
 	String firstContact = ".tableViews()[0].cells()[0]";
 	String contactNameSuffix = ".staticTexts()[0]";
 	String contactNumberSuffix = ".staticTexts()[1]";
+	String allChildOfTableView = ".tableViews()[0].elements()";
 	
 	By forwardButton = MobileBy.name("Forward");
 	By editAndForwardButton = MobileBy.name("Edit and Forward");

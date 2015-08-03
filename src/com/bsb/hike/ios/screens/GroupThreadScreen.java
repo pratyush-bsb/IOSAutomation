@@ -213,6 +213,9 @@ public class GroupThreadScreen extends HikeLibrary implements ChatScreenInterfac
 			List<WebElement> allChatMessagesList = driver.findElementsByIosUIAutomation(allChatMessages);
 			MobileElement lastMessage = (MobileElement) allChatMessagesList.get(allChatMessagesList.size() - 1);
 			new TouchAction(driver).longPress(lastMessage).perform();
+			if(!isElementPresent(deleteMessage)) {
+				new TouchAction(driver).longPress(lastMessage).perform();
+			}
 
 		} catch (Exception e) {
 

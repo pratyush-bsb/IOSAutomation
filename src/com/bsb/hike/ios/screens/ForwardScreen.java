@@ -195,7 +195,8 @@ public class ForwardScreen extends HikeLibrary implements ContactSelectionInterf
 			List<WebElement> allTabsElements = driver.findElements(allTabs);
 			if(allTabsElements.size() > 1) {
 				//groups tab is there. get recent tabs count
-				countOfRecents = Integer.parseInt(allTabsElements.get(1).getAttribute("name"));
+				WebElement countField = allTabsElements.get(1).findElement(MobileBy.IosUIAutomation(contactNumberSuffix));
+				countOfRecents = Integer.parseInt(countField.getAttribute("name"));
 			}
 		} catch(Exception e) {}
 		return countOfRecents;
@@ -246,6 +247,7 @@ public class ForwardScreen extends HikeLibrary implements ContactSelectionInterf
 			//clickOnElement(contactsTab);
 			//if group chats available
 			boolean groupChats = isElementPresent(groupsTab);
+			List<WebElement> allTabs = driver.findElements(MobileBy.IosUIAutomation(allChildOfTableView));
 			List<WebElement> allContacts = driver.findElements(MobileBy.IosUIAutomation(allContactsPrefix));
 			int contactsSize = allContacts.size();
 			int countOfRecentsListed = 0;
@@ -255,20 +257,26 @@ public class ForwardScreen extends HikeLibrary implements ContactSelectionInterf
 				//list all groups and their numbers
 				boolean groupContinued = true;
 				int counter = 0;
-				while (groupContinued && counter < contactsSize) {
+				int countOfGroupsInList = 0;
+				while (groupContinued && counter < allTabs.size()) {
 					try {
-						String members = allContacts.get(counter).findElement(MobileBy.IosUIAutomation(contactNumberSuffix)).getAttribute("name");
-						if (members.contains("people")) {
-							//this is a group. Print group name and members
-							Reporter.log("Group name : " + allContacts.get(counter).findElement(MobileBy.IosUIAutomation(contactNameSuffix)).getAttribute("name") + " Members : " + members);
-						} else {
+						String validGroup = allTabs.get(counter).getAttribute("name");
+						if (validGroup.contains("GROUPS")) {
+							//this is the start of the group
+							groupContinued = true;
+							counter++;
+							continue;
+						} else if(!validGroup.equalsIgnoreCase("RECENTS")) {
+							groupContinued = true;
+							counter++;
+							countOfGroupsInList++;
+						} else if (validGroup.equalsIgnoreCase("RECENTS")) {
 							groupContinued = false;
 						}
-						counter++;
 					} catch (Exception e) { groupContinued = false; }
 				}
-				countOfRecentsListed = contactsSize - counter;
-				Assert.assertTrue((countOfGroups == counter), "The count mentioned in 'GROUPS' header is not the same as number of groups listed");
+				countOfRecentsListed = contactsSize - countOfGroupsInList;
+				Assert.assertTrue((countOfGroups == countOfGroupsInList), "The count mentioned in 'GROUPS' header is not the same as number of groups listed");
 			}
 			
 			int countOfRecentsInTab = getCountOfRecentChats();

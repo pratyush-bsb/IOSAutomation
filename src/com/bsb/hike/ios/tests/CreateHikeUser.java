@@ -39,7 +39,7 @@ public class CreateHikeUser extends HikeLibrary {
 
 	@Test(priority=1)
 	public void test001() throws Exception{
-		//Thread.sleep(1000*10);
+		
 		setDEFAULT_MSISDN();
 		setPin();
 		WelcomeScreen welcomeScreenObj = new WelcomeScreen();

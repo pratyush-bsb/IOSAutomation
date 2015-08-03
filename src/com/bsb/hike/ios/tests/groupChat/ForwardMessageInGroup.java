@@ -76,19 +76,20 @@ public class ForwardMessageInGroup extends HikeLibrary {
 
 		//search for any 1-1 contact
 		forwardScreenObj.clickOnSearchTab();
-		enterText(forwardScreenObj.getSearchOrEnterNumber(), HIKE_CONTACT_NAME_1);
+		enterTextWithClear(forwardScreenObj.getSearchOrEnterNumber(), HIKE_CONTACT_NAME_1);
 
-		Assert.assertFalse(isElementPresent(forwardScreenObj.getGroupsTab()), "Groups tab appeared when only recents tab should have come");
+		WebElement currentScreenElement = forwardScreenObj.getcurrentScreenElement();
+		Assert.assertFalse(isElementPresentUnderParentElement(forwardScreenObj.getGroupsTab(), currentScreenElement), "Groups tab appeared when only recents tab should have come");
 		Assert.assertTrue(isElementPresent(forwardScreenObj.getRecentsTab()), "Recents tab did not appear when recents tab should have come");
 
 		forwardScreenObj.cancelTyping();
 
 		//search for any group name
 		forwardScreenObj.clickOnSearchTab();
-		enterText(forwardScreenObj.getSearchOrEnterNumber(), groupName);
+		enterTextWithClear(forwardScreenObj.getSearchOrEnterNumber(), groupName);
 
 		Assert.assertTrue(isElementPresent(forwardScreenObj.getGroupsTab()), "Groups tab did not appear when groups tab should have come");
-		Assert.assertFalse(isElementPresent(forwardScreenObj.getRecentsTab()), "Recents tab appeared when recents tab should not have come");
+		Assert.assertFalse(isElementPresentUnderParentElement(forwardScreenObj.getRecentsTab(), currentScreenElement), "Recents tab appeared when recents tab should not have come");
 
 		forwardScreenObj.cancelTyping();
 
@@ -98,18 +99,21 @@ public class ForwardMessageInGroup extends HikeLibrary {
 		Assert.assertTrue(isElementPresent(forwardScreenObj.getSmsContactsTab()), "SMS contacts tab did not come under contacts category");
 
 		forwardScreenObj.clickOnSearchTab();
-		enterText(forwardScreenObj.getSearchOrEnterNumber(), HIKE_CONTACT_NAME_1);
+		enterTextWithClear(forwardScreenObj.getSearchOrEnterNumber(), HIKE_CONTACT_NAME_1);
 
-		Assert.assertFalse(isElementPresent(forwardScreenObj.getSmsContactsTab()), "SMS tab appeared when only people on hike tab should have come");
+		Assert.assertFalse(isElementPresentUnderParentElement(forwardScreenObj.getSmsContactsTab(), currentScreenElement), "SMS tab appeared when only people on hike tab should have come");
 		Assert.assertTrue(isElementPresent(forwardScreenObj.getPeopleOnHikeTab()), "People on hike tab did not appear when it should have come");
 
 		forwardScreenObj.cancelTyping();
 
 		forwardScreenObj.clickOnSearchTab();
-		enterText(forwardScreenObj.getSearchOrEnterNumber(), HIKE_SMS_CONTACT_NAME_1);
+		enterTextWithClear(forwardScreenObj.getSearchOrEnterNumber(), HIKE_SMS_CONTACT_NAME_1);
 
-		Assert.assertFalse(isElementPresent(forwardScreenObj.getPeopleOnHikeTab()), "People on hike tab appeared when only SMS contacts tab should have come");
+		Assert.assertFalse(isElementPresentUnderParentElement(forwardScreenObj.getPeopleOnHikeTab(), currentScreenElement), "People on hike tab appeared when only SMS contacts tab should have come");
 		Assert.assertTrue(isElementPresent(forwardScreenObj.getSmsContactsTab()), "SMS contacts tab did not appear when only it should have come");
+		
+		forwardScreenObj.cancelTyping();
+		forwardScreenObj.cancelForwarding();
 
 	}
 
@@ -132,7 +136,7 @@ public class ForwardMessageInGroup extends HikeLibrary {
 		ForwardScreen forwardScreenObj = chatScreenObj.clickOnForwardButton();
 
 		clickOnElement(forwardScreenObj.getSearchOrEnterNumber());
-		enterText(forwardScreenObj.getSearchOrEnterNumber(), groupName);
+		enterTextWithClear(forwardScreenObj.getSearchOrEnterNumber(), groupName);
 		try {
 			WebElement contactFound = driver.findElementByIosUIAutomation(forwardScreenObj.getAllContactsPrefix());
 			contactFound.click();
@@ -190,11 +194,13 @@ public class ForwardMessageInGroup extends HikeLibrary {
 		goToHome();
 
 		//validate headers with chat
-		ChatThreadScreen chatScreenObj = (ChatThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupName, true);
-		chatScreenObj.longPressOnLastMessage();
-		ForwardScreen forwardScreenObj = chatScreenObj.clickOnForwardButton();
+		GroupThreadScreen groupChatScreenObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupName, true);
+		groupChatScreenObj.sendMessage("text to forward");
+		groupChatScreenObj.longPressOnLastMessage();
+		ForwardScreen forwardScreenObj = groupChatScreenObj.clickOnForwardButton();
+		clickOnElement(forwardScreenObj.getContactsTab());
 		clickOnElement(forwardScreenObj.getSearchOrEnterNumber());
-		enterText(forwardScreenObj.getSearchOrEnterNumber(), HIKE_CONTACT_NAME);
+		enterTextWithClear(forwardScreenObj.getSearchOrEnterNumber(), HIKE_CONTACT_NAME);
 		try {
 			WebElement contactFound = driver.findElementByIosUIAutomation(forwardScreenObj.getAllContactsPrefix());
 			contactFound.click();
@@ -208,11 +214,13 @@ public class ForwardMessageInGroup extends HikeLibrary {
 		Assert.assertTrue(textInActionBar.contains(HIKE_CONTACT_NAME), "The header does not contain the selected contact name");
 
 		forwardScreenObj.cancelForwarding();
+		forwardScreenObj.cancelTyping();
 
 		//validate headers with GC
 
-		chatScreenObj.longPressOnLastMessage();
-		forwardScreenObj = chatScreenObj.clickOnForwardButton();
+		groupChatScreenObj.longPressOnLastMessage();
+		forwardScreenObj = groupChatScreenObj.clickOnForwardButton();
+		clickOnElement(forwardScreenObj.getChatsTab());
 		clickOnElement(forwardScreenObj.getSearchOrEnterNumber());
 		enterText(forwardScreenObj.getSearchOrEnterNumber(), groupName);
 		try {
@@ -228,11 +236,12 @@ public class ForwardMessageInGroup extends HikeLibrary {
 		Assert.assertTrue(textInActionBar.contains(groupName), "The header does not contain the selected contact name");
 
 		forwardScreenObj.cancelForwarding();
+		forwardScreenObj.cancelTyping();
 
 		//try validating from chat to GC
 
 		goToHome();
-		chatScreenObj = (ChatThreadScreen) homeScreenMenuObj.goToSpecificUserThread(HIKE_CONTACT_NAME, false);
+		ChatThreadScreen chatScreenObj = (ChatThreadScreen) homeScreenMenuObj.goToSpecificUserThread(HIKE_CONTACT_NAME, false);
 		chatScreenObj.longPressOnLastMessage();
 		forwardScreenObj = chatScreenObj.clickOnForwardButton();
 		clickOnElement(forwardScreenObj.getSearchOrEnterNumber());
@@ -250,6 +259,7 @@ public class ForwardMessageInGroup extends HikeLibrary {
 		Assert.assertTrue(textInActionBar.contains(groupName), "The header does not contain the selected contact name");
 
 		forwardScreenObj.cancelForwarding();
+		forwardScreenObj.cancelTyping();
 
 	}
 
@@ -260,7 +270,7 @@ public class ForwardMessageInGroup extends HikeLibrary {
 				"2. Select a contact to forward message to. \n" +
 				"3. Ensure that message is pre populated in the text field. \n");
 
-		String textToForward = "This is a random string to";
+		String textToForward = "This is a random string to forward";
 		String groupName = "IOS Automation group";
 
 		goToHome();

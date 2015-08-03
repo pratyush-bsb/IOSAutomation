@@ -99,7 +99,7 @@ public class SendMessageInGC extends HikeLibrary {
 		
 		String groupName = "IOS automation group";
 		String messageToSend = "Message sent through group chat user info.";
-		String user = "1234567890";
+		String user = "+911234567890";
 		
 		goToHome();
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupName, true);

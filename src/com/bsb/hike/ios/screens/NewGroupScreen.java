@@ -36,8 +36,8 @@ public class NewGroupScreen extends HikeLibrary {
 	protected By screenHeader = MobileBy.name("New Group");
 	protected By nextButton = MobileBy.name("Next");
 	protected By addPhoto = MobileBy.name("add photo");
-	protected By newGroupInfo = MobileBy.name("Chat with up to 500 friends");
-	protected String newGroupInfoString = "Chat with up to 500 friends";
+	protected By newGroupInfo = MobileBy.name("Chat with up to 1000 friends");
+	protected String newGroupInfoString = "Chat with up to 1000 friends";
 	protected By typeGroupName = MobileBy.IosUIAutomation(".textFields()[0]"); //get text by value
 	protected String defaultGroupNameText = "Name the Group";
 	

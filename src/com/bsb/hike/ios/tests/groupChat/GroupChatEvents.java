@@ -17,6 +17,7 @@ import com.bsb.hike.ios.screens.GroupProfileScreen;
 import com.bsb.hike.ios.screens.GroupThreadScreen;
 import com.bsb.hike.ios.screens.HomeScreenMenu;
 import com.bsb.hike.ios.screens.NewGroupScreen;
+import com.bsb.hike.ios.screens.PhotosScreen;
 import com.support.bsb.hike.qa.apisupport.GroupChatMessageSupport;
 
 public class GroupChatEvents extends HikeLibrary {
@@ -73,8 +74,8 @@ public class GroupChatEvents extends HikeLibrary {
 		goToHome();
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupName, true);
 		GroupProfileScreen groupProfileObj = groupThreadObj.clickOnGroupName();
-		groupProfileObj.clickOnCameraIcon();
-		CameraScreen cameraScreenObj = groupProfileObj.takePhoto();
+		PhotosScreen photosScreenObj = groupProfileObj.clickOnCameraIcon();
+		CameraScreen cameraScreenObj = photosScreenObj.clickOnCameraIconInPhotosScreen();
 		groupProfileObj = cameraScreenObj.clickPhoto(groupName);
 		groupThreadObj = groupProfileObj.goBackToThread();
 		String lastMessage = groupThreadObj.getLastMessage();
@@ -179,8 +180,8 @@ public class GroupChatEvents extends HikeLibrary {
 		goToHome();
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupName, true);
 		GroupProfileScreen groupProfileObj = groupThreadObj.clickOnGroupName();
-		groupProfileObj.clickOnCameraIcon();
-		CameraScreen cameraScreenObj = groupProfileObj.takePhoto();
+		PhotosScreen photosScreenObj = groupProfileObj.clickOnCameraIcon();
+		CameraScreen cameraScreenObj = photosScreenObj.clickOnCameraIconInPhotosScreen();
 		groupProfileObj = cameraScreenObj.clickPhoto(groupName);
 		groupThreadObj = groupProfileObj.goBackToThread();
 		String lastMessage = groupThreadObj.getLastMessage();

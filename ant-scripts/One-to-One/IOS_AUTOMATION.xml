@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="IOS Automation" parallel="tests" thread-count="1">
+
+	<listeners>
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+	</listeners>
+	<!-- <listeners>
+		<listener class-name="Screenshot" /> 
+	</listeners>
+	<test verbose="6" name="Summary and Submit Page">
+		<classes>
+			<class name="com.bsb.appium.Library.ScreenshotsListener" />
+		</classes>
+	</test> -->
+	
+
+	<test name="One-to-One Create Hike User" preserve-order="true">
+		<classes>
+			<class name="com.bsb.hike.ios.tests.CreateHikeUser" />
+		</classes>
+	</test>
+	
+	<test name="One-to-One New Messaging Test" preserve-order="true">
+		<classes>
+			<class name="com.bsb.hike.ios.tests.NewMessagingTest" />
+		</classes>
+	</test>
+	
+	<test name="One-to-One Forward message Test" preserve-order="true">
+		<classes>
+			<class name="com.bsb.hike.ios.tests.ForwardingMessage" />
+		</classes>
+	</test>
+	
+	<test name="One-to-One Copy Paste message Test" preserve-order="true">
+		<classes>
+			<class name="com.bsb.hike.ios.tests.CopyPastingMessage" />
+		</classes>
+	</test>
+	
+	<test name="One-to-One Chat with unsaved number Test" preserve-order="true">
+		<classes>
+			<class name="com.bsb.hike.ios.tests.ChatWithUnsavedNumber" />
+		</classes>
+	</test>
+	
+	<test name="One-to-One Delete chat and messages Test" preserve-order="true">
+		<classes>
+			<class name="com.bsb.hike.ios.tests.DeletingChatAndMessage" />
+		</classes>
+	</test>
+	
+	<test name="One-to-One Receiving messages Test" preserve-order="true">
+		<classes>
+			<class name="com.bsb.hike.ios.tests.ReceivingMessages" />
+		</classes>
+	</test>
+	
+	<test name="One-to-One SMS chat Test" preserve-order="true">
+		<classes>
+			<class name="com.bsb.hike.ios.tests.SMSChat" />
+		</classes>
+	</test>
+	
+</suite>

@@ -218,6 +218,7 @@ public class ChatThreadScreen extends AppiumLibrary implements ChatScreenInterfa
 	public RecordAudio clickOnAudioButton() {
 		clickOnElement(attachmentButton);
 		clickOnElement(audioButton);
+		//clickOnElement()
 		return new RecordAudio();
 	}
 
@@ -311,6 +312,7 @@ public class ChatThreadScreen extends AppiumLibrary implements ChatScreenInterfa
 		clickOnElement(chatThreadOverflowButton);
 		clickOnElement(moreButton);
 		Assert.assertTrue(isElementPresent(inviteToHike), "Invite to Hike button not present for sms user.");
+		clickOnElement(cancelButton);
 	}
 
 	public int countOfMessagesTyped() {
@@ -402,6 +404,7 @@ public class ChatThreadScreen extends AppiumLibrary implements ChatScreenInterfa
 		if(isElementPresent(moreButton)) {
 			clickOnMoreOption();
 		}
+		clickOnBlockButton();
 		clickOnBlockButton();
 	}
 
