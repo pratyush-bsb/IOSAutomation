@@ -2,6 +2,7 @@
 
 build_type="$1"
 tag_number="$2"
+suite_to_trigger = "$3"
 
 cd /Users/qa-lab/.jenkins/jobs/iOS_AutomationSuite/workspace
 rm -rf ./build
@@ -62,11 +63,24 @@ done < /Users/qa-lab/.jenkins/jobs/iOS_AutomationSuite/workspace/Hike-Info.plist
 
 #run setup here. changes in every machine
 
-#for one-to-one and settings
-./runSignUpCases build
-./runSignUpCases ui.ios
-
-#move reports folder to apache folder
-rm -rf /Library/WebServer/Documents/Reports/$build_number/$version_number/Sign-Up-Flow/*
-mkdir -p /Library/WebServer/Documents/Reports/$build_number/$version_number/Sign-Up-Flow
-mv reports/html/* /Library/WebServer/Documents/Reports/$build_number/$version_number/Sign-Up-Flow/
+if [[ $suite_to_trigger == "oneToOne" ]]; then
+	./runTestSuite ios.onetoone
+	rm -rf /Library/WebServer/Documents/Reports/$build_number/$version_number/One-to-One/*
+	mkdir -p /Library/WebServer/Documents/Reports/$build_number/$version_number/One-to-One
+	mv reports/html/* /Library/WebServer/Documents/Reports/$build_number/$version_number/One-to-One
+elif [[ $suite_to_trigger == "group" ]]; then
+	./runTestSuite ios.group
+	rm -rf /Library/WebServer/Documents/Reports/$build_number/$version_number/Group/*
+	mkdir -p /Library/WebServer/Documents/Reports/$build_number/$version_number/Group
+	mv reports/html/* /Library/WebServer/Documents/Reports/$build_number/$version_number/Group
+elif  [[ $suite_to_trigger == "settings" ]]; then
+	./runTestSuite ios.settings
+	rm -rf /Library/WebServer/Documents/Reports/$build_number/$version_number/Settings/*
+	mkdir -p /Library/WebServer/Documents/Reports/$build_number/$version_number/Settings
+	mv reports/html/* /Library/WebServer/Documents/Reports/$build_number/$version_number/Settings
+elif  [[ $suite_to_trigger == "signupflow" ]]; then
+	./runTestSuite ios.signupflow
+	rm -rf /Library/WebServer/Documents/Reports/$build_number/$version_number/SignUpFlow/*
+	mkdir -p /Library/WebServer/Documents/Reports/$build_number/$version_number/SignUpFlow
+	mv reports/html/* /Library/WebServer/Documents/Reports/$build_number/$version_number/SignUpFlow
+fi

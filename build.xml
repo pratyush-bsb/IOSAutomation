@@ -7,9 +7,9 @@
 	</taskdef>
 
 	<target name="init" description="All the targets need to depend on this target for properties and classpath initilization.">
+		<echo message="${project.dir}" />
 		<var name="app.name" value="iostests" />
 		<dirname property="project.dir" file="./IOSAutomation" />
-		<echo message="${project.dir}" />
 		<var name="build.dir" value="${project.dir}/build" />
 		<!--<var name="support.dir" value="${project.dir}/support" /> -->
 		<var name="reports.dir" value="${project.dir}/reports" />
@@ -75,12 +75,39 @@
 	 -->
 	 
 
-	<target name="ui.ios" depends="build" description="Runs iOS test suite from TestNG">
+	<target name="ios.onetoone" depends="build" description="Runs iOS test suite from TestNG">
 		<testng classpathref="runtime.classpath"  outputDir="${reports.dir}" haltOnfailure="true">
 			<classpath>
 				<pathelement path="${build.dir}" />
 			</classpath>
-			<xmlfileset dir="${project.dir}" includes="IOS_AUTOMATION.xml" />
+			<xmlfileset dir="${project.dir}" includes="ant-testng-scripts/IOS_AUTOMATION.xml" />
+		</testng>
+	</target>
+	
+	<target name="ios.group" depends="build" description="Runs iOS test suite from TestNG">
+		<testng classpathref="runtime.classpath"  outputDir="${reports.dir}" haltOnfailure="true">
+			<classpath>
+				<pathelement path="${build.dir}" />
+			</classpath>
+			<xmlfileset dir="${project.dir}" includes="ant-testng-scripts/IOS_GroupCases_AUTOMATION.xml" />
+		</testng>
+	</target>
+	
+	<target name="ios.settings" depends="build" description="Runs iOS test suite from TestNG">
+		<testng classpathref="runtime.classpath"  outputDir="${reports.dir}" haltOnfailure="true">
+			<classpath>
+				<pathelement path="${build.dir}" />
+			</classpath>
+			<xmlfileset dir="${project.dir}" includes="ant-testng-scripts/IOS_SettingsCases_AUTOMATION.xml" />
+		</testng>
+	</target>
+	
+	<target name="ios.signupflow" depends="build" description="Runs iOS test suite from TestNG">
+		<testng classpathref="runtime.classpath"  outputDir="${reports.dir}" haltOnfailure="true">
+			<classpath>
+				<pathelement path="${build.dir}" />
+			</classpath>
+			<xmlfileset dir="${project.dir}" includes="ant-testng-scripts/IOS_SignUpFlowAUTOMATION.xml" />
 		</testng>
 	</target>
 	 
