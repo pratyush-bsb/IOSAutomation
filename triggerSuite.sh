@@ -66,7 +66,6 @@ do
 done < /Users/qa-lab/.jenkins/jobs/iOS_AutomationSuite/workspace/Hike-Info.plist
 
 #run setup here. changes in every machine
-echo $suite_to_trigger
 
 if [[ $suite_to_trigger == "oneToOne" ]]; then
 	./runTestSuite ios.onetoone
