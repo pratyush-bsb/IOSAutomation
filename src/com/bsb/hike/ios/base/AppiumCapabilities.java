@@ -38,6 +38,7 @@ public class AppiumCapabilities {
 		capabilities.setCapability("bundleId", bundleId);
 		capabilities.setCapability("udid", deviceID.trim());
 		//capabilities.setCapability("showIOSLog", true);
+		executeCommand("/usr/local/bin/ideviceinstaller -i "+appPath);
 		while(!sessionCreated) {
 			try {
 				driver = new IOSDriver (new URL("http://0.0.0.0:4723/wd/hub"), capabilities);
@@ -47,7 +48,6 @@ public class AppiumCapabilities {
 			}
 		}
 		
-		executeCommand("/usr/local/bin/ideviceinstaller -g "+appPath);
 	}
 
 	public String executeCommand(String command) {
