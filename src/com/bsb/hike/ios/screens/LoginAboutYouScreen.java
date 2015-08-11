@@ -34,7 +34,7 @@ public class LoginAboutYouScreen extends HikeLibrary {
 
 	protected By aboutYouTitle = MobileBy.name("About You");
 	protected By nextButton = MobileBy.name("Next");
-	protected By addPhotoButton = MobileBy.name("avatarPlaceholderMedium0");
+	protected By addPhotoButton = MobileBy.IosUIAutomation(".buttons()[0]");
 	protected By editNameField = MobileBy.IosUIAutomation(".textFields()[0]");
 	protected By feelingLazyLabel = MobileBy.name("Feeling lazy? We'll do it for you");
 	protected By connectWithFacebookButton = MobileBy.name("Connect with Facebook");
