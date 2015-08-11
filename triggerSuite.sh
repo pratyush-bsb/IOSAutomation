@@ -4,6 +4,8 @@ build_type="$1"
 tag_number="$2"
 suite_to_trigger = "$3"
 
+echo $suite_to_trigger
+
 cd /Users/qa-lab/.jenkins/jobs/iOS_AutomationSuite/workspace
 rm -rf ./build
 git fetch
@@ -62,6 +64,7 @@ do
 done < /Users/qa-lab/.jenkins/jobs/iOS_AutomationSuite/workspace/Hike-Info.plist
 
 #run setup here. changes in every machine
+echo $suite_to_trigger
 
 if [[ $suite_to_trigger == "oneToOne" ]]; then
 	./runTestSuite ios.onetoone
