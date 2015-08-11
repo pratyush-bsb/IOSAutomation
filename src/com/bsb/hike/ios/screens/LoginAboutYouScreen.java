@@ -34,7 +34,7 @@ public class LoginAboutYouScreen extends HikeLibrary {
 
 	protected By aboutYouTitle = MobileBy.name("About You");
 	protected By nextButton = MobileBy.name("Next");
-	protected By addPhotoButton = MobileBy.name("add photo");
+	protected By addPhotoButton = MobileBy.name("avatarPlaceholderMedium0");
 	protected By editNameField = MobileBy.IosUIAutomation(".textFields()[0]");
 	protected By feelingLazyLabel = MobileBy.name("Feeling lazy? We'll do it for you");
 	protected By connectWithFacebookButton = MobileBy.name("Connect with Facebook");
@@ -110,9 +110,10 @@ public class LoginAboutYouScreen extends HikeLibrary {
 		return(isEnabled(addPhotoButton));
 	}
 
-	public void clickOnAddPhotoBtn()
+	public PhotosScreen clickOnAddPhotoBtn()
 	{
 		clickOnElement(addPhotoButton);
+		return new PhotosScreen();
 	}
 
 	public String getTextByName_NameEnteringEditText()

@@ -46,6 +46,8 @@ public class AppiumCapabilities {
 				sessionCreated = false;
 			}
 		}
+		
+		executeCommand("/usr/local/bin/ideviceinstaller -g "+appPath);
 	}
 
 	public String executeCommand(String command) {

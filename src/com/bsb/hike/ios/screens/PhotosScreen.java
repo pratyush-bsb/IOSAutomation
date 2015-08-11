@@ -39,6 +39,7 @@ public class PhotosScreen extends HikeLibrary {
 	protected By backButton = MobileBy.name("Back");
 	protected By cancelButton = MobileBy.name("Cancel");
 	protected By cameraIcon = MobileBy.name("ic_camera_live_camera_grid");
+	protected By stopButton = MobileBy.name("Stop");
 	
 	protected By allImagesInGallery = MobileBy.IosUIAutomation(".collectionViews()[0].cells()"); //first one is camera. so fetch data from [1]
 
@@ -46,6 +47,10 @@ public class PhotosScreen extends HikeLibrary {
 		return photoScreenHeader;
 	}
 
+	public By getStopButton() {
+		return stopButton;
+	}
+	
 	public By getBackButton() {
 		return backButton;
 	}

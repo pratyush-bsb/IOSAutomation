@@ -19,6 +19,7 @@ import com.bsb.hike.ios.screens.CountryScreen;
 import com.bsb.hike.ios.screens.HomeScreenMenu;
 import com.bsb.hike.ios.screens.LoginAboutYouScreen;
 import com.bsb.hike.ios.screens.LoginPhoneNumberScreen;
+import com.bsb.hike.ios.screens.PhotosScreen;
 import com.bsb.hike.ios.screens.PinEnteringScreen;
 import com.bsb.hike.ios.screens.PushNotificationsScreen;
 import com.bsb.hike.ios.screens.TermsAndConditions;
@@ -319,24 +320,16 @@ public class SignUpFlow extends HikeLibrary {
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Click on add photo logo. \n" +
 				"2. Verify validity by first cancelling and then adding photo. \n");
 		
-		clickOnElement(aboutYouScreenObj.getAddPhotoButton());
+		PhotosScreen photosScreenObj = aboutYouScreenObj.clickOnAddPhotoBtn();
+		CameraScreen cameraObj = photosScreenObj.clickOnCameraIconInPhotosScreen();
 		
-		Assert.assertTrue(isElementPresent(aboutYouScreenObj.getChangePhotoActionBar()), "The 'Change Photo' bar did not come after clicking on add photo button");
-		Assert.assertTrue(isElementPresent(aboutYouScreenObj.getTakePhotoButton()), "The 'Take Photo' button did not come after clicking on add photo button");
-		Assert.assertTrue(isElementPresent(aboutYouScreenObj.getChooseExistingButton()), "The 'Choose Existing' button did not come after clicking on add photo button");
-		Assert.assertTrue(isElementPresent(aboutYouScreenObj.getCancelPhotoButton()), "The 'Cancel' button did not come after clicking on add photo button");
-		
-		clickOnElement(aboutYouScreenObj.getCancelPhotoButton());
-		Assert.assertFalse(isElementPresent(aboutYouScreenObj.getChangePhotoActionBar()), "The 'Change Photo' bar did not disappear after clicking on cancel button");
-		
-		clickOnElement(aboutYouScreenObj.getAddPhotoButton());
-		CameraScreen cameraObj = aboutYouScreenObj.clickOnTakePhoto();
 		Assert.assertTrue(isElementPresent(cameraObj.getCancelButton()), "Cancel Button on available on camera screen");
 		
 		clickOnElement(cameraObj.getCancelButton());
 		
-		Assert.assertTrue(isElementPresent(aboutYouScreenObj.getAboutYouTitle()), "'Cancel' button in camera screen did not take to about you screen");
-		
+		Assert.assertTrue(isElementPresent(photosScreenObj.getCameraIcon()), "'Cancel' button in camera screen did not take to photos screen");
+		clickOnElement(photosScreenObj.getBackButton());
+		clickOnElement(photosScreenObj.getStopButton());
 	}
 	
 	@Test(priority=18)
@@ -345,17 +338,21 @@ public class SignUpFlow extends HikeLibrary {
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Click on add photo logo. \n" +
 				"2. Choose camera image and set as profile picture. \n");
 		
-		clickOnElement(aboutYouScreenObj.getAddPhotoButton());
-		CameraScreen cameraObj = aboutYouScreenObj.clickOnTakePhoto();
+		
+		PhotosScreen photosScreenObj = aboutYouScreenObj.clickOnAddPhotoBtn();
+		CameraScreen cameraObj = photosScreenObj.clickOnCameraIconInPhotosScreen();
 		clickOnElement(cameraObj.getCapturePhotoButton());
 		
 		//wait until photo is clicked
 		boolean photoClicked = false;
-		while (!photoClicked) {
+		int counter = 0;
+		while (!photoClicked && counter < 10) {
 			try {
 				driver.findElement(cameraObj.getRetakeButton());
 				photoClicked = true;
-			} catch(Exception e) {}
+			} catch(Exception e) {
+				counter++;
+			}
 		}
 		
 		Assert.assertTrue(isElementPresent(cameraObj.getRetakeButton()), "Retake button did not come after clicking image");
@@ -377,12 +374,13 @@ public class SignUpFlow extends HikeLibrary {
 		CameraScreen cameraObj = new CameraScreen();
 		clickOnElement(cameraObj.getCapturePhotoButton());
 		clickOnElement(cameraObj.getUsePhotoButton());
+		clickOnElement(cameraObj.getUpdateButton());
 		
 		Assert.assertTrue(isElementPresent(aboutYouScreenObj.getAboutYouTitle()), "'Use Photo' button in camera screen did not take to about you screen");
 		
 	}
 	
-	@Test(priority=20)
+	/*@Test(priority=20)
 	public void test020_SetGalleryImage() {
 		
 		Reporter.log(iOSAutomation_DESCRIPTION+" : 1. Click on choose existing. \n" +
@@ -391,7 +389,7 @@ public class SignUpFlow extends HikeLibrary {
 		clickOnElement(aboutYouScreenObj.getAddPhotoButton());
 		clickOnElement(aboutYouScreenObj.getChooseExistingButton());
 		
-	}
+	}*/
 	
 	@Test(priority=21)
 	public void test021_UsernameValidationCases() {

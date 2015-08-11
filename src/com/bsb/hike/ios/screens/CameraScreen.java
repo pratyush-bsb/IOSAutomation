@@ -50,6 +50,10 @@ public class CameraScreen extends HikeLibrary {
 	public By getCapturePhotoButton() {
 		return capturePhotoButton;
 	}
+	
+	public By getUpdateButton() {
+		return updateButton;
+	}
 
 	public By getRetakeButton() {
 		return retakeButton;
