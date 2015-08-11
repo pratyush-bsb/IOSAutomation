@@ -63,8 +63,8 @@ public class MongoDBManagerUtil
         {
             mongoReplicaProps = new ArrayList<ServerAddress>(); 
             //mongoReplicaProps.add(new ServerAddress("mongodb1.qa.sg1.hike.in", 27017));
-        	mongoReplicaProps.add(new ServerAddress("10.0.1.141", 27017));
-        	mongoReplicaProps.add(new ServerAddress("10.0.1.141", 27017));
+        	mongoReplicaProps.add(new ServerAddress("10.0.7.141", 27017));
+        	mongoReplicaProps.add(new ServerAddress("10.0.7.141", 27017));
             MongoOptions options = new MongoOptions();
             options.autoConnectRetry = true;
             options.readPreference = ReadPreference.primaryPreferred();
