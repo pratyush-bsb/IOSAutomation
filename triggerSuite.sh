@@ -5,6 +5,8 @@ tag_number="$2"
 suite_to_trigger="$3"
 
 echo "$suite_to_trigger"
+echo "$build_type"
+echo "$tag_number"
 
 cd /Users/qa-lab/.jenkins/jobs/iOS_AutomationSuite/workspace
 rm -rf ./build
