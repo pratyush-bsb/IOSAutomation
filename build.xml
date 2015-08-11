@@ -11,7 +11,7 @@
 		<var name="app.name" value="iostests" />
 		<dirname property="project.dir" file="./IOSAutomation" />
 		<var name="build.dir" value="${project.dir}/build" />
-		<!--<var name="support.dir" value="${project.dir}/support" /> -->
+		
 		<var name="reports.dir" value="${project.dir}/reports" />
 		<var name="src.dir" value="${project.dir}/src" />
 		<var name="ScreenShots.dir" value="ScreenShots" />

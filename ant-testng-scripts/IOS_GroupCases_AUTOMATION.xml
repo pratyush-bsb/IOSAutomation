@@ -54,7 +54,7 @@
 		</classes>
 	</test>
 	<!-- Dropping 'InviteFromGC' test cases as the 'Invite' option has been dropped from release 3.4.1.10.2
-	<test name="Group cases -- Invite from GC info" preserve-order="true">
+	<test name="Group cases - Invite from GC info" preserve-order="true">
 		<classes>
 			<class name="com.bsb.hike.ios.tests.groupChat.InviteFromGCInfo" />
 		</classes>
