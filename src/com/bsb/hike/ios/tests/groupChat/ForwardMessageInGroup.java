@@ -65,6 +65,12 @@ public class ForwardMessageInGroup extends HikeLibrary {
 		String groupName = "IOS Automation group";
 
 		goToHome();
+		//have a 1:1 chat in recents
+		StartANewChatScreen newChatScreenObj = homeScreenMenuObj.clickOnComposeConversation();
+		ChatThreadScreen chatThreadObj = newChatScreenObj.searchContactByNameAndStartChat(HIKE_CONTACT_NAME_1);
+		chatThreadObj.sendMessage("message");
+		goToHome();
+		
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupName, true);
 		groupThreadObj.longPressOnLastMessage();
 
