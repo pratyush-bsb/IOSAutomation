@@ -8,20 +8,20 @@ echo "$suite_to_trigger"
 echo "$build_type"
 echo "$tag_number"
 
-cd /Users/qa-lab/.jenkins/jobs/iOS_AutomationSuite/workspace
-rm -rf ./build
-git fetch
-git checkout origin/dev
+#cd /Users/qa-lab/.jenkins/jobs/iOS_AutomationSuite/workspace
+#rm -rf ./build
+#git fetch
+#git checkout origin/dev
 
 if [ "$tag_number" != "0" ]; then
 	#tag number is provided. pull code with respect to this
-	git checkout $tag_number
+	#git checkout $tag_number
 fi
 
-xcodebuild -scheme Hike -workspace Hike.xcworkspace clean archive -archivePath ./build/Hike -destination generic/platform=iOS
-xcodebuild -exportArchive -exportFormat ipa -archivePath ./build/Hike.xcarchive -exportPath ./build/Hike.ipa -exportProvisioningProfile "iOSTeam Provisioning Profile: com.bsb.hike"
-rm -rf /Users/qa-lab/Documents/iosAutomation/IOSAutomation/*.ipa
-mv build/*.ipa /Users/qa-lab/Documents/iosAutomation/IOSAutomation/
+#xcodebuild -scheme Hike -workspace Hike.xcworkspace clean archive -archivePath ./build/Hike -destination generic/platform=iOS
+#xcodebuild -exportArchive -exportFormat ipa -archivePath ./build/Hike.xcarchive -exportPath ./build/Hike.ipa -exportProvisioningProfile "iOSTeam Provisioning Profile: com.bsb.hike"
+#rm -rf /Users/qa-lab/Documents/iosAutomation/IOSAutomation/*.ipa
+#mv build/*.ipa /Users/qa-lab/Documents/iosAutomation/IOSAutomation/
 
 cd /Users/qa-lab/Documents/iosAutomation/IOSAutomation
 git pull
