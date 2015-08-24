@@ -13,10 +13,10 @@ echo "$tag_number"
 #git fetch
 #git checkout origin/dev
 
-if [ "$tag_number" != "0" ]; then
+#if [ "$tag_number" != "0" ]; then
 	#tag number is provided. pull code with respect to this
 	#git checkout $tag_number
-fi
+#fi
 
 #xcodebuild -scheme Hike -workspace Hike.xcworkspace clean archive -archivePath ./build/Hike -destination generic/platform=iOS
 #xcodebuild -exportArchive -exportFormat ipa -archivePath ./build/Hike.xcarchive -exportPath ./build/Hike.ipa -exportProvisioningProfile "iOSTeam Provisioning Profile: com.bsb.hike"
