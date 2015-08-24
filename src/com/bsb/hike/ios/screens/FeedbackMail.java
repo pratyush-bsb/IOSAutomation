@@ -3,6 +3,7 @@ package com.bsb.hike.ios.screens;
 import io.appium.java_client.MobileBy;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import com.bsb.hike.ios.library.HikeLibrary;
 
@@ -17,10 +18,11 @@ public class FeedbackMail extends HikeLibrary {
 		int counter = 0;
 		boolean pageLoaded = false;
 		
-		while(!pageLoaded && counter < 5) {
+		while(!pageLoaded && counter < 10) {
 			try {
-				driver.findElement(header);
-				pageLoaded = true;
+				WebElement toFieldElem = driver.findElement(toField);
+				String toFieldValueCaptured = toFieldElem.getAttribute("value");
+				pageLoaded = toFieldValueCaptured.equalsIgnoreCase(toFieldPrefilled);
 			} catch (Exception e) {
 				counter++;
 				try {

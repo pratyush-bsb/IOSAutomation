@@ -45,7 +45,7 @@ public class NotificationsInSettings extends HikeLibrary {
 		Assert.assertEquals(getTextByValue(notificationObj.getInChatSounds()), "1", "In chat alerts is not enabled by default");
 		Assert.assertEquals(getTextByValue(notificationObj.getVibrationSwitch()), "1", "Vibration is not enabled by default");
 		Assert.assertEquals(getTextByValue(notificationObj.getMessagePreviewSwitch()), "1", "Message Preview is not enabled by default");
-		Assert.assertEquals(getTextByValue(notificationObj.getDisableNudgeSwitch()), "1", "Disable nudge is not enabled by default");
+		Assert.assertEquals(getTextByValue(notificationObj.getDisableNudgeSwitch()), "0", "Disable nudge is not enabled by default");
 		Assert.assertEquals(getTextByValue(notificationObj.getContactJoiningSwitch()), "1", "Contact joining hike alert is not enabled by default");
 		
 	}

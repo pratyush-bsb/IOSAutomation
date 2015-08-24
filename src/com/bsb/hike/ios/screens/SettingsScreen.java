@@ -44,7 +44,7 @@ public class SettingsScreen extends HikeLibrary{
 	protected By EnterKeyIsSend_LBL = MobileBy.name("Enter Key Is Send");
 	//protected By EnterKeyIsSend_BTN = MobileBy.name("settings enter return cell ico");
 	protected By FAQ_LBL = MobileBy.name("FAQ");
-	protected By Contact_LBL = MobileBy.name("Contact");
+	protected By Contact_LBL = MobileBy.name("Contact Us");
 	protected By stickerShop = MobileBy.name("Sticker Shop");
 	protected By madeWithLoveFooter = MobileBy.name("madeWithLoveFooter");
 
