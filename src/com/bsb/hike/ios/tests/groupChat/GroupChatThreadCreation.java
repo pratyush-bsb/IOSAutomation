@@ -20,6 +20,7 @@ import com.bsb.hike.ios.screens.GroupProfileScreen;
 import com.bsb.hike.ios.screens.GroupThreadScreen;
 import com.bsb.hike.ios.screens.HomeScreenMenu;
 import com.bsb.hike.ios.screens.NewGroupScreen;
+import com.bsb.hike.ios.screens.PhotosScreen;
 import com.bsb.hike.ios.screens.SettingsScreen;
 import com.support.bsb.hike.qa.apisupport.GroupChatMessageSupport;
 
@@ -55,10 +56,11 @@ public class GroupChatThreadCreation extends HikeLibrary {
 		Assert.assertEquals(getTextByValue(newGroupObj.getTypeGroupName()), newGroupObj.getDefaultGroupText(), "Default text in 'type group name' field did not match");
 		Assert.assertFalse(isElementEnabled(newGroupObj.getNextButton()), "The next button is not disabled by default");
 		Assert.assertTrue(isKeyboardVisible(), "The keyboard is not visible by default");
-		newGroupObj.clickOnAddPhoto();
-		Assert.assertTrue(isElementEnabled(newGroupObj.getTakePhotoButton()), "The take photo button is not visible");
-		Assert.assertTrue(isElementEnabled(newGroupObj.getChooseExistingButton()), "The choose existing button is not visible");
-		newGroupObj.cancelAddingPhoto();
+		PhotosScreen photosScreenObj = newGroupObj.clickOnAddPhoto();
+		Assert.assertTrue(isElementPresent(photosScreenObj.getCameraIcon()), "Clicking on add photo for new group did not take to 'All photos' screen.");
+
+		clickOnElement(photosScreenObj.getBackButton());
+		clickOnElement(photosScreenObj.getStopButton());
 	}
 
 	@Test(priority=2)
@@ -347,7 +349,14 @@ public class GroupChatThreadCreation extends HikeLibrary {
 		goToHome();
 
 		GroupThreadScreen groupThreadObj = (GroupThreadScreen) homeScreenMenuObj.goToSpecificUserThread(groupName, true);
-
+		
+		if(groupThreadObj == null) {
+			Reporter.log("Error! Server side group was not created.");
+			settingsObj = homeScreenMenuObj.clickOnSettings_Lbl();
+			blockedListObj = settingsObj.clickOnBlockList();
+			blockedListObj.unblockContact(HIKE_CONTACT_NAME);
+		}
+		
 		UserBlockedConfirmationToast blockedToast = new UserBlockedConfirmationToast();
 
 		//assert presence of block toast
@@ -366,5 +375,7 @@ public class GroupChatThreadCreation extends HikeLibrary {
 		Assert.assertTrue(isKeyboardVisible(), "keyboard is not coming as popup to type in!");
 
 	}
+	
+	
 
 }

@@ -218,6 +218,15 @@ public class ChatThreadScreen extends AppiumLibrary implements ChatScreenInterfa
 	public RecordAudio clickOnAudioButton() {
 		clickOnElement(attachmentButton);
 		clickOnElement(audioButton);
+		//TODO remove Thread.sleep()
+		try {
+		Thread.sleep(3000);
+		if(isElementPresent(allowButton)) {
+			clickOnElement(allowButton);
+		} else if (isElementPresent(okButton)) {
+			clickOnElement(okButton);
+		}
+		} catch(Exception e) {}
 		//clickOnElement()
 		return new RecordAudio();
 	}

@@ -53,6 +53,8 @@ public interface ChatScreenInterface {
 	
 	By allEmojisInCurrentTab = MobileBy.IosUIAutomation(".collectionViews()[0].cells()");
 	By allEmojisCategories = MobileBy.IosUIAutomation(".collectionViews()[1].cells()");
+	By allowButton = MobileBy.name("Allow");
+	By okButton = MobileBy.name("Ok");
 
 
 	public void clickOverlaybutton();

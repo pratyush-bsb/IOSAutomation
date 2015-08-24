@@ -72,7 +72,7 @@ public class PhotosScreen extends HikeLibrary {
 	//public methods
 	public CameraScreen clickOnCameraIconInPhotosScreen() {
 		try {
-			WebElement cameraIconElement = driver.findElements(allImagesInGallery).get(0);
+			WebElement cameraIconElement = driver.findElement(cameraIcon);
 			new TouchAction(driver).press(cameraIconElement).perform();
 			cameraIconElement.click();
 		} catch(Exception e) {

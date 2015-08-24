@@ -101,8 +101,9 @@ public class NewGroupScreen extends HikeLibrary {
 		enterTextWithClear(typeGroupName, groupName);
 	}
 	
-	public void clickOnAddPhoto() {
+	public PhotosScreen clickOnAddPhoto() {
 		clickOnElement(addPhoto);
+		return new PhotosScreen();
 	}
 	
 	public void cancelAddingPhoto() {
