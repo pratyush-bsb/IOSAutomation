@@ -22,7 +22,7 @@ public class AppiumCapabilities {
 		String username = executeCommand("whoami");
 		String appPathPrefix = "/Users/";
 		String appPathSuffix = "/Documents/workspace/IOSAutomation/";
-		String appName = "Hike.app";
+		String appName = "Hike.ipa";
 		String appPath = appPathPrefix + username.trim() + appPathSuffix + appName;
 		String deviceID = executeCommand("/usr/local/bin/idevice_id -l");
 		String deviceName = executeCommand("/usr/local/bin/idevicename -u " + deviceID);
