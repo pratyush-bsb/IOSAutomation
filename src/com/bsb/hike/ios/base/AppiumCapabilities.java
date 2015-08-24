@@ -21,7 +21,7 @@ public class AppiumCapabilities {
 		boolean sessionCreated = false;
 		String username = executeCommand("whoami");
 		String appPathPrefix = "/Users/";
-		String appPathSuffix = "/Documents/workspace/IOSAutomation/";
+		String appPathSuffix = "/Documents/iosAutomation/IOSAutomation/";
 		String appName = "Hike.ipa";
 		String appPath = appPathPrefix + username.trim() + appPathSuffix + appName;
 		String deviceID = executeCommand("/usr/local/bin/idevice_id -l");
