@@ -15,11 +15,11 @@
 	</test> -->
 	
 
-	<test name="One-to-One Create Hike User" preserve-order="true">
+	<!-- <test name="One-to-One Create Hike User" preserve-order="true">
 		<classes>
 			<class name="com.bsb.hike.ios.tests.CreateHikeUser" />
 		</classes>
-	</test>
+	</test>  -->
 	
 	<test name="One-to-One New Messaging Test" preserve-order="true">
 		<classes>
